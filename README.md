@@ -15,7 +15,7 @@ People give their vote by calling a voting option in a voting smart contract on 
 - Dario
 - Keno
 - Base aepp team
-- Ledger HW team
+- Ledger HW team (fixed/done)
 
 Product Coordinator: Emin
 
@@ -43,7 +43,7 @@ Product Coordinator: Emin
 - Voting with AE token on Minerva Mainnet via Base Aepp
 - Voting with AE accounts participating in the token migration (locked tokens)
 - AirGap Voting Support
-- Desktop Ledger Support
+- Desktop Ledger Support (fixed/done)
 
 # Blockers that need to be resolved
 
