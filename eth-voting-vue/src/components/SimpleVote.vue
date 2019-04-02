@@ -12,6 +12,8 @@
       <p v-if="etherBalance">Your account's ETH balance on the current network: {{etherBalance}}</p>
       <p v-if="!etherBalance">Could not fetch your account's balance - MetaMask set up?</p>
       <p v-if="!currentVote">No vote for this address yet</p>
+      <p v-if="!tokenBalanceAtHeight">Could not fetch your Tokenbalance at Block {{votingHeightBlock}}, correct network?</p>
+      <p v-if="tokenBalanceAtHeight">Your AE-Token Balance (ERC-20) at block {{votingHeightBlock}} is {{tokenBalanceAtHeight}}.</p>
     </div>
     <div class="message" v-if="message">{{message}}</div>
   </div>
@@ -25,7 +27,7 @@ import artifacts from '../../build/contracts/SimpleVote.json'
 const SimpleVote = contract(artifacts)
 
 // TODO: Display AE ERC20 balance for user's information
-
+// TODO: Try updating to web3 1.0
 export default {
   name: 'SimpleVote',
   data() {
@@ -35,8 +37,11 @@ export default {
       account: null,
       newVote: 0,
       currentVote: 0,
-      etherBalance:0,
-      erc20Balance: 0
+      etherBalance: 0,
+      erc20Balance: 0,
+      votingHeightBlock: 7487763, // TODO: Adjust value to the blocknumber which is supposed to be the time of counting for the vote
+      tokenBalanceAtHeight: null,
+      tokenContractAddress: "0x5CA9a71B1d01849C0a95490Cc00559717fCF0D1d" // TODO: Adapt automatically to network (Mainnet/Ropsten etc)
     }
   },
   created() {
@@ -92,7 +97,20 @@ export default {
         this.currentVote = r.toNumber()
       });
     },
-  
+    getTokenbalanceAtHeight() {
+      web3.eth.call({
+        to: tokenContractAddress,
+        data: "0x70a08231000000000000000000000000" + this.account.substring(0,2)
+      }, (err, result) => {
+        if (err != null){
+            console.error(err)
+            this.message = "There was an error fetching your Tokenbalance at Block " + this.votingHeightBlock + " . Correct network?"
+            return
+        }
+        this.tokenBalanceAtHeight = result.toNumber 
+      })
+    }
+    ,
     updateEthBalance(acc) {
       web3.eth.getBalance(acc, (err, balance) => {
         if (err != null) {
@@ -102,6 +120,7 @@ export default {
         }
         // TODO: Check for minimal value a user should have to successfully make a transaction, maybe take gas price into account.
         if (balance == 0) {
+          this.etherBalance = "0"
           this.message = "Your account does not have any Ether, ask a friend ?"
           return
         }
