@@ -1,73 +1,87 @@
-const {Universal} = require('@aeternity/aepp-sdk');
+const {ChainNode} = require('@aeternity/aepp-sdk');
 const axios = require('axios');
+const BigNumber = require('bignumber.js');
 
-const votingAcc = 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB';
-
+const middlewareUrl = "http://localhost:8000";
 
 const getClient = () => {
-    return Universal({
+    return ChainNode({
         url: 'https://sdk-testnet.aepps.com',
         internalUrl: 'https://sdk-testnet.aepps.com',
-        keypair: {
-            secretKey: '',
-            publicKey: 'ak_twR4h7dEcUtc2iSEDv8kB7UFJJDGiEDQCXr85C3fYF8FdVdyo'
-        },
         networkId: 'ae_uat'
     });
 };
 
-// same with async
-const testVote = async () => {
-
-    const client = await getClient();
-
-    const vote = {
-        vote: {
-            id: 1,
-            option: 2
-        }
-    };
-
-
-    client.spend(0, votingAcc, {payload: JSON.stringify(vote)});
-};
+const groupBy = (xs, key) => xs.reduce((acc, x) => Object.assign({}, acc, {
+    [x[key]]: (acc[x[key]] || []).concat(x)
+}), {});
 
 const testVerify = async () => {
-    // 1. fetch all txs towards voting account from middleware
-    // 2. filter multiple votes by same account, filter txs for valid voting payload, filter txs for specific vote
-    // 3. check stake for each voter account at height
-    // 4. multiply stake by votes for options
+    const votingAcc = 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB';
+    const votingStakeHeight = 30000;
+    const votingEndingHeight = 60000;
+    const voteId = 1;
 
-    const votingHeight = 30000;
-    const middlewareUrl = "http://localhost:8000";
+
+    // 1. fetch all txs towards voting account from middleware
     const votingAccTxs = await axios.get(`${middlewareUrl}/middleware/transactions/account/${votingAcc}`).catch(console.error).then(res => res.data.transactions);
     const filteredVotingTxs = votingAccTxs
-        .filter(tx => tx.tx.type === 'SpendTx')
-        .filter(tx => tx.tx.payload !== '')
-        .filter(tx => {
+        .filter(tx => tx.tx.type === 'SpendTx') // filter spend transactions
+        .filter(tx => tx.tx.payload !== '') // filter transactions with empty payload
+        .filter(tx => { // filter transactions with valid voting payload
             try {
                 const payload = JSON.parse(tx.tx.payload);
-                return payload.vote && payload.vote.id && payload.vote.option;
+                return payload.vote && payload.vote.id && payload.vote.option && payload.vote.id === voteId;
             } catch {
                 return false;
             }
         })
-        .map(tx => {
+        .map(tx => { // map data to extract needed information
             const payload = JSON.parse(tx.tx.payload);
             return {
+                height: tx.block_height,
+                nonce: tx.tx.nonce,
+                txHash: tx.hash,
                 account: tx.tx.sender_id,
-                vote: payload.vote
+                voteOption: payload.vote.option
             }
         });
 
-    console.log(filteredVotingTxs);
 
+    // 2. filter multiple votes by same account, filter txs for valid voting payload, filter txs for specific vote
+    const votingAccounts = Object.values(groupBy(filteredVotingTxs, 'account')).map((txs) => {
+        const beforeEndingTxs = txs.filter(tx => tx.height <= votingEndingHeight); // filter votes before votingEndingHeight
+        const highestNonce = Math.max(...beforeEndingTxs.map(tx => tx.nonce), 0);
+        return beforeEndingTxs.find(tx => tx.nonce === highestNonce); // only show vote with highest nonce
+    }).filter(vote => vote); // filter accounts with no votes before votingEndingHeight
+
+
+    // 3. check stake for each voter account at height
     const client = await getClient();
+    const votingAccountStakes = await Promise.all(votingAccounts.map(async (vote) => {
+        const balanceAtHeight = await client.balance(vote.account, {height: votingStakeHeight}).catch((e) => {
+            console.error(e.message);
+            return '0'; // account balance will fail if account didn't exist at votingStakeHeight, so stake is 0
+        });
+        return {...vote, ...{stake: balanceAtHeight}} // append stake to vote object
+    }));
 
-    const balanceAtHeight = await client.balance('ak_twR4h7dEcUtc2iSEDv8kB7UFJJDGiEDQCXr85C3fYF8FdVdyo', {height: votingHeight});
-    console.log(balanceAtHeight); // sdk seems to be incorrect
 
+    // 4. sum up stake by votes for options
+    const votesByOption = groupBy(votingAccountStakes, 'voteOption');
+    const stakesForOption = Object.keys(votesByOption).reduce(function (acc, option) {
+        const votes = votesByOption[option];
+
+        const totalStake = votes.reduce((acc, vote) => { // sum up stakes using bignumber
+            return acc.plus(new BigNumber(vote.stake))
+        }, new BigNumber('0')).toFixed();
+
+        acc.push({option: option, totalStake: totalStake, votes: votes}); // add stakes and votes for option to final result
+        return acc;
+    }, []);
+
+
+    console.log(JSON.stringify(stakesForOption, null, 2));
 };
 
-//testVote();
 testVerify();
