@@ -12,8 +12,9 @@
   },
   "dependencies": {
     "@aeternity/aepp-components": "https://github.com/aeternity/aepp-components.git#develop",
-    "@aeternity/aepp-sdk": "^2.3.2",
+    "@aeternity/aepp-sdk": "^2.4.0",
     "axios": "^0.18.0",
+    "bignumber.js": "^8.1.1",
     "vue": "^2.6.8",
     "vue-meta": "^1.5.8",
     "vue-router": "^3.0.2"
