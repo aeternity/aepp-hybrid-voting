@@ -8,7 +8,6 @@ contract SimpleVote {
     int256 public totalVotes;
     int8 public maxVoteValue;
     
-    mapping (address=> bool) public hasVoted;
     mapping (address=> int8) public getVote;
 
     constructor (int8 _maxVoteValue) public {
@@ -16,11 +15,10 @@ contract SimpleVote {
     }
     
     function vote(int8 _vote) public returns (bool) {
-        // TODO: Uncomment next line in production, testing is easier like this now.
-        //require(hasVoted[msg.sender] == false, "Sender has voted already");
+        // TODO: Uncomment next line in production, testing is easier like this now. It's prohibiting users from votig multiple times.
+        //require(getVote[msg.sender] == 0, "Sender has voted already");
         require(_vote <= maxVoteValue, "Voted for value higher than allowed");
         getVote[msg.sender] = _vote;
-        hasVoted[msg.sender] == true;
         voters.push(msg.sender);
         votes.push(_vote);
         totalVotes++;

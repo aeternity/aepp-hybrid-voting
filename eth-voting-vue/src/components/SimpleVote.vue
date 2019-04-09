@@ -13,7 +13,7 @@
       <p v-if="!etherBalance">Could not fetch your account's balance - MetaMask set up?</p>
       <p v-if="!currentVote">No vote for this address yet</p>
       <p v-if="!tokenBalanceAtHeight">Could not fetch your Tokenbalance at Block {{votingHeightBlock}}, correct network?</p>
-      <p v-if="tokenBalanceAtHeight">Your AE-Token Balance (ERC-20) at block {{votingHeightBlock}} is {{tokenBalanceAtHeight}}.</p>
+      <p v-if="tokenBalanceAtHeight">Your AE-Token Balance (ERC-20) at block {{votingHeightBlock}} is {{tokenBalanceAtHeight}}. (Currently checking Kovan)</p>
     </div>
     <div class="message" v-if="message">{{message}}</div>
   </div>
@@ -26,7 +26,6 @@ import contract from 'truffle-contract'
 import artifacts from '../../build/contracts/SimpleVote.json'
 const SimpleVote = contract(artifacts)
 
-// TODO: Display AE ERC20 balance for user's information
 // TODO: Try updating to web3 1.0
 export default {
   name: 'SimpleVote',
@@ -41,7 +40,7 @@ export default {
       erc20Balance: 0,
       votingHeightBlock: 7487763, // TODO: Adjust value to the blocknumber which is supposed to be the time of counting for the vote
       tokenBalanceAtHeight: null,
-      tokenContractAddress: "0x5CA9a71B1d01849C0a95490Cc00559717fCF0D1d" // TODO: Adapt automatically to network (Mainnet/Ropsten etc)
+      tokenContractAddress: "0x35d8830ea35e6df033eedb6d5045334a4e34f9f9" // TODO: This is Ethereum Kovan Network now, change to Ethereum main net.
     }
   },
   created() {
@@ -68,12 +67,14 @@ export default {
         return
       }
       this.account = accs[0];
+      this.updateEthBalance(this.account)
+      this.getTokenbalanceAtHeight()
+
       SimpleVote.deployed()
         .then((instance) => instance.address)
         .then((address) => {
           this.contractAddress = address
           this.updateCurrentVote()
-          this.updateEthBalance(this.account)
         })
     })
   },
@@ -99,15 +100,15 @@ export default {
     },
     getTokenbalanceAtHeight() {
       web3.eth.call({
-        to: tokenContractAddress,
-        data: "0x70a08231000000000000000000000000" + this.account.substring(0,2)
+        to: this.tokenContractAddress,
+        data: "0x70a08231000000000000000000000000" + this.account.substring(2)
       }, (err, result) => {
         if (err != null){
             console.error(err)
             this.message = "There was an error fetching your Tokenbalance at Block " + this.votingHeightBlock + " . Correct network?"
             return
         }
-        this.tokenBalanceAtHeight = result.toNumber 
+        this.tokenBalanceAtHeight = Number(result / Math.pow(10,18)) 
       })
     }
     ,
@@ -124,7 +125,7 @@ export default {
           this.message = "Your account does not have any Ether, ask a friend ?"
           return
         }
-        this.etherBalance = balance.toString();
+        this.etherBalance = (balance / Math.pow(10,18)).toString();
 
     })
 }
