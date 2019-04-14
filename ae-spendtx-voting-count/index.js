@@ -2,7 +2,7 @@ const {ChainNode} = require('@aeternity/aepp-sdk');
 const axios = require('axios');
 const BigNumber = require('bignumber.js');
 
-const middlewareUrl = "http://localhost:8000";
+const middlewareUrl = "http://localhost:8000"; // "https://testnet.mdw.aepps.com";
 
 const getClient = () => {
     return ChainNode({
@@ -32,7 +32,7 @@ const testVerify = async () => {
             try {
                 const payload = JSON.parse(tx.tx.payload);
                 return payload.vote && payload.vote.id && payload.vote.option && payload.vote.id === voteId;
-            } catch {
+            } catch(e) {
                 return false;
             }
         })
