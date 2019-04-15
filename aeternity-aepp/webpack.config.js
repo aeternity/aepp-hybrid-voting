@@ -38,7 +38,7 @@ module.exports = env => {
     },
     output: {
       filename: 'bundle.js?[hash]',
-      publicPath: ''
+      publicPath: './'
     },
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
@@ -52,7 +52,7 @@ module.exports = env => {
       new HtmlWebpackPlugin({
         inject: true,
         // chunks: ['main'],
-        title: 'Æpp Drone Aepp',
+        title: 'Aeternity Voting',
         template: './src/index.html',
         filename: distFolder + '/index.html',
         // Avoids building twice for dev
