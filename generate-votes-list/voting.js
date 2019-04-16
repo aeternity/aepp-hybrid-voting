@@ -69,9 +69,9 @@ async function start() {
                 toBlock: block
             }
         );
-        
+
         for (var j = 0; j < events.length; j++) {
-            balanceAtHeight = balanceAtHeight.add(events[j].returnValues._value);
+            balanceAtHeight = balanceAtHeight.add(new web3.utils.BN(events[j].returnValues._value));
         }
 
         json[voter] = {
