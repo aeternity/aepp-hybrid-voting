@@ -55,13 +55,8 @@ export default {
     }
 
     SimpleVote.setProvider(web3.currentProvider)
-    web3.eth.getAccounts((err, accs) => {
-      if (err != null) {
-        console.error(err)
-        this.message = "There was an error fetching your accounts. Do you have Metamask, Mist installed or an Ethereum node running? If not, you might want to look into that"
-        return
-      }
-
+    web3.eth.getAccounts() 
+    .then((accs) => {
       if (accs.length == 0) {
         this.message = "Couldn't get any accounts! Make sure your Ethereum client is configured correctly."
         return
@@ -76,6 +71,10 @@ export default {
           this.contractAddress = address
           this.updateCurrentVote()
         })
+    })
+    .catch((err) => {
+      console.error(err)
+      this.message = "There was an error fetching your accounts. Do you have Metamask, Mist installed or an Ethereum node running? If not, you might want to look into that"
     })
   },
   methods: {
@@ -102,23 +101,17 @@ export default {
       web3.eth.call({
         to: this.tokenContractAddress,
         data: "0x70a08231000000000000000000000000" + this.account.substring(2)
-      }, (err, result) => {
-        if (err != null){
-            console.error(err)
-            this.message = "There was an error fetching your Tokenbalance at Block " + this.votingHeightBlock + " . Correct network?"
-            return
-        }
+      }).then((result) => {
         this.tokenBalanceAtHeight = Number(result / Math.pow(10,18)) 
-      })
+      }).catch((err) => {
+        console.error(err)
+        this.message = "There was an error fetching your Tokenbalance at Block " + this.votingHeightBlock + " . Correct network?"
+      });
     }
     ,
     updateEthBalance(acc) {
-      web3.eth.getBalance(acc, (err, balance) => {
-        if (err != null) {
-          console.error(err)
-          this.message = "There was an error fetching the balance for your account " + acc.
-          return
-        }
+      web3.eth.getBalance(acc)
+      .then((balance) => {
         // TODO: Check for minimal value a user should have to successfully make a transaction, maybe take gas price into account.
         if (balance == 0) {
           this.etherBalance = "0"
@@ -127,7 +120,10 @@ export default {
         }
         this.etherBalance = (balance / Math.pow(10,18)).toString();
 
-    })
+    }).catch ((err) => {
+      console.error(err)
+      this.message = "There was an error fetching the balance for your account " + acc
+    });
 }
   },
 }
