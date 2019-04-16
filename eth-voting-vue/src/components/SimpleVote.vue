@@ -19,17 +19,17 @@
   </div>
 </template>
 
-
 <script>
 import Web3 from 'web3'
 import contract from 'truffle-contract'
 import artifacts from '../../build/contracts/SimpleVote.json'
 const SimpleVote = contract(artifacts)
+var web3
 
 // TODO: Try updating to web3 1.0
 export default {
   name: 'SimpleVote',
-  data() {
+  data () {
     return {
       message: null,
       contractAddress: null,
@@ -38,94 +38,91 @@ export default {
       currentVote: 0,
       etherBalance: 0,
       erc20Balance: 0,
-      votingHeightBlock: 7487763, // TODO: Adjust value to the blocknumber which is supposed to be the time of counting for the vote
+      votingHeightBlock: 10754080, // TODO: Adjust value to the blocknumber which is supposed to be the time of counting for the vote
       tokenBalanceAtHeight: null,
-      tokenContractAddress: "0x35d8830ea35e6df033eedb6d5045334a4e34f9f9" // TODO: This is Ethereum Kovan Network now, change to Ethereum main net.
+      tokenContractAddress: '0x35d8830ea35e6Df033eEdb6d5045334A4e34f9f9' // TODO: This is Ethereum Kovan Network now, change to Ethereum main net.
     }
   },
-  created() {
-    if (typeof web3 !== 'undefined') {
-      console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 Fluyd, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
+  created () {
+    if (typeof window.web3 !== 'undefined') {
+      console.warn('Using web3 detected from external source. If you find that your accounts don\'t appear or you have 0 Fluyd, ensure you\'ve configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask')
       // Use Mist/MetaMask's provider
-      web3 = new Web3(web3.currentProvider)
+      web3 = new Web3(window.web3.currentProvider)
     } else {
-      console.warn("No web3 detected. Falling back to http://127.0.0.1:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask")
+      console.warn('No web3 detected. Falling back to http://127.0.0.1:8545. You should remove this fallback when you deploy live, as it\'s inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask')
       // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-      web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"))
+      web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'))
     }
 
     SimpleVote.setProvider(web3.currentProvider)
-    web3.eth.getAccounts() 
-    .then((accs) => {
-      if (accs.length == 0) {
-        this.message = "Couldn't get any accounts! Make sure your Ethereum client is configured correctly."
-        return
-      }
-      this.account = accs[0];
-      this.updateEthBalance(this.account)
-      this.getTokenbalanceAtHeight()
+    web3.eth.getAccounts()
+      .then((accs) => {
+        if (accs.length === 0) {
+          this.message = 'Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.'
+          return
+        }
+        this.account = accs[0]
+        this.updateEthBalance(this.account)
+        this.getTokenbalanceAtHeight()
 
-      SimpleVote.deployed()
-        .then((instance) => instance.address)
-        .then((address) => {
-          this.contractAddress = address
-          this.updateCurrentVote()
-        })
-    })
-    .catch((err) => {
-      console.error(err)
-      this.message = "There was an error fetching your accounts. Do you have Metamask, Mist installed or an Ethereum node running? If not, you might want to look into that"
-    })
+        SimpleVote.deployed()
+          .then((instance) => instance.address)
+          .then((address) => {
+            this.contractAddress = address
+            this.updateCurrentVote()
+          })
+      }).catch((err) => {
+        console.error(err)
+        this.message = 'There was an error fetching your accounts. Do you have Metamask, Mist installed or an Ethereum node running? If not, you might want to look into that'
+      })
   },
   methods: {
-    placeVote() {
-      this.message = "Transaction started";
+    placeVote () {
+      this.message = 'Transaction started'
       return SimpleVote.deployed()
         .then((instance) => instance.vote(this.newVote, {from: this.account}))
         .then(() => {
-          this.message = "Transaction done"
+          this.message = 'Transaction done'
           this.updateCurrentVote()
         })
         .catch((e) => {
           console.error(e)
-          this.message = "Transaction failed"
+          this.message = 'Transaction failed'
         })
     },
-    updateCurrentVote() {
+    updateCurrentVote () {
       SimpleVote.deployed().then((instance) => instance.getVote(this.account)).then((r) => {
         console.log(r.toNumber())
         this.currentVote = r.toNumber()
-      });
+      })
     },
-    getTokenbalanceAtHeight() {
+    getTokenbalanceAtHeight () {
       web3.eth.call({
         to: this.tokenContractAddress,
-        data: "0x70a08231000000000000000000000000" + this.account.substring(2)
+        data: '0x70a08231000000000000000000000000' + this.account.substring(2)
       }).then((result) => {
-        this.tokenBalanceAtHeight = Number(result / Math.pow(10,18)) 
+        this.tokenBalanceAtHeight = Number(result / Math.pow(10, 18))
       }).catch((err) => {
         console.error(err)
-        this.message = "There was an error fetching your Tokenbalance at Block " + this.votingHeightBlock + " . Correct network?"
-      });
-    }
-    ,
-    updateEthBalance(acc) {
+        this.message = 'There was an error fetching your Tokenbalance at Block ' + this.votingHeightBlock + ' . Correct network?'
+      })
+    },
+    updateEthBalance (acc) {
       web3.eth.getBalance(acc)
-      .then((balance) => {
+        .then((balance) => {
         // TODO: Check for minimal value a user should have to successfully make a transaction, maybe take gas price into account.
-        if (balance == 0) {
-          this.etherBalance = "0"
-          this.message = "Your account does not have any Ether, ask a friend ?"
-          return
-        }
-        this.etherBalance = (balance / Math.pow(10,18)).toString();
-
-    }).catch ((err) => {
-      console.error(err)
-      this.message = "There was an error fetching the balance for your account " + acc
-    });
-}
-  },
+          if (balance === 0) {
+            this.etherBalance = '0'
+            this.message = 'Your account does not have any Ether, ask a friend ?'
+            return
+          }
+          this.etherBalance = (balance / Math.pow(10, 18)).toString()
+        }).catch((err) => {
+          console.error(err)
+          this.message = 'There was an error fetching the balance for your account ' + acc
+        })
+    }
+  }
 }
 </script>
 
