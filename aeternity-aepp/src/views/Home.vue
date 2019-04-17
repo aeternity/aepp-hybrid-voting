@@ -89,8 +89,8 @@
         voteId: 1,
         height: 0,
         stakeAtHeight: 0,
-        votingEndingHeight: 75000,
-        votingStakeHeight: 63000,
+        votingStakeHeight: 67000,
+        votingEndingHeight: 80000,
         activeOption: null,
         status: STATUS_LOADING,
         voteOptions: [
@@ -175,7 +175,7 @@
       const voteReceiver = 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB'
 
       const middlewareUrl = 'https://testnet.mdw.aepps.com/'
-      const votingAccTxs = await axios.get(`${middlewareUrl}/middleware/transactions/account/${voteReceiver}`).catch(console.error).then(res => res.data.transactions)
+      const votingAccTxs = await axios.get(`${middlewareUrl}/middleware/transactions/account/${this.address}/to/${voteReceiver}`).catch(console.error).then(res => res.data.transactions)
       const filteredVotingTxs = votingAccTxs
         .filter(tx => tx.tx.type === 'SpendTx')
         .filter(tx => tx.tx.payload !== '')
