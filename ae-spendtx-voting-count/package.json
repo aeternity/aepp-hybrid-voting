@@ -1,0 +1,17 @@
+{
+  "name": "ae-spendtx-voting-experiment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node $NODE_DEBUG_OPTION index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aeternity/aepp-sdk": "^2.4.0",
+    "axios": "^0.18.0",
+    "bignumber.js": "^8.1.1"
+  }
+}
