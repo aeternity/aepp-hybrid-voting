@@ -2,7 +2,7 @@ const {ChainNode} = require('@aeternity/aepp-sdk');
 const axios = require('axios');
 const BigNumber = require('bignumber.js');
 
-const middlewareUrl = "http://localhost:8000"; // "https://testnet.mdw.aepps.com";
+const middlewareUrl = "https://testnet.mdw.aepps.com";
 
 const getClient = () => {
     return ChainNode({
@@ -18,13 +18,13 @@ const groupBy = (xs, key) => xs.reduce((acc, x) => Object.assign({}, acc, {
 
 const testVerify = async () => {
     const votingAcc = 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB';
-    const votingStakeHeight = 30000;
-    const votingEndingHeight = 60000;
+    const votingStakeHeight = 67000;
+    const votingEndingHeight = 80000;
     const voteId = 1;
 
 
     // 1. fetch all txs towards voting account from middleware
-    const votingAccTxs = await axios.get(`${middlewareUrl}/middleware/transactions/account/${votingAcc}`).catch(console.error).then(res => res.data.transactions);
+    const votingAccTxs = await axios.get(`${middlewareUrl}/middleware/transactions/account/${votingAcc}`).catch(console.error).then(res => res.data);
     const filteredVotingTxs = votingAccTxs
         .filter(tx => tx.tx.type === 'SpendTx') // filter spend transactions
         .filter(tx => tx.tx.payload !== '') // filter transactions with empty payload
