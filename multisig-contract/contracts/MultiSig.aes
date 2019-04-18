@@ -23,7 +23,7 @@ contract MultiSig =
   record state =
     { admin_one : address
     , admin_two : address
-    , multi_sig_hashes: map(address, hash) }
+    , multi_sig_hashes: map(address, int) }
 
   record spend_data =
     { spend_to_address : address
@@ -42,7 +42,7 @@ contract MultiSig =
     require_caller_is_either_admin(Call.caller)
 
     // update agreement to spend, so always latest agreement is in state for each admin
-    let data_hash = Crypto.blake2b(spend_data)
+    let data_hash = spend_data_hash(spend_data)
     put(state{ multi_sig_hashes[Call.caller] = data_hash })
 
     // if both admins agree on the same spend data, execute spend and reset agreement
@@ -55,6 +55,13 @@ contract MultiSig =
       false
 
   // CONTRACT SPECIFIC HELPER FUNCTIONS
+
+  private function spend_data_hash(spend_data : spend_data) : int =
+    let separator = " => "
+    let address_string = Address.to_str(spend_data.spend_to_address)
+    let amount_string = Int.to_str(spend_data.spend_amount)
+    let address_and_amount = String.concat(String.concat(address_string, separator), amount_string)
+    String.sha3(address_and_amount)
 
   private function require_not_zero_address(address_to_check : address) =
     require(address_to_check != #0, "ADDRESS_NOT_ALLOWED_ZERO")
