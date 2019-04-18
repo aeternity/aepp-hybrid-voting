@@ -19,5 +19,53 @@
 // DO NEVER USE THIS WITHOUT SECURITY AUDIT FIRST
 
 contract MultiSig =
-   type state = ()
-   function main(x : int) = x
+
+  record state =
+    { admin_one : address
+    , admin_two : address
+    , multi_sig_hashes: map(address, hash) }
+
+  record spend_data =
+    { spend_to_address : address
+    , spend_amount : int }
+
+  public function init(admin_one' : address, admin_two' : address) : state =
+    require_not_zero_address(admin_one')
+    require_not_zero_address(admin_two')
+    require_not_equal_addresses(admin_one', admin_two')
+
+    { admin_one = admin_one',
+      admin_two = admin_two',
+      multi_sig_hashes = {}}
+
+  public stateful function add_data_and_spend_if_both_admins_agree(spend_data : spend_data) : bool =
+    require_caller_is_either_admin(Call.caller)
+
+    // update agreement to spend, so always latest agreement is in state for each admin
+    let data_hash = Crypto.blake2b(spend_data)
+    put(state{ multi_sig_hashes[Call.caller] = data_hash })
+
+    // if both admins agree on the same spend data, execute spend and reset agreement
+    if(state.multi_sig_hashes[state.admin_one] == state.multi_sig_hashes[state.admin_two])
+      put(state{ multi_sig_hashes = {} })
+      Chain.spend(spend_data.spend_to_address, spend_data.spend_amount)
+      true
+    else
+      // purposfully not abort multi_sig_hashes data should be updated
+      false
+
+  // CONTRACT SPECIFIC HELPER FUNCTIONS
+
+  private function require_not_zero_address(address_to_check : address) =
+    require(address_to_check != #0, "ADDRESS_NOT_ALLOWED_ZERO")
+
+  private function require_not_equal_addresses(address_to_check_one : address, address_to_check_two : address) =
+    require(address_to_check_one != address_to_check_two, "ADDRESSES_NOT_ALLOWED_EQUAL")
+
+  private function require_caller_is_either_admin(address_to_check : address) =
+    require(address_to_check == state.admin_one || address_to_check == state.admin_two, "ADRRESS_IS_NOT_ADMIN")
+
+  // GENERIC HELPER FUNCTIONS
+
+  private function require(b : bool, err : string) =
+    if(!b) abort(err)
