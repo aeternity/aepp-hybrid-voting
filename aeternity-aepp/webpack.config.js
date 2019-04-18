@@ -7,6 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const PurgecssPlugin = require('purgecss-webpack-plugin')
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 let glob = require('glob-all')
 
 const distFolder = path.resolve(__dirname, 'dist')
@@ -39,7 +40,7 @@ module.exports = env => {
     },
     output: {
       filename: 'bundle.js?[hash]',
-      publicPath: '/'
+      publicPath: env.NODE_ENV === 'prod' ? './' : '/'
     },
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
@@ -76,7 +77,8 @@ module.exports = env => {
       }),
       new HtmlWebpackHarddiskPlugin(),
       new CleanWebpackPlugin([distFolder]),
-      new VueLoaderPlugin()
+      new VueLoaderPlugin(),
+      new BaseHrefWebpackPlugin({ baseHref: env.NODE_ENV === 'prod' ? 'https://aeternity.com/aepp-hybrid-voting/' : '/' })
     ],
     module: {
       rules: [
