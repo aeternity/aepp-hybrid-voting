@@ -13,7 +13,7 @@ const routes = [
 const router = new Router({ mode: 'history', routes: routes })
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} - Drone Aepp`
+  document.title = `${to.meta.title} - Voting Aepp`
   next()
 })
 

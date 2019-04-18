@@ -15,9 +15,11 @@
     "@aeternity/aepp-sdk": "^2.4.0",
     "axios": "^0.18.0",
     "bignumber.js": "^8.1.1",
+    "truffle-contract": "^4.0.12",
     "vue": "^2.6.8",
     "vue-meta": "^1.5.8",
-    "vue-router": "^3.0.2"
+    "vue-router": "^3.0.2",
+    "web3": "^1.0.0-beta.37"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

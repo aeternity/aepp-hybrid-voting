@@ -31,7 +31,8 @@ module.exports = env => {
       }
     },
     node: {
-      fs: 'empty'
+      fs: 'empty',
+      process: 'mock'
     },
     entry: {
       'main': './src/main.js'
