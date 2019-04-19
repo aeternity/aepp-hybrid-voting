@@ -25,21 +25,15 @@ const aeternity = {
 
 aeternity.init = async (vote) => {
   try {
-    console.log("HERE1")
     aeternity.client = await Aepp()
-    console.log("HERE1")
     aeternity.address = await aeternity.client.address()
-    console.log("HERE1")
     aeternity.height = await aeternity.client.height()
-    console.log("HERE1")
     aeternity.stakeAtHeight = await aeternity.client.balance(aeternity.address, { height: aeternity.vote.stakeHeight })
       .then(balance => `${atomsToAe(balance)} AE`)
       .catch(() => '0 AE')
-    console.log("HERE1")
     aeternity.balance = await aeternity.client.balance(aeternity.address)
       .then(balance => `${atomsToAe(balance)}`)
       .catch(() => '0')
-    console.log("HERE1")
     aeternity.vote = vote
     return true
   } catch (e) {

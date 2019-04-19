@@ -102,17 +102,14 @@
           {
             id: 1,
             name: 'Option 1',
-            address: 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB'
           },
           {
             id: 2,
             name: 'Option 2',
-            address: 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB'
           },
           {
             id: 3,
             name: 'Option 3',
-            address: 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB'
           }
         ]
       }
@@ -163,24 +160,23 @@
     },
     async created () {
 
-      console.log('Trying')
       if (window.parent !== window) {
         const success = await aeternity.init({
           id: this.voteId,
           stakeHeight: 67000,
-          endHeight: 80000
+          endHeight: 80000,
+          options: this.voteOptions
         })
-        console.log('HERE ')
         if (success) this.provider = aeternity
         else console.warn('Could not init aeternity')
       }
 
       if (!this.provider) {
-        console.log('Trying1')
         const success = await ethereum.init({
           id: this.voteId,
           stakeHeight: 10754080,
-          endHeight: 11769152
+          endHeight: 11769152,
+          options: this.voteOptions
         })
         if (success) this.provider = ethereum
         else console.warn('Could not init ethereum')

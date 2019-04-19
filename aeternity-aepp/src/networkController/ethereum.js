@@ -81,11 +81,12 @@ ethereum.getCurrentStatus = async () => {
     }
   } else {
     ethereum.status = STATUS_VOTE_SUCCESS
+    ethereum.activeOption = ethereum.vote.options.find(voteOption => voteOption.id === activeOption.id)
   }
 
   return {
     status: ethereum.status,
-    activeOption: activeOption
+    activeOption: ethereum.activeOption
   }
 }
 
@@ -105,15 +106,13 @@ ethereum.getTokenbalanceAtHeight = async () => {
     to: ethereum.tokenContractAddress,
     data: '0x70a08231000000000000000000000000' + ethereum.address.substring(2)
   })
-  ethereum.stakeAtHeight = Number(result / Math.pow(10, 18))
+  ethereum.stakeAtHeight = String(Number(result / Math.pow(10, 18))) + ' AE'
 }
 
 ethereum.updateEthBalance = async (acc) => {
   const balance = await ethereum.web3.eth.getBalance(acc)
-  // TODO: Check for minimal value a user should have to successfully make a transaction, maybe take gas price into account.
   if (balance === 0) {
     ethereum.balance = '0'
-    throw Error('Your account does not have any Ether, ask a friend ?')
   }
   ethereum.balance = (balance / Math.pow(10, 18)).toString()
 }

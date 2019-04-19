@@ -78,7 +78,7 @@ module.exports = env => {
       new HtmlWebpackHarddiskPlugin(),
       new CleanWebpackPlugin([distFolder]),
       new VueLoaderPlugin(),
-      new BaseHrefWebpackPlugin({ baseHref: env.NODE_ENV === 'prod' ? 'https://aeternity.com/aepp-hybrid-voting/' : '/' })
+      new BaseHrefWebpackPlugin({ baseHref: env.NODE_ENV === 'prod' ? '/aepp-hybrid-voting/' : '/' })
     ],
     module: {
       rules: [
