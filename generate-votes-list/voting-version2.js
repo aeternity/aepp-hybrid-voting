@@ -76,9 +76,9 @@ async function start() {
 
         json[voter] = {
             "vote": Number(vote),
-            "balance": balanceAtHeight.add(new web3.utils.BN(burnedTokens)),
-            "burnedTokens": burnedTokens,
-            "ownedTokens": balanceAtHeight
+            "totalBalance": balanceAtHeight.add(new web3.utils.BN(burnedTokens)).toString(),
+            "burnedTokens": burnedTokens.toString(),
+            "ownedTokens": balanceAtHeight.toString()
         };
         lastCount = i;
         bar.tick();
@@ -103,7 +103,7 @@ function checkConfig() {
 }
 
 function saveJSON() {
-    let jsonString = JSON.stringify(json, Object.keys(json).concat(["vote", "balance"]), 2);
+    let jsonString = JSON.stringify(json, Object.keys(json).concat(["vote", "totalBalance", "burnedTokens", "ownedTokens"]), 2);
     jsonString = jsonString.replace(/: "/gm, ': ')
     jsonString = jsonString.replace(/",$/gm, ',')
     jsonString = jsonString.replace(/"$/gm, '')

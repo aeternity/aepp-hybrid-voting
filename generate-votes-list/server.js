@@ -27,39 +27,49 @@ app.get('/vote/:address', getVote);
 async function getVote(request, response) {
     var voter = request.params.address;
     if (!voter || !web3.utils.isAddress(voter)) {
-        response.writeHeader(400, {"Content-Type": "application/json"});
+        response.writeHeader(400, { "Content-Type": "application/json" });
         response.write(JSON.stringify({
+            error: true,
             message: "Invalid address"
         }));
         response.end();
     } else {
-        // fetch the vote
-        var vote = await VotingContract.methods.getVote(voter).call();
-        // get the balance at height
-        var balanceAtHeight = new web3.utils.BN(
-            await AEToken.methods.balanceOf(voter).call(BLOCK_NUMBER));
-        // check Burns in the current delivery period
-        var res = await axios.get(
-            `${BL_URL }/data/${TABLE}?where=from%3D%27${voter}%27%20AND%20deliveryPeriod%3D${DELIVERY_PERIOD}`,
-        );
+        try {
+            // fetch the vote
+            var vote = await VotingContract.methods.getVote(voter).call();
+            // get the balance at height
+            var balanceAtHeight = new web3.utils.BN(
+                await AEToken.methods.balanceOf(voter).call(BLOCK_NUMBER));
+            // check Burns in the current delivery period
+            var res = await axios.get(
+                `${BL_URL}/data/${TABLE}?where=from%3D%27${voter}%27%20AND%20deliveryPeriod%3D${DELIVERY_PERIOD}`,
+            );
 
-        var burnedTokens = new web3.utils.BN(0);
-        for (var j = 0; j < res.data.length; j++) {
-            let transactionHash = res.data[j].transactionHash;
-            let txReceipt = await web3.eth.getTransactionReceipt(transactionHash);
-            if (txReceipt.blockNumber < BLOCK_NUMBER)
-                burnedTokens = burnedTokens.add(new web3.utils.BN(res.data[j].value));
+            var burnedTokens = new web3.utils.BN(0);
+            for (var j = 0; j < res.data.length; j++) {
+                let transactionHash = res.data[j].transactionHash;
+                let txReceipt = await web3.eth.getTransactionReceipt(transactionHash);
+                if (txReceipt.blockNumber < BLOCK_NUMBER)
+                    burnedTokens = burnedTokens.add(new web3.utils.BN(res.data[j].value));
+            }
+
+            response.writeHeader(200, { "Content-Type": "application/json" });
+            response.write(JSON.stringify({
+                voter: voter,
+                vote: vote,
+                totalBalance: balanceAtHeight.add(new web3.utils.BN(burnedTokens)).toString(),
+                burnedTokens: burnedTokens.toString(),
+                ownedTokens: balanceAtHeight.toString()
+            }));
+            response.end();
+        } catch (err) {
+            console.log(err);
+            response.writeHeader(500, { "Content-Type": "application/json" });
+            response.write(JSON.stringify({
+                error: true,
+                message: err
+            }));
         }
-
-        response.writeHeader(200, {"Content-Type": "application/json"});
-        response.write(JSON.stringify({
-            voter: voter,
-            vote: vote,
-            totalBalance: balanceAtHeight.add(new web3.utils.BN(burnedTokens)).toString(),
-            burnedTokens: burnedTokens.toString(),
-            ownedTokens: balanceAtHeight.toString()
-        }));
-        response.end();
     }
 }
 

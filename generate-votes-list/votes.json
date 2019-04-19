@@ -1,10 +1,26 @@
 {
   "0x73A4b29281fB9d519875B2949bcB0d9BC28AE8B7": {
     "vote": 4,
-    "balance": 0
+    "totalBalance": 0,
+    "burnedTokens": 0,
+    "ownedTokens": 0
   },
   "0x965B8DD208685Dd84867acB17965E30ed886aC19": {
-    "vote": 5,
-    "balance": 5000000000000000000000
+    "vote": 1,
+    "totalBalance": 4999999999999999999900,
+    "burnedTokens": 0,
+    "ownedTokens": 4999999999999999999900
+  },
+  "0xb226050F6322501080Dfa6F62E03D63c59A16538": {
+    "vote": 1,
+    "totalBalance": 48000000000000000000,
+    "burnedTokens": 0,
+    "ownedTokens": 48000000000000000000
+  },
+  "0x2cbECBC6be7db01757D02a97989Bf59687333Baa": {
+    "vote": 1,
+    "totalBalance": 0,
+    "burnedTokens": 0,
+    "ownedTokens": 0
   }
 }
