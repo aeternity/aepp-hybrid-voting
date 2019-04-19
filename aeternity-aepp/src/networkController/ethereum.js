@@ -10,6 +10,7 @@ const STATUS_INITIAL = 0, STATUS_VOTE_SELECTED = 1, STATUS_LOADING = 2, STATUS_V
   STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5
 
 const ethereum = {
+  network: "ethereum",
   address: null,
   height: null,
   stakeAtHeight: null,
@@ -94,7 +95,10 @@ ethereum.sendVote = async (id) => {
   try {
     const instance = await SimpleVote.deployed()
     await instance.vote(id, { from: ethereum.address })
-    return true
+    return {
+      status: STATUS_VOTE_SUCCESS,
+      activeOption: ethereum.vote.options.find(voteOption => voteOption.id === id)
+    }
   } catch (e) {
     console.warn(e)
     return false
@@ -106,7 +110,7 @@ ethereum.getTokenbalanceAtHeight = async () => {
     to: ethereum.tokenContractAddress,
     data: '0x70a08231000000000000000000000000' + ethereum.address.substring(2)
   })
-  ethereum.stakeAtHeight = String(Number(result / Math.pow(10, 18))) + ' AE'
+  ethereum.stakeAtHeight = String(Number(result / Math.pow(10, 18)))
 }
 
 ethereum.updateEthBalance = async (acc) => {

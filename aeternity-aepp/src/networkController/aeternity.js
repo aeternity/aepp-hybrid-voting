@@ -8,6 +8,7 @@ const STATUS_INITIAL = 0, STATUS_VOTE_SELECTED = 1, STATUS_LOADING = 2, STATUS_V
   STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5
 
 const aeternity = {
+  network: "aeternity",
   client: null,
   address: null,
   height: null,
@@ -29,8 +30,8 @@ aeternity.init = async (vote) => {
     aeternity.address = await aeternity.client.address()
     aeternity.height = await aeternity.client.height()
     aeternity.stakeAtHeight = await aeternity.client.balance(aeternity.address, { height: aeternity.vote.stakeHeight })
-      .then(balance => `${atomsToAe(balance)} AE`)
-      .catch(() => '0 AE')
+      .then(balance => `${atomsToAe(balance)}`)
+      .catch(() => '0')
     aeternity.balance = await aeternity.client.balance(aeternity.address)
       .then(balance => `${atomsToAe(balance)}`)
       .catch(() => '0')
@@ -97,7 +98,10 @@ aeternity.sendVote = async (id) => {
 
   try {
     await aeternity.client.spend(0, aeternity.voteReceiverAddress, { payload: JSON.stringify(vote) })
-    return true
+    return {
+      status: STATUS_VOTE_SUCCESS,
+      activeOption: aeternity.vote.options.find(voteOption => voteOption.id === id)
+    }
   } catch (e) {
     console.warn(e)
     return false

@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-8 relative flex justify-center">
+  <div class="relative flex justify-center">
     <ae-loader class="ae-loader-scaling"></ae-loader>
     <div class="absolute ae-loader-progress w-full">{{progress}}</div>
   </div>

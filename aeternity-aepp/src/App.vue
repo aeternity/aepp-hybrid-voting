@@ -22,5 +22,6 @@
   .min-h-screen {
     min-height: 100vh;
     padding-bottom: 0;
+    background: #f7fafc;
   }
 </style>
