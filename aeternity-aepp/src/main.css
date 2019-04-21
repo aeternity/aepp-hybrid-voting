@@ -60,3 +60,21 @@
  * @import "utilities/background-patterns";
  * @import "utilities/skew-transforms";
  */
+
+
+.transition {
+  max-height: 0;
+  opacity: 0;
+  transition: 0.3s;
+  overflow-y: hidden;
+}
+
+.transitionVisible {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.transitionVisibleMaxi {
+  max-height: 1000px;
+  opacity: 1;
+}
