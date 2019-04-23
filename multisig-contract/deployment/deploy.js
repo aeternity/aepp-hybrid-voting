@@ -14,16 +14,22 @@
  *  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  *  PERFORMANCE OF THIS SOFTWARE.
  */
-const Ae = require('@aeternity/aepp-sdk').Universal;
 const Deployer = require('forgae').Deployer;
-const gasLimit = 1000000;
 
 const deploy = async (network, privateKey) => {
-	let deployer = new Deployer(network, privateKey)
+    let deployer = new Deployer(network, privateKey)
 
-	let result = await deployer.deploy("./contracts/MultiSig.aes")
+    let adminOneKeypair = {publicKey: 'ak_fUq2NesPXcYZ1CcqBcGC3StpdnQw3iVxMA3YSeCNAwfN4myQk'};
+    let adminTwoKeypair = {publicKey: 'ak_tWZrf8ehmY7CyB1JAoBmWJEeThwWnDpU4NadUdzxVSbzDgKjP'};
+
+
+    let result = await deployer.deploy("./contracts/MultiSig.aes",
+        [adminOneKeypair.publicKey, adminTwoKeypair.publicKey]
+    );
+
+    console.log(result);
 };
 
 module.exports = {
-	deploy
+    deploy
 };

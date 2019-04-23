@@ -29,6 +29,8 @@ const decodeAddress = (key) => {
 
 describe('MultiSig Contract', () => {
 
+    console.log(wallets);
+
     let clientOne, adminTwo, contract;
     let adminOneKeypair = wallets[0];
     let adminTwoKeypair = wallets[1];
@@ -58,9 +60,7 @@ describe('MultiSig Contract', () => {
 
         const compiledContract = await clientOne.contractCompile(contractSource);
 
-        const deployPromise = compiledContract.deploy({ // Deploy it
-            initState: `(${decodeAddress(adminOneKeypair.publicKey)}, ${decodeAddress(adminTwoKeypair.publicKey)})`
-        });
+        const deployPromise = compiledContract.deploy([adminOneKeypair.publicKey, adminTwoKeypair.publicKey]);
 
         await assert.isFulfilled(deployPromise, 'Could not deploy the MultiSig Smart Contract'); // Check it is deployed
         contract = await deployPromise;
