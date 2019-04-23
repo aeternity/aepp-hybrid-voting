@@ -59,10 +59,10 @@ describe('MultiSig Contract', () => {
     it('Deploy and Initialize MultiSig Contract', async () => {
         let contractSource = utils.readFileRelative('./contracts/MultiSig.aes', "utf-8"); // Read the aes file
 
-        const compiledContract = await clientOne.getContractInstance(contractSource);
-        contract = await compiledContract.deploy([adminOneKeypair.publicKey, adminTwoKeypair.publicKey]);
+        contract = await clientOne.getContractInstance(contractSource);
+        const deploy = await contract.deploy([adminOneKeypair.publicKey, adminTwoKeypair.publicKey]);
 
-        await assert(!!contract, 'Could not deploy the MultiSig Smart Contract'); // Check it is deployed
+        await assert(!!deploy, 'Could not deploy the MultiSig Smart Contract'); // Check it is deployed
     });
 
     it('MultiSig Contract, both admins agree to spend workflow', async () => {
@@ -75,7 +75,7 @@ describe('MultiSig Contract', () => {
             spend_to_address: receiverNonAdminKeypair.publicKey,
             spend_amount: 1000
         }]).catch(console.error);
-        console.log(call);
+        await assert(!!call, 'Could not call the MultiSig Smart Contract');
     });
 
 });
