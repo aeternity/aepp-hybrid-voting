@@ -33,7 +33,7 @@ aeternity.init = async (vote) => {
       .then(balance => `${atomsToAe(balance)}`)
       .catch(() => '0')
     aeternity.balance = await aeternity.client.balance(aeternity.address)
-      .then(balance => `${atomsToAe(balance)}`)
+      .then(balance => `${atomsToAe(balance)}`.replace(',',''))
       .catch(() => '0')
     aeternity.vote = vote
     return true

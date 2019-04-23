@@ -1,25 +1,23 @@
 <template>
   <div id="app" class="min-h-screen">
     <div class="min-h-screen">
-      <!--
-      <div class="bg-white w-full shadow h-12 p-1 relative">
+      <div class="bg-white w-full shadow h-12 p-1 relative hidden md:block mb-8">
         <div class="flex h-full">
-
-          <div class="p-2 flex">
-            <img src="./assets/logo-small.png" class="h-full">
+          <div class="h-full">
+            <img src="./assets/logo-small.png" class="h-full w-auto p-3 mx-3"/>
           </div>
-
           <div class="border-l border-gray-400">
-
+            <div class="flex items-center h-full ml-6">
+              <strong>æternity</strong>voting
+            </div>
           </div>
         </div>
       </div>
-      -->
-      <ae-main class="flex justify-center">
+      <div class="flex justify-center">
         <div class="mobile-container">
           <router-view></router-view>
         </div>
-      </ae-main>
+      </div>
     </div>
   </div>
 </template>
@@ -39,7 +37,7 @@
   .min-h-screen {
     min-height: 100vh;
     padding-bottom: 0;
-    background: #f7fafc;
+    background: #F1F4F7;
   }
 
   .mobile-container {

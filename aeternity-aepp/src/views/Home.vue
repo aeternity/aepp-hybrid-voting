@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="hasGeneralError" class="bg-white rounded-lg p-4 shadow">
-      <div class="text-2xl font-bold text-red-500 text-center mb-4">
-        <h2>Error</h2>
+    <div v-if="hasGeneralError" class=" mx-4 mt-4 bg-white rounded-lg p-4 shadow">
+      <div class="font-bold text-red-500 mb-4">
+        <h2 class="text-2xl">Error</h2>
         <div>
           {{error}}
         </div>
@@ -93,7 +93,7 @@
     <div class="m-4">
       <div class="relative flex justify-center">
         <hr class="w-full absolute left-0 z-0 border-t" style="top: .5rem">
-        <div class="label z-10 p-2" style="background-color: #f7fafc">
+        <div class="label z-10 p-2" style="background-color: #F1F4F7">
           OPEN POLLS
         </div>
       </div>
@@ -170,23 +170,26 @@
 
       </div>
       <!-- BUTTONS -->
+      <div class="mt-2">
+        <div v-if="isSuccessful" class="w-full flex justify-center">
+          <AeButton class="my-4" fill="primary" face="round" @click="removeVote">
+            Change your vote
+          </AeButton>
+        </div>
+        <div v-if="showOptions" class="w-full flex justify-center">
+          <AeButton :disabled="!provider" class="my-4" fill="primary" face="round" @click="sendVote">
+            Confirm
+          </AeButton>
+        </div>
 
-      <div v-if="isSuccessful" class="w-full flex justify-center">
-        <AeButton class="my-4" fill="primary" face="round" @click="removeVote">
-          Change your vote
-        </AeButton>
-      </div>
-      <div v-if="showOptions" class="w-full flex justify-center">
-        <AeButton :disabled="!provider" class="my-4" fill="primary" face="round" @click="sendVote">
-          Confirm
-        </AeButton>
+        <div v-if="hasVotingError" class="w-full flex justify-center">
+          <AeButton  class="my-4" fill="primary" face="round" @click="removeVote">
+            Try again
+          </AeButton>
+        </div>
+
       </div>
 
-      <div v-if="hasVotingError" class="w-full flex justify-center">
-        <AeButton  class="my-4" fill="primary" face="round" @click="removeVote">
-          Try again
-        </AeButton>
-      </div>
     </div>
   </div>
 </template>
@@ -328,7 +331,7 @@
       console.log(String(this.provider.balance))
       if (String(this.provider.balance) === '0') {
         this.status = STATUS_ERROR
-        this.error = 'Your balance is 0, please add tokens to your account'
+        this.error = `Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account`
       } else {
         this.status = result.status
       }
