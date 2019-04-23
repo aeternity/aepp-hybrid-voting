@@ -19,17 +19,16 @@ const Crypto = require('@aeternity/aepp-sdk').Crypto;
 
 const config = {
     host: "http://localhost:3001/",
-    internalHost: "http://localhost:3001/internal/"
+    internalHost: "http://localhost:3001/internal/",
+    compilerUrl: "https://compiler.aepps.com"
 };
 
 const decodeAddress = (key) => {
     const address = Crypto.decodeBase58Check(key.split('_')[1]).toString('hex')
-    return `0x${address}`
+    return `#${address}`
 };
 
 describe('MultiSig Contract', () => {
-
-    console.log(wallets);
 
     let clientOne, adminTwo, contract;
     let adminOneKeypair = wallets[0];
@@ -41,6 +40,7 @@ describe('MultiSig Contract', () => {
         clientOne = await Ae({
             url: config.host,
             internalUrl: config.internalHost,
+            compilerUrl: config.compilerUrl,
             keypair: adminOneKeypair,
             nativeMode: true,
             networkId: 'ae_devnet'
@@ -49,6 +49,7 @@ describe('MultiSig Contract', () => {
         adminTwo = await Ae({
             url: config.host,
             internalUrl: config.internalHost,
+            compilerUrl: config.compilerUrl,
             keypair: adminTwoKeypair,
             nativeMode: true,
             networkId: 'ae_devnet'
@@ -58,21 +59,23 @@ describe('MultiSig Contract', () => {
     it('Deploy and Initialize MultiSig Contract', async () => {
         let contractSource = utils.readFileRelative('./contracts/MultiSig.aes', "utf-8"); // Read the aes file
 
-        const compiledContract = await clientOne.contractCompile(contractSource);
+        const compiledContract = await clientOne.getContractInstance(contractSource);
+        contract = await compiledContract.deploy([adminOneKeypair.publicKey, adminTwoKeypair.publicKey]);
 
-        const deployPromise = compiledContract.deploy([adminOneKeypair.publicKey, adminTwoKeypair.publicKey]);
-
-        await assert.isFulfilled(deployPromise, 'Could not deploy the MultiSig Smart Contract'); // Check it is deployed
-        contract = await deployPromise;
+        await assert(!!contract, 'Could not deploy the MultiSig Smart Contract'); // Check it is deployed
     });
 
     it('MultiSig Contract, both admins agree to spend workflow', async () => {
-        await clientOne.spend(100000, contract.address.replace('ct_', 'ak_'));
+        await clientOne.spend(100000, contract.deployInfo.address.replace('ct_', 'ak_'));
         const receiverBalance = await clientOne.balance(receiverNonAdminKeypair.publicKey);
-        const contractBalance = await clientOne.balance(contract.address);
+        const contractBalance = await clientOne.balance(contract.deployInfo.address);
         console.log(receiverBalance, contractBalance);
-        await contract.call('add_data_and_spend_if_both_admins_agree', {args: `({spend_to_address = ${decodeAddress(receiverNonAdminKeypair.publicKey)}, spend_amount = 1000})`})
-            .catch(console.error)
+
+        const call = await contract.call('add_data_and_spend_if_both_admins_agree', [{
+            spend_to_address: receiverNonAdminKeypair.publicKey,
+            spend_amount: 1000
+        }]).catch(console.error);
+        console.log(call);
     });
 
 });
