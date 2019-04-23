@@ -38,6 +38,8 @@
     min-height: 100vh;
     padding-bottom: 0;
     background: #F1F4F7;
+    max-height: 100vh;
+    overflow-y: auto;
   }
 
   .mobile-container {
