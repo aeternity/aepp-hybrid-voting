@@ -24,9 +24,47 @@ const aeternity = {
   voteReceiverAddress: 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB'
 }
 
-aeternity.init = async (vote) => {
+aeternity.initBase = async (vote) => {
   try {
     aeternity.client = await Aepp()
+    return aeternity.initProvider(vote)
+  } catch (e) {
+    console.warn(e)
+    return false
+  }
+}
+
+aeternity.getWalletWindow = async () => {
+  const iframe = document.createElement('iframe')
+  iframe.src = prompt('DEBUG: Enter wallet URL', 'https://stage-identity.aepps.com/')
+  iframe.style.display = 'none'
+  document.body.appendChild(iframe)
+  await new Promise(resolve => {
+    const handler = ({ data }) => {
+      if (data.method !== 'ready') return
+      window.removeEventListener('message', handler)
+      resolve()
+    }
+    window.addEventListener('message', handler)
+  })
+  return iframe.contentWindow
+}
+
+aeternity.initLedger = async (vote) => {
+  try {
+
+    aeternity.client = await Aepp({
+      parent: await aeternity.getWalletWindow()
+    })
+    return aeternity.initProvider(vote)
+  } catch (e) {
+    console.warn(e)
+    return false
+  }
+}
+
+aeternity.initProvider = async (vote) => {
+  try {
     aeternity.address = await aeternity.client.address()
     aeternity.height = await aeternity.client.height()
     aeternity.stakeAtHeight = await aeternity.client.balance(aeternity.address, { height: aeternity.vote.stakeHeight })

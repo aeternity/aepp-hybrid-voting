@@ -183,7 +183,7 @@
         </div>
 
         <div v-if="hasVotingError" class="w-full flex justify-center">
-          <AeButton  class="my-4" fill="primary" face="round" @click="removeVote">
+          <AeButton class="my-4" fill="primary" face="round" @click="removeVote">
             Try again
           </AeButton>
         </div>
@@ -296,22 +296,9 @@
         }
       }
     },
-    async created () {
-      if (window.parent !== window) {
-        const success = await aeternity.init({
-          id: this.voteId,
-          stakeHeight: 67000,
-          endHeight: 80000,
-          options: this.voteOptions
-        })
-        if (success) {
-          this.provider = aeternity
-        } else {
-          console.warn('Could not init aeternity')
-        }
-      }
+    async mounted () {
 
-      if (!this.provider) {
+      if (window.ethereum || window.web3) {
         const success = await ethereum.init({
           id: this.voteId,
           stakeHeight: 10754080,
@@ -320,8 +307,37 @@
         })
         if (success) this.provider = ethereum
         else {
+          console.warn('Could not init ethereum')
+        }
+      }
+
+      if (window.parent !== window) {
+        const success = await aeternity.initBase({
+          id: this.voteId,
+          stakeHeight: 67000,
+          endHeight: 80000,
+          options: this.voteOptions
+        })
+        if (success) {
+          this.provider = aeternity
+        } else {
+          console.warn('Could not init aeternity base')
+        }
+      }
+
+      if (!this.provider) {
+        // Try Ledger
+        const success = await aeternity.initLedger({
+          id: this.voteId,
+          stakeHeight: 67000,
+          endHeight: 80000,
+          options: this.voteOptions
+        })
+
+        if (success) this.provider = aeternity
+        else {
           this.status = STATUS_INIT_FAILED
-          return console.warn('Could not init ethereum')
+          return console.warn('Could not init aeternity ledger')
         }
       }
 
