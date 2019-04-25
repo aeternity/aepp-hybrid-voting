@@ -21,7 +21,8 @@ const aeternity = {
   },
   status: null,
   activeOption: null,
-  voteReceiverAddress: 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB'
+  //voteReceiverAddress: 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB'
+  voteReceiverAddress: 'ak_11111111111111111111111111111111273Yts'
 }
 
 aeternity.initBase = async (vote) => {
@@ -71,7 +72,7 @@ aeternity.initProvider = async (vote) => {
       .then(balance => `${atomsToAe(balance)}`)
       .catch(() => '0')
     aeternity.balance = await aeternity.client.balance(aeternity.address)
-      .then(balance => `${atomsToAe(balance)}`.replace(',',''))
+      .then(balance => `${atomsToAe(balance)}`.replace(',', ''))
       .catch(() => '0')
     aeternity.vote = vote
     return true
@@ -82,32 +83,42 @@ aeternity.initProvider = async (vote) => {
 }
 
 aeternity.getCurrentStatus = async () => {
-  const middlewareUrl = 'https://testnet.mdw.aepps.com/'
-  const votingAccTxs = await axios.get(`${middlewareUrl}/middleware/transactions/account/${aeternity.address}/to/${aeternity.voteReceiverAddress}`).then(res => res.data.transactions)
-  const filteredVotingTxs = votingAccTxs
-    .filter(tx => tx.tx.type === 'SpendTx')
-    .filter(tx => tx.tx.payload !== '')
-    .filter(tx => tx.tx.sender_id === aeternity.address)
-    .filter(tx => {
-      try {
+  let filteredVotingTxs = []
+  try {
+    const middlewareUrl = 'https://testnet.mdw.aepps.com'
+    const votingAccTxs = await axios.get(`${middlewareUrl}/middleware/transactions/account/${aeternity.address}/to/${aeternity.voteReceiverAddress}`).then(res => res.data.transactions)
+    filteredVotingTxs = votingAccTxs
+      .filter(tx => tx.tx.type === 'SpendTx')
+      .filter(tx => tx.tx.payload !== '')
+      .filter(tx => tx.tx.sender_id === aeternity.address)
+      .filter(tx => {
+        try {
+          const payload = JSON.parse(tx.tx.payload)
+          return payload.vote && payload.vote.id && payload.vote.option && payload.vote.id === aeternity.vote.id
+        } catch {
+          return false
+        }
+      })
+      .map(tx => {
         const payload = JSON.parse(tx.tx.payload)
-        return payload.vote && payload.vote.id && payload.vote.option && payload.vote.id === aeternity.vote.id
-      } catch {
-        return false
-      }
-    })
-    .map(tx => {
-      const payload = JSON.parse(tx.tx.payload)
-      return {
-        height: tx.block_height,
-        nonce: tx.tx.nonce,
-        txHash: tx.hash,
-        account: tx.tx.sender_id,
-        voteOption: payload.vote.option
-      }
-    })
-    .filter(tx => tx.height <= aeternity.vote.endHeight)
-    .sort((tx1, tx2) => tx2.nonce - tx1.nonce)
+        return {
+          height: tx.block_height,
+          nonce: tx.tx.nonce,
+          txHash: tx.hash,
+          account: tx.tx.sender_id,
+          voteOption: payload.vote.option
+        }
+      })
+      .filter(tx => tx.height <= aeternity.vote.endHeight)
+      .sort((tx1, tx2) => tx2.nonce - tx1.nonce)
+
+  } catch (e) {
+    if (aeternity.height > aeternity.vote.endHeight) {
+      aeternity.status = STATUS_VOTE_CLOSED
+    } else {
+      aeternity.status = STATUS_INITIAL
+    }
+  }
 
   if (filteredVotingTxs.length === 0) {
     if (aeternity.height > aeternity.vote.endHeight) {

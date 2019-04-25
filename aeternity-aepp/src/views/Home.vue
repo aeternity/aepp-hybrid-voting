@@ -344,7 +344,6 @@
       const result = await this.provider.getCurrentStatus()
       this.activeOption = result.activeOption
 
-      console.log(String(this.provider.balance))
       if (String(this.provider.balance) === '0') {
         this.status = STATUS_ERROR
         this.error = `Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account`
