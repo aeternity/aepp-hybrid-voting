@@ -76,6 +76,7 @@ describe('MultiSig Contract', () => {
             spend_amount: 1000
         }]).catch(console.error);
         await assert(!!call, 'Could not call the MultiSig Smart Contract');
+        console.log(await call.decode());
     });
 
 });
