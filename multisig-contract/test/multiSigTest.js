@@ -31,7 +31,7 @@ const decodeAddress = (key) => {
 
 describe('MultiSig Contract', () => {
 
-    let clientOne, clientTwo, contractClientOne, contractSource;
+    let clientOne, clientTwo, nonAdmin, contractClientOne, contractSource;
     let adminOneKeypair = wallets[0];
     let adminTwoKeypair = wallets[1];
     let nonAdminKeypair = wallets[2];
@@ -55,39 +55,204 @@ describe('MultiSig Contract', () => {
             nativeMode: true,
             networkId: 'ae_devnet'
         });
+
+        nonAdmin = await Ae({
+            url: config.host,
+            internalUrl: config.internalHost,
+            compilerUrl: config.compilerUrl,
+            keypair: nonAdminKeypair,
+            nativeMode: true,
+            networkId: 'ae_devnet'
+        });
     });
 
-    it('Deploy and Initialize MultiSig Contract', async () => {
+    it('MultiSig Contract, SUCCESS deploy and initialize', async () => {
         contractSource = utils.readFileRelative('./contracts/MultiSig.aes', "utf-8"); // Read the aes file
-
         contractClientOne = await clientOne.getContractInstance(contractSource);
         const deploy = await contractClientOne.deploy([adminOneKeypair.publicKey, adminTwoKeypair.publicKey]);
 
-        assert.isDefined(deploy, 'Could not deploy the MultiSig Smart Contract'); // Check it is deployed
+        assert.equal(deploy.deployInfo.result.returnType, 'ok', 'Could not deploy the MultiSig Smart Contract');
     });
 
-    it('MultiSig Contract, both admins agree to spend workflow', async () => {
+    it('MultiSig Contract, FAILURE deploy and initialize with same admin', async () => {
+        const contractClientOneFailDeploy = await clientOne.getContractInstance(contractSource);
+        const deploy = await contractClientOneFailDeploy.deploy([adminOneKeypair.publicKey, adminOneKeypair.publicKey]);
+
+        assert.equal(deploy.deployInfo.result.returnType, 'revert', 'Deploy the MultiSig Smart Contract did not revert');
+    });
+
+    async function adminOneAgree(address, amount) {
+        const callAdminOne = await contractClientOne.call('add_data_and_spend_if_both_admins_agree', [{
+            spend_to_address: address,
+            spend_amount: amount
+        }]).catch(console.error);
+        assert.isDefined(callAdminOne, 'Could not call the MultiSig Smart Contract Admin One');
+        let callAdminOneDecoded = await callAdminOne.decode();
+        assert.isFalse(callAdminOneDecoded);
+    }
+
+    async function adminTwoAgree(address, amount, assertSent = true) {
+        let contractClientTwo = await clientTwo.getContractInstance(contractSource, {contractAddress: contractClientOne.deployInfo.address})
+        const callAdminTwo = await contractClientTwo.call('add_data_and_spend_if_both_admins_agree', [{
+            spend_to_address: address,
+            spend_amount: amount
+        }]).catch(console.error);
+        assert.isDefined(callAdminTwo, 'Could not call the MultiSig Smart Contract Admin Two');
+        let callAdminTwoDecoded = await callAdminTwo.decode();
+        assertSent ? assert.isTrue(callAdminTwoDecoded) : assert.isFalse(callAdminTwoDecoded);
+    }
+
+    it('MultiSig Contract, SUCCESS both admins agree to spend workflow', async () => {
         const sendAmount = 10000;
         await clientOne.spend(sendAmount, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
         const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
         const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
 
-        const callAdminOne = await contractClientOne.call('add_data_and_spend_if_both_admins_agree', [{
-            spend_to_address: receiverNonAdminKeypair.publicKey,
-            spend_amount: sendAmount
-        }]).catch(console.error);
-        assert.isDefined(callAdminOne, 'Could not call the MultiSig Smart Contract Admin One');
-        let callAdminOneDecoded = await callAdminOne.decode();
-        assert.isFalse(callAdminOneDecoded);
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+        await adminTwoAgree(receiverNonAdminKeypair.publicKey, sendAmount);
 
-        let contractClientTwo = await clientTwo.getContractInstance(contractSource, {contractAddress: contractClientOne.deployInfo.address})
-        const callAdminTwo = await contractClientTwo.call('add_data_and_spend_if_both_admins_agree', [{
+        const receiverBalanceAfterwards = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterwards = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterwards.isEqualTo(receiverBalanceInitial.plus(sendAmount)), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterwards.isEqualTo(contractBalanceInitial.minus(sendAmount)), 'Contract Balance not as expected');
+    });
+
+    it('MultiSig Contract, FAILURE non admin tries to spend', async () => {
+        const sendAmount = 10000;
+        await clientOne.spend(sendAmount, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
+        const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        let contractNonAdmin = await nonAdmin.getContractInstance(contractSource, {contractAddress: contractClientOne.deployInfo.address})
+        const callNonAdmin = await contractNonAdmin.call('add_data_and_spend_if_both_admins_agree', [{
             spend_to_address: receiverNonAdminKeypair.publicKey,
             spend_amount: sendAmount
-        }]).catch(console.error);
-        assert.isDefined(callAdminTwo, 'Could not call the MultiSig Smart Contract Admin One');
-        let callAdminTwoDecoded = await callAdminTwo.decode();
-        assert.isTrue(callAdminTwoDecoded);
+        }]).then(() => Promise.resolve(false)).catch(() => Promise.resolve(true));
+        assert.isTrue(callNonAdmin, 'Could not call the MultiSig Smart Contract non Admin');
+
+        const receiverBalanceAfterwards = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterwards = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterwards.isEqualTo(receiverBalanceInitial), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterwards.isEqualTo(contractBalanceInitial), 'Contract Balance not as expected');
+    });
+
+    it('MultiSig Contract, SUCCESS both admins agree to spend workflow, first agrees twice', async () => {
+        const sendAmount = 10000;
+        await clientOne.spend(sendAmount, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
+        const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+        await adminTwoAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+
+        const receiverBalanceAfterwards = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterwards = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterwards.isEqualTo(receiverBalanceInitial.plus(sendAmount)), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterwards.isEqualTo(contractBalanceInitial.minus(sendAmount)), 'Contract Balance not as expected');
+    });
+
+    it('MultiSig Contract, SUCCESS both admins agree to spend workflow, next spend after first success', async () => {
+        const sendAmount = 10000;
+        await clientOne.spend(sendAmount * 2, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
+        const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+        await adminTwoAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+
+        const receiverBalanceAfterFirst = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterFirst = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterFirst.isEqualTo(receiverBalanceInitial.plus(sendAmount)), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterFirst.isEqualTo(contractBalanceInitial.minus(sendAmount)), 'Contract Balance not as expected');
+
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+        await adminTwoAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+
+        const receiverBalanceAfterSecond = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterSecond = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterSecond.isEqualTo(receiverBalanceAfterFirst.plus(sendAmount)), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterSecond.isEqualTo(contractBalanceAfterFirst.minus(sendAmount)), 'Contract Balance not as expected');
+    });
+
+    it('MultiSig Contract, SUCCESS both admins agree to spend workflow, first changes agreement, second agrees', async () => {
+        const sendAmount = 10000;
+        await clientOne.spend(sendAmount, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
+        const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        await adminOneAgree(nonAdminKeypair.publicKey, sendAmount);
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+        await adminTwoAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+
+        const receiverBalanceAfterwards = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterwards = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterwards.isEqualTo(receiverBalanceInitial.plus(sendAmount)), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterwards.isEqualTo(contractBalanceInitial.minus(sendAmount)), 'Contract Balance not as expected');
+    });
+
+    it('MultiSig Contract, FAILURE only admin agrees to spend workflow', async () => {
+        const sendAmount = 10000;
+        await clientOne.spend(sendAmount, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
+        const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+
+        const receiverBalanceAfterwards = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterwards = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterwards.isEqualTo(receiverBalanceInitial), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterwards.isEqualTo(contractBalanceInitial), 'Contract Balance not as expected');
+    });
+
+    it('MultiSig Contract, FAILURE second admin disagrees address to spend workflow', async () => {
+        const sendAmount = 10000;
+        await clientOne.spend(sendAmount, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
+        const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+        await adminTwoAgree(nonAdminKeypair.publicKey, sendAmount, false);
+
+        const receiverBalanceAfterwards = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterwards = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterwards.isEqualTo(receiverBalanceInitial), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterwards.isEqualTo(contractBalanceInitial), 'Contract Balance not as expected');
+    });
+
+    it('MultiSig Contract, FAILURE second admin disagrees amount to spend workflow', async () => {
+        const sendAmount = 10000;
+        await clientOne.spend(sendAmount, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
+        const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+        await adminTwoAgree(receiverNonAdminKeypair.publicKey, sendAmount * 2, false);
+
+        const receiverBalanceAfterwards = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterwards = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterwards.isEqualTo(receiverBalanceInitial), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterwards.isEqualTo(contractBalanceInitial), 'Contract Balance not as expected');
+    });
+
+    it('MultiSig Contract, SUCCESS second admin first disagrees then agrees to spend workflow', async () => {
+        const sendAmount = 10000;
+        await clientOne.spend(sendAmount, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
+        const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        await adminOneAgree(receiverNonAdminKeypair.publicKey, sendAmount);
+        await adminTwoAgree(receiverNonAdminKeypair.publicKey, sendAmount * 2, false);
+        await adminTwoAgree(receiverNonAdminKeypair.publicKey, sendAmount);
 
         const receiverBalanceAfterwards = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
         const contractBalanceAfterwards = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
