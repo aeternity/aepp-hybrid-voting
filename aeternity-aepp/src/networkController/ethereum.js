@@ -17,8 +17,7 @@ const ethereum = {
   vote: {
     id: null,
     stakeHeight: null,
-    endHeight: null,
-    options: null
+    endHeight: null
   },
   web3: null,
   status: null,
@@ -43,10 +42,10 @@ ethereum.init = async (vote) => {
     }
 
     SimpleVote.setProvider(ethereum.web3.currentProvider)
-
+    ethereum.vote = vote
     const accs = await ethereum.web3.eth.getAccounts()
     ethereum.height = (await ethereum.web3.eth.getBlock('latest')).number
-    ethereum.vote = vote
+
 
     if (accs.length === 0) {
       console.warn('Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.')
@@ -70,21 +69,17 @@ ethereum.init = async (vote) => {
 ethereum.getCurrentStatus = async () => {
   const instance = await SimpleVote.deployed()
   const response = await instance.getVote(ethereum.address)
-  const activeOption = {
-    id: response.toNumber()
-  }
+  const id = response.toNumber();
 
-
-  if (!activeOption.id) {
+  if (typeof id !== 'number') {
     if (ethereum.height > ethereum.vote.endHeight) {
-      console.log("CLOSED")
       ethereum.status = STATUS_VOTE_CLOSED
     } else {
       ethereum.status = STATUS_INITIAL
     }
   } else {
     ethereum.status = STATUS_VOTE_SUCCESS
-    ethereum.activeOption = ethereum.vote.options.find(voteOption => voteOption.id === activeOption.id)
+    ethereum.activeOption = id
   }
 
   return {
@@ -99,7 +94,7 @@ ethereum.sendVote = async (id) => {
     await instance.vote(id, { from: ethereum.address })
     return {
       status: STATUS_VOTE_SUCCESS,
-      activeOption: ethereum.vote.options.find(voteOption => voteOption.id === id)
+      activeOption: id
     }
   } catch (e) {
     console.warn(e)

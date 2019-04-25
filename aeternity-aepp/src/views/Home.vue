@@ -13,11 +13,13 @@
       <div class="bg-white rounded-t-lg p-4 shadow">
         <div>
           <div class="label mb-2">
-            Account Key
+            Account
           </div>
           <ae-identity-light
-            :balance="provider.network === 'aeternity' ? Number(provider.balance) : Number(provider.stakeAtHeight)"
-            :address="provider.address" :active="true"/>
+            :balance="Number(provider.balance)"
+            :currency="provider.network === 'aeternity' ? 'AE' : 'ETH'"
+            :address="provider.address" :active="true"
+          />
           <hr class="border-t border-gray-200"/>
           <div class="label mb-2">
             Voting power at block {{provider.vote.stakeHeight}}
@@ -126,14 +128,15 @@
               Your vote
             </div>
             <div class="mt-2">
-              {{activeOption ? activeOption.name : '&nbsp;'}}
+              Foundation Reward: {{activeOption}} %
             </div>
             <div class="text-gray-700">
               Explanation Explanation Explanation Explanation Explanation Explanation.
             </div>
           </div>
         </div>
-        <div v-if="showOptions" class="py-4">
+        <div v-if="showOptions" class="p-4">
+          <!--
           <div v-for="(voteOption, index) in voteOptions">
             <div class="flex flex-row items-start p-4">
               <ae-check v-model="selectedId" :value="voteOption.id" :disabled="!provider" type="radio">
@@ -149,6 +152,38 @@
             </div>
             <hr v-if="index !== voteOptions.length - 1" class="border-t border-gray-400"/>
           </div>
+          -->
+          <div class="my-3">
+            <div class="flex justify-between">
+              <div style="color: #76818c;">0%</div>
+              <div>
+                Select Foundation Reward
+              </div>
+              <div style="color: #76818c;">15%</div>
+            </div>
+
+            <div class="mt-1 mb-2">
+              <AeRange steps="1" min="0" max="15" v-model="selectedId"></AeRange>
+            </div>
+            <div class="flex justify-center">
+              <div class="text-center mt-2" style="width: 190px">
+                <div class="text-xl">
+                  Your Vote
+                </div>
+                <div class="flex justify-between">
+                  <div>Mining Reward:</div>
+                  <div class="font-bold">{{100-selectedId}}%</div>
+                </div>
+                <div class="flex justify-between">
+                  <div>Foundation Reward:</div>
+                  <div class="font-bold">{{selectedId}}%</div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
         <div class="flex w-full h-full justify-center items-center py-6" v-if="isLoading">
@@ -171,30 +206,27 @@
             </div>
           </div>
         </div>
-
-
         <div v-if="votingClosed">
           <div class="text-2xl font-bold text-center my-8">
             Voting closed at height {{provider.vote.endHeight}}
           </div>
         </div>
-
       </div>
       <!-- BUTTONS -->
       <div class="mt-2">
         <div v-if="isSuccessful" class="w-full flex justify-center">
-          <AeButton class="my-4" fill="primary" face="round" @click="removeVote">
+          <AeButton extend class="my-4" fill="primary" face="round" @click="removeVote">
             Change your vote
           </AeButton>
         </div>
         <div v-if="showOptions" class="w-full flex justify-center">
-          <AeButton :disabled="!provider || !selectedId" class="my-4" fill="primary" face="round" @click="sendVote">
+          <AeButton extend :disabled="!provider" class="my-4" fill="primary" face="round" @click="sendVote">
             Confirm
           </AeButton>
         </div>
 
         <div v-if="hasVotingError" class="w-full flex justify-center">
-          <AeButton class="my-4" fill="primary" face="round" @click="removeVote">
+          <AeButton extend class="my-4" fill="primary" face="round" @click="removeVote">
             Try again
           </AeButton>
         </div>
@@ -206,16 +238,12 @@
 </template>
 
 <script>
-  import { AeBackdrop, AeButton, AeCard, AeButtonGroup } from '@aeternity/aepp-components/'
+  import { AeButton, AeIdenticon, AeText } from '@aeternity/aepp-components/'
   import BiggerLoader from '../components/BiggerLoader'
   import aeternity from '../networkController/aeternity'
   import ethereum from '../networkController/ethereum'
-  import AeLoader from '@aeternity/aepp-components/src/components/aeLoader/aeLoader'
-  import AeText from '@aeternity/aepp-components/src/components/ae-text/ae-text'
-  import AeIdentityLight from '@aeternity/aepp-components/src/components/aeIdentityLight/aeIdentityLight'
-  import AeCheck from '@aeternity/aepp-components/src/components/ae-check/ae-check'
-  import AeIdenticon from '@aeternity/aepp-components/src/components/ae-identicon/ae-identicon'
-  import AeIcon from '@aeternity/aepp-components/src/components/aeIcon/aeIcon'
+  import AeIdentityLight from '../components/AeIdentityLight'
+  import AeRange from '../components/AeRange'
 
   const STATUS_INITIAL = 0, STATUS_VOTE_SELECTED = 1, STATUS_LOADING = 2, STATUS_VOTE_SUCCESS = 3,
     STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5, STATUS_ERROR = 6, STATUS_INIT_FAILED = 7, STATUS_VOTE_TIMEOUT = 8
@@ -223,17 +251,12 @@
   export default {
     name: 'Home',
     components: {
-      AeIcon,
+      AeRange,
       AeIdenticon,
-      AeCheck,
       AeIdentityLight,
       AeText,
-      AeLoader,
       BiggerLoader,
-      AeButtonGroup,
-      AeBackdrop,
-      AeButton,
-      AeCard
+      AeButton
     },
     data () {
       return {
@@ -245,21 +268,7 @@
         status: STATUS_LOADING,
         provider: null,
         activeHelp: null,
-        selectedId: null,
-        voteOptions: [
-          {
-            id: 1,
-            name: 'Option 1',
-          },
-          {
-            id: 2,
-            name: 'Option 2',
-          },
-          {
-            id: 3,
-            name: 'Option 3',
-          }
-        ]
+        selectedId: 0
       }
     },
     computed: {
@@ -311,6 +320,7 @@
           } else if (result) {
             this.status = STATUS_VOTE_SUCCESS
             this.activeOption = result.activeOption
+            this.selectedId = this.activeOption
           } else {
             this.status = STATUS_VOTE_FAIL
           }
@@ -321,25 +331,11 @@
     },
     async mounted () {
 
-      if (window.ethereum || window.web3) {
-        const success = await ethereum.init({
-          id: this.voteId,
-          stakeHeight: 10754080,
-          endHeight: 11769152,
-          options: this.voteOptions
-        })
-        if (success) this.provider = ethereum
-        else {
-          console.warn('Could not init ethereum')
-        }
-      }
-
       if (window.parent !== window) {
         const success = await aeternity.initBase({
           id: this.voteId,
           stakeHeight: 67000,
-          endHeight: 80000,
-          options: this.voteOptions
+          endHeight: 80000
         })
         if (success) {
           this.provider = aeternity
@@ -348,13 +344,24 @@
         }
       }
 
+      if ((window.ethereum || window.web3) && !this.provider) {
+        const success = await ethereum.init({
+          id: this.voteId,
+          stakeHeight: 10754080,
+          endHeight: 11769152
+        })
+        if (success) this.provider = ethereum
+        else {
+          console.warn('Could not init ethereum')
+        }
+      }
+
       if (!this.provider) {
         // Try Ledger
         const success = await aeternity.initLedger({
           id: this.voteId,
           stakeHeight: 67000,
-          endHeight: 80000,
-          options: this.voteOptions
+          endHeight: 80000
         })
 
         if (success) this.provider = aeternity
@@ -366,6 +373,7 @@
 
       const result = await this.provider.getCurrentStatus()
       this.activeOption = result.activeOption
+      this.selectedId = this.activeOption ? this.activeOption : this.selectedId
 
       if (String(this.provider.balance) === '0') {
         this.status = STATUS_ERROR

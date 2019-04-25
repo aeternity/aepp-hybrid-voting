@@ -8,7 +8,7 @@ const STATUS_INITIAL = 0, STATUS_VOTE_SELECTED = 1, STATUS_LOADING = 2, STATUS_V
   STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5
 
 const aeternity = {
-  network: "aeternity",
+  network: 'aeternity',
   client: null,
   address: null,
   height: null,
@@ -16,8 +16,7 @@ const aeternity = {
   vote: {
     id: null,
     stakeHeight: null,
-    endHeight: null,
-    options: null
+    endHeight: null
   },
   status: null,
   activeOption: null,
@@ -66,6 +65,7 @@ aeternity.initLedger = async (vote) => {
 
 aeternity.initProvider = async (vote) => {
   try {
+    aeternity.vote = vote
     aeternity.address = await aeternity.client.address()
     aeternity.height = await aeternity.client.height()
     aeternity.stakeAtHeight = await aeternity.client.balance(aeternity.address, { height: aeternity.vote.stakeHeight })
@@ -74,7 +74,7 @@ aeternity.initProvider = async (vote) => {
     aeternity.balance = await aeternity.client.balance(aeternity.address)
       .then(balance => `${atomsToAe(balance)}`.replace(',', ''))
       .catch(() => '0')
-    aeternity.vote = vote
+
     return true
   } catch (e) {
     console.warn(e)
@@ -128,7 +128,7 @@ aeternity.getCurrentStatus = async () => {
     }
   } else {
     aeternity.status = STATUS_VOTE_SUCCESS
-    aeternity.activeOption = aeternity.vote.options.find(voteOption => voteOption.id === filteredVotingTxs[0].voteOption)
+    aeternity.activeOption = filteredVotingTxs[0].voteOption
   }
 
   return {
@@ -149,7 +149,7 @@ aeternity.sendVote = async (id) => {
     await aeternity.client.spend(0, aeternity.voteReceiverAddress, { payload: JSON.stringify(vote) })
     return {
       status: STATUS_VOTE_SUCCESS,
-      activeOption: aeternity.vote.options.find(voteOption => voteOption.id === id)
+      activeOption: id
     }
   } catch (e) {
     console.warn(e)
