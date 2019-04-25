@@ -18,7 +18,7 @@ const groupBy = (xs, key) => xs.reduce((acc, x) => Object.assign({}, acc, {
 }), {});
 
 const countStakes = async () => {
-    const votingAcc = 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB';
+    const votingAcc = 'ak_11111111111111111111111111111111273Yts';
     const votingStakeHeight = 67000;
     const votingEndingHeight = 80000;
     const voteId = 1;
@@ -47,7 +47,7 @@ const countStakes = async () => {
                 voteOption: payload.vote.option
             }
         });
-    console.log(`1. did fetch ${filteredVotingTxs.length} from middleware\n`);
+    console.log(`1. did fetch ${filteredVotingTxs.length} valid voting transactions from middleware\n`);
 
 
     // 2. filter multiple votes by same account, filter txs for valid voting payload, filter txs for specific vote

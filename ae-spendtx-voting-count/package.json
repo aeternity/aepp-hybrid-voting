@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aeternity/aepp-sdk": "^2.4.0",
+    "@aeternity/aepp-sdk": "^3.1.0",
     "axios": "^0.18.0",
     "bignumber.js": "^8.1.1"
   }
