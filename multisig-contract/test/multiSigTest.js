@@ -16,6 +16,7 @@
  */
 const Ae = require('@aeternity/aepp-sdk').Universal;
 const Crypto = require('@aeternity/aepp-sdk').Crypto;
+const BigNumber = require('bignumber.js');
 
 const config = {
     host: "http://localhost:3001/",
@@ -30,7 +31,7 @@ const decodeAddress = (key) => {
 
 describe('MultiSig Contract', () => {
 
-    let clientOne, adminTwo, contract;
+    let clientOne, clientTwo, contractClientOne, contractSource;
     let adminOneKeypair = wallets[0];
     let adminTwoKeypair = wallets[1];
     let nonAdminKeypair = wallets[2];
@@ -46,7 +47,7 @@ describe('MultiSig Contract', () => {
             networkId: 'ae_devnet'
         });
 
-        adminTwo = await Ae({
+        clientTwo = await Ae({
             url: config.host,
             internalUrl: config.internalHost,
             compilerUrl: config.compilerUrl,
@@ -57,26 +58,42 @@ describe('MultiSig Contract', () => {
     });
 
     it('Deploy and Initialize MultiSig Contract', async () => {
-        let contractSource = utils.readFileRelative('./contracts/MultiSig.aes', "utf-8"); // Read the aes file
+        contractSource = utils.readFileRelative('./contracts/MultiSig.aes', "utf-8"); // Read the aes file
 
-        contract = await clientOne.getContractInstance(contractSource);
-        const deploy = await contract.deploy([adminOneKeypair.publicKey, adminTwoKeypair.publicKey]);
+        contractClientOne = await clientOne.getContractInstance(contractSource);
+        const deploy = await contractClientOne.deploy([adminOneKeypair.publicKey, adminTwoKeypair.publicKey]);
 
-        await assert(!!deploy, 'Could not deploy the MultiSig Smart Contract'); // Check it is deployed
+        assert.isDefined(deploy, 'Could not deploy the MultiSig Smart Contract'); // Check it is deployed
     });
 
     it('MultiSig Contract, both admins agree to spend workflow', async () => {
-        await clientOne.spend(100000, contract.deployInfo.address.replace('ct_', 'ak_'));
-        const receiverBalance = await clientOne.balance(receiverNonAdminKeypair.publicKey);
-        const contractBalance = await clientOne.balance(contract.deployInfo.address);
-        console.log(receiverBalance, contractBalance);
+        const sendAmount = 10000;
+        await clientOne.spend(sendAmount, contractClientOne.deployInfo.address.replace('ct_', 'ak_'));
+        const receiverBalanceInitial = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceInitial = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
 
-        const call = await contract.call('add_data_and_spend_if_both_admins_agree', [{
+        const callAdminOne = await contractClientOne.call('add_data_and_spend_if_both_admins_agree', [{
             spend_to_address: receiverNonAdminKeypair.publicKey,
-            spend_amount: 1000
+            spend_amount: sendAmount
         }]).catch(console.error);
-        await assert(!!call, 'Could not call the MultiSig Smart Contract');
-        console.log(await call.decode());
+        assert.isDefined(callAdminOne, 'Could not call the MultiSig Smart Contract Admin One');
+        let callAdminOneDecoded = await callAdminOne.decode();
+        assert.isFalse(callAdminOneDecoded);
+
+        let contractClientTwo = await clientTwo.getContractInstance(contractSource, {contractAddress: contractClientOne.deployInfo.address})
+        const callAdminTwo = await contractClientTwo.call('add_data_and_spend_if_both_admins_agree', [{
+            spend_to_address: receiverNonAdminKeypair.publicKey,
+            spend_amount: sendAmount
+        }]).catch(console.error);
+        assert.isDefined(callAdminTwo, 'Could not call the MultiSig Smart Contract Admin One');
+        let callAdminTwoDecoded = await callAdminTwo.decode();
+        assert.isTrue(callAdminTwoDecoded);
+
+        const receiverBalanceAfterwards = new BigNumber(await clientOne.balance(receiverNonAdminKeypair.publicKey));
+        const contractBalanceAfterwards = new BigNumber(await clientOne.balance(contractClientOne.deployInfo.address));
+
+        assert.isTrue(receiverBalanceAfterwards.isEqualTo(receiverBalanceInitial.plus(sendAmount)), 'Receiver Balance not as expected');
+        assert.isTrue(contractBalanceAfterwards.isEqualTo(contractBalanceInitial.minus(sendAmount)), 'Contract Balance not as expected');
     });
 
 });

@@ -56,7 +56,7 @@ contract MultiSig =
           Chain.spend(spend_data.spend_to_address, spend_data.spend_amount)
           true
         else
-          // purposfully not abort multi_sig_hashes data should be updated
+          // purposfully not abort, multi_sig_hashes data should be updated
           false
       _ => false
 
