@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="bg-gray-300 rounded-b-lg p-3 cursor-pointer flex justify-center">
-        <a href="https://forum.aeternity.com/" class="label text-sm">NEED ASSISTANCE?</a>
+        <a href="https://forum.aeternity.com/" target="_blank" class="label text-sm">NEED ASSISTANCE?</a>
       </div>
     </div>
     <!-- NO ACCOUNT FOUND HEADER -->
@@ -157,7 +157,18 @@
 
         <div v-if="hasVotingError">
           <div class="text-2xl font-bold text-red-500 text-center my-8">
-            ❌️ Voting transaction failed.
+            &times; Voting transaction failed.
+          </div>
+        </div>
+
+        <div v-if="hasVotingTimeout">
+          <div class="text-5xl font-bold text-red-500 text-center my-8">
+            <div style="line-height: 2rem;">
+              &times;
+            </div>
+            <div class="text-xl">
+              Voting transaction timeout. Please check your wallet provider to sign the transaction.
+            </div>
           </div>
         </div>
 
@@ -177,7 +188,7 @@
           </AeButton>
         </div>
         <div v-if="showOptions" class="w-full flex justify-center">
-          <AeButton :disabled="!provider" class="my-4" fill="primary" face="round" @click="sendVote">
+          <AeButton :disabled="!provider || !selectedId" class="my-4" fill="primary" face="round" @click="sendVote">
             Confirm
           </AeButton>
         </div>
@@ -207,7 +218,7 @@
   import AeIcon from '@aeternity/aepp-components/src/components/aeIcon/aeIcon'
 
   const STATUS_INITIAL = 0, STATUS_VOTE_SELECTED = 1, STATUS_LOADING = 2, STATUS_VOTE_SUCCESS = 3,
-    STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5, STATUS_ERROR = 6, STATUS_INIT_FAILED = 7
+    STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5, STATUS_ERROR = 6, STATUS_INIT_FAILED = 7, STATUS_VOTE_TIMEOUT = 8
 
   export default {
     name: 'Home',
@@ -252,9 +263,6 @@
       }
     },
     computed: {
-      hasActiveVote () {
-        return this.status === STATUS_VOTE_SELECTED
-      },
       showOptions () {
         return this.status === STATUS_VOTE_SELECTED || this.status === STATUS_INITIAL || this.status === STATUS_INIT_FAILED
       },
@@ -266,6 +274,9 @@
       },
       hasVotingError () {
         return this.status === STATUS_VOTE_FAIL
+      },
+      hasVotingTimeout () {
+        return this.status === STATUS_VOTE_TIMEOUT
       },
       hasGeneralError () {
         return this.status === STATUS_ERROR
@@ -285,12 +296,24 @@
       async sendVote () {
         this.status = STATUS_LOADING
         try {
-          const result = await this.provider.sendVote(this.selectedId)
-          if (result) {
-            console.log(result)
+          // TIMEOUT
+          const result = await Promise.race([
+            this.provider.sendVote(this.selectedId),
+            new Promise(resolve => {
+              setTimeout(() => {
+                resolve('TIMEOUT')
+              }, 60000)
+            })
+          ])
+
+          if (result === 'TIMEOUT') {
+            this.status = STATUS_VOTE_TIMEOUT
+          } else if (result) {
             this.status = STATUS_VOTE_SUCCESS
             this.activeOption = result.activeOption
-          } else this.status = STATUS_VOTE_FAIL
+          } else {
+            this.status = STATUS_VOTE_FAIL
+          }
         } catch (e) {
           this.status = STATUS_VOTE_FAIL
         }
