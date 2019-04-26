@@ -30,8 +30,6 @@ contract MultiSig =
     , spend_amount : int }
 
   public function init(admin_one' : address, admin_two' : address) : state =
-    require_not_zero_address(admin_one')
-    require_not_zero_address(admin_two')
     require_not_equal_addresses(admin_one', admin_two')
 
     { admin_one = admin_one',
@@ -63,14 +61,12 @@ contract MultiSig =
 
   // CONTRACT SPECIFIC HELPER FUNCTIONS
 
-  private function require_not_zero_address(address_to_check : address) =
-    require(address_to_check != #0, "ADDRESS_NOT_ALLOWED_ZERO")
-
   private function require_not_equal_addresses(address_to_check_one : address, address_to_check_two : address) =
     require(address_to_check_one != address_to_check_two, "ADDRESSES_NOT_ALLOWED_EQUAL")
 
   private function require_caller_is_either_admin(address_to_check : address) =
     require(address_to_check == state.admin_one || address_to_check == state.admin_two, "ADRRESS_IS_NOT_ADMIN")
+
 
   // GENERIC HELPER FUNCTIONS
 
