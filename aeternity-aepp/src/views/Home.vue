@@ -2,7 +2,7 @@
   <div>
     <div class="flex justify-center fixed items-start bottom-0 left-0 top-0 right-0 z-50"
          style="background-color: rgba(255, 255, 255, 0.8);" v-if="(isLoading || isInitial) && !provider">
-      <div class="bg-white rounded-lg p-8 shadow" style="margin-top: 10%;  max-width: 600px;">
+      <div class="bg-white rounded-lg p-8 shadow" style="margin-top: 10%;  max-width: 500px;">
         <div v-if="!error && isInitial">
           <div class="text-xl">
             Lets get started!

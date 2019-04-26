@@ -99,7 +99,7 @@ ethereum.getCurrentStatus = async () => {
 
 ethereum.sendVote = async (id) => {
   try {
-    const response = await SimpleVote.methods.vote(id).call({from: ethereum.address}).catch(e => console.error(e))
+    const response = await SimpleVote.methods.vote(id).send({from: ethereum.address}).catch(e => console.error(e))
     if(response) {
       return {
         status: STATUS_VOTE_SUCCESS,
