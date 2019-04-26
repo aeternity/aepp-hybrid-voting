@@ -2,39 +2,56 @@
   <div>
     <div class="flex justify-center fixed items-start bottom-0 left-0 top-0 right-0 z-50"
          style="background-color: rgba(255, 255, 255, 0.8);" v-if="(isLoading || isInitial) && !provider">
-      <div class="bg-white rounded-lg p-8 shadow" style="margin-top: 10%;  max-width: 500px;">
+      <div class="bg-white rounded-lg p-8 shadow-lg mx-4" style="margin-top: 10%; max-width: 500px;">
         <div v-if="!error && isInitial">
-          <div class="text-xl">
-            Lets get started!
+          <div v-if="!isMobile()">
+            <div class="text-xl">
+              Lets get started!
+            </div>
+            <div>
+              What wallet would you like to connect?
+            </div>
+            <div class="flex flex-col mt-6 h-48 justify-between" v-if="!isMobile()">
+              <ae-check type="radio" value="ledger" v-model="selectedClient">
+                <div class="ml-3">
+                  <strong>Ledger / Hardware Wallet</strong><br/>
+                  For Aeternity Mainnet Tokens
+                </div>
+              </ae-check>
+              <ae-check type="radio" value="baseaepp" v-model="selectedClient">
+                <div class="ml-3">
+                  <strong>Base Aepp</strong><br/>
+                  For Aeternity Mainnet Tokens
+                </div>
+              </ae-check>
+              <ae-check type="radio" value="metamask" v-model="selectedClient">
+                <div class="ml-3">
+                  <strong>Mist / MetaMask</strong><br/>
+                  For ERC20 Tokens
+                </div>
+              </ae-check>
+            </div>
+            <div class="mt-6">
+              <AeButton :disabled="!selectedClient" fill="primary" extend face="round" @click="connectWallet">
+                Connect
+              </AeButton>
+            </div>
           </div>
-          <div>
-            What wallet would you like to connect?
-          </div>
-          <div class="flex flex-col mt-6 h-48 justify-between">
-            <ae-check type="radio" value="ledger" v-model="selectedClient">
-              <div class="ml-3">
-                <strong>Ledger / Hardware Wallet</strong><br/>
-                For Aeternity Mainnet Tokens
-              </div>
-            </ae-check>
-            <ae-check type="radio" value="baseaepp" v-model="selectedClient">
-              <div class="ml-3">
-                <strong>Base Aepp</strong><br/>
-                For Aeternity Mainnet Tokens
-              </div>
-            </ae-check>
-
-            <ae-check type="radio" value="metamask" v-model="selectedClient">
-              <div class="ml-3">
-                <strong>Mist / MetaMask</strong><br/>
-                For ERC20 Tokens
-              </div>
-            </ae-check>
-          </div>
-          <div class="mt-6">
-            <AeButton :disabled="!selectedClient" fill="primary" extend face="round" @click="connectWallet">
-              Connect
-            </AeButton>
+          <!-- MOBILE -->
+          <div v-else>
+            <div class="text-xl">
+              Oh no...
+            </div>
+            <div class="mt-4">
+              On mobile devices only the base aepp is supported. Please visit
+              <a class="text-blue-600 clearfix w-full text-center block my-4" target="_blank" href="https://base.aepps.com">https://base.aepps.com</a>
+              or open this page on a desktop browser.
+            </div>
+            <div class="mt-6">
+              <AeButton fill="primary" extend face="round" @click="openBaseAepp">
+                Open Base Aepp
+              </AeButton>
+            </div>
           </div>
         </div>
         <div v-if="isLoading">
@@ -201,11 +218,11 @@
               <div>
                 Select Foundation Reward
               </div>
-              <div style="color: #76818c;">15%</div>
+              <div style="color: #76818c;">20%</div>
             </div>
 
             <div class="mt-1 mb-2">
-              <AeRange steps="1" min="0" max="15" v-model="selectedId"></AeRange>
+              <AeRange steps="1" min="0" max="20" v-model="selectedId"></AeRange>
             </div>
             <div class="flex justify-center">
               <div class="text-center mt-2" style="width: 190px">
@@ -347,6 +364,9 @@
         this.activeOption = null
         this.status = STATUS_SHOW_OPTIONS
       },
+      openBaseAepp() {
+        window.open('https://base.aepps.com')
+      },
       async connectWallet () {
         this.status = STATUS_LOADING
         if (this.selectedClient === 'baseaepp') {
@@ -476,10 +496,10 @@
       this.selectedClient = this.retrieveSelectedWallet()
       if (this.selectedClient) this.connectWallet()
       else {
-        if (window.parent !== window) {
+        if (window.parent !== window && this.isMobile()) {
           this.selectedClient = 'baseaepp'
-          await this.connectWallet();
-          if(this.provider) return
+          await this.connectWallet()
+          if (this.provider) return
         }
         this.status = STATUS_INITIAL
       }

@@ -36,7 +36,7 @@ aeternity.initBase = async (vote) => {
 
 aeternity.getWalletWindow = async () => {
   const iframe = document.createElement('iframe')
-  iframe.src = prompt('DEBUG: Enter wallet URL', 'https://stage-identity.aepps.com/')
+  iframe.src = 'https://stage-identity.aepps.com/' // TODO change to base.aepps.com
   iframe.style.display = 'none'
   document.body.appendChild(iframe)
   await new Promise(resolve => {
