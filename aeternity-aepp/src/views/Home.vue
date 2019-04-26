@@ -1,10 +1,55 @@
 <template>
   <div>
-    <div v-if="hasGeneralError" class=" mx-4 mt-4 bg-white rounded-lg p-4 shadow">
-      <div class="font-bold text-red-500 mb-4">
-        <h2 class="text-2xl">Error</h2>
-        <div>
-          {{error}}
+    <div class="flex justify-center fixed items-start bottom-0 left-0 top-0 right-0 z-50"
+         style="background-color: rgba(255, 255, 255, 0.8);" v-if="(isLoading || isInitial) && !provider">
+      <div class="bg-white rounded-lg p-8 shadow" style="margin-top: 10%;  max-width: 600px;">
+        <div v-if="!error && isInitial">
+          <div class="text-xl">
+            Lets get started!
+          </div>
+          <div>
+            What wallet would you like to connect?
+          </div>
+          <div class="flex flex-col mt-6 h-48 justify-between">
+            <ae-check type="radio" value="ledger" v-model="selectedClient">
+              <div class="ml-3">
+                <strong>Ledger / Hardware Wallet</strong><br/>
+                For Aeternity Mainnet Tokens
+              </div>
+            </ae-check>
+            <ae-check type="radio" value="baseaepp" v-model="selectedClient">
+              <div class="ml-3">
+                <strong>Base Aepp</strong><br/>
+                For Aeternity Mainnet Tokens
+              </div>
+            </ae-check>
+
+            <ae-check type="radio" value="metamask" v-model="selectedClient">
+              <div class="ml-3">
+                <strong>Mist / MetaMask</strong><br/>
+                For ERC20 Tokens
+              </div>
+            </ae-check>
+          </div>
+          <div class="mt-6">
+            <AeButton :disabled="!selectedClient" fill="primary" extend face="round" @click="connectWallet">
+              Connect
+            </AeButton>
+          </div>
+        </div>
+        <div v-if="isLoading">
+          <BiggerLoader></BiggerLoader>
+        </div>
+        <div v-if="error">
+          <div class="text-xl">
+            Oh no...
+          </div>
+          <div class="text-red-500 mb-6">
+            {{error}}
+          </div>
+          <AeButton fill="secondary" extend face="round" @click="error = ''">
+            Back
+          </AeButton>
         </div>
       </div>
     </div>
@@ -46,7 +91,7 @@
             </div>
             <div class="flex flex-col ml-2">
               <div class="-mb-1">No Account found</div>
-              <div class="text-sm text-gray-500">Could not connect to your wallet</div>
+              <div class="text-sm text-gray-500">Connect to your wallet below.</div>
             </div>
           </div>
         </div>
@@ -86,10 +131,6 @@
           <a href="https://forum.aeternity.com/" class="label text-sm">NEED ASSISTANCE?</a>
         </div>
       </div>
-    </div>
-    <!-- LOADER -->
-    <div v-if="!provider && !initFailed" class="my-10">
-      <BiggerLoader></BiggerLoader>
     </div>
     <!-- DIVIDER -->
     <div class="m-4">
@@ -178,15 +219,12 @@
                   <div>Foundation Reward:</div>
                   <div class="font-bold">{{selectedId}}%</div>
                 </div>
-
               </div>
             </div>
-
           </div>
-
         </div>
 
-        <div class="flex w-full h-full justify-center items-center py-6" v-if="isLoading">
+        <div class="flex w-full h-full justify-center items-center py-6" v-if="isLoading && provider">
           <BiggerLoader></BiggerLoader>
         </div>
 
@@ -244,13 +282,18 @@
   import ethereum from '../networkController/ethereum'
   import AeIdentityLight from '../components/AeIdentityLight'
   import AeRange from '../components/AeRange'
+  import AeBackdrop from '@aeternity/aepp-components/src/components/ae-backdrop/ae-backdrop'
+  import AeCheck from '@aeternity/aepp-components/src/components/ae-check/ae-check'
+  import { detect } from 'detect-browser'
 
-  const STATUS_INITIAL = 0, STATUS_VOTE_SELECTED = 1, STATUS_LOADING = 2, STATUS_VOTE_SUCCESS = 3,
+  const STATUS_INITIAL = 0, STATUS_SHOW_OPTIONS = 1, STATUS_LOADING = 2, STATUS_VOTE_SUCCESS = 3,
     STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5, STATUS_ERROR = 6, STATUS_INIT_FAILED = 7, STATUS_VOTE_TIMEOUT = 8
 
   export default {
     name: 'Home',
     components: {
+      AeCheck,
+      AeBackdrop,
       AeRange,
       AeIdenticon,
       AeIdentityLight,
@@ -260,7 +303,7 @@
     },
     data () {
       return {
-        client: null,
+        selectedClient: null,
         error: null,
         voteId: 1,
         height: 0,
@@ -268,12 +311,16 @@
         status: STATUS_LOADING,
         provider: null,
         activeHelp: null,
-        selectedId: 0
+        selectedId: 0,
+        storeKey: 'selectedWallet'
       }
     },
     computed: {
+      isInitial () {
+        return this.status === STATUS_INITIAL
+      },
       showOptions () {
-        return this.status === STATUS_VOTE_SELECTED || this.status === STATUS_INITIAL || this.status === STATUS_INIT_FAILED
+        return this.status === STATUS_SHOW_OPTIONS || this.status === STATUS_INIT_FAILED || this.status === STATUS_INITIAL
       },
       isLoading () {
         return this.status === STATUS_LOADING
@@ -287,9 +334,6 @@
       hasVotingTimeout () {
         return this.status === STATUS_VOTE_TIMEOUT
       },
-      hasGeneralError () {
-        return this.status === STATUS_ERROR
-      },
       votingClosed () {
         return this.status === STATUS_VOTE_CLOSED
       },
@@ -300,7 +344,104 @@
     methods: {
       removeVote () {
         this.activeOption = null
-        this.status = STATUS_INITIAL
+        this.status = STATUS_SHOW_OPTIONS
+      },
+      async connectWallet () {
+        this.status = STATUS_LOADING
+        if (this.selectedClient === 'baseaepp') {
+          if (window.parent !== window) {
+            const success = await aeternity.initBase({
+              id: this.voteId,
+              stakeHeight: 67000,
+              endHeight: 80000
+            })
+            if (success) {
+              this.provider = aeternity
+            } else {
+              this.status = STATUS_INITIAL
+              this.error = 'An error occured while connecting to the base-aepp. Please make sure your base-aepp is up to date.'
+            }
+          } else {
+            this.status = STATUS_INITIAL
+            this.error = 'We could not find the base-aepp. Please make sure you run this aepp inside the base-aepp.'
+          }
+        }
+
+        if (this.selectedClient === 'metamask') {
+          if (window.ethereum || window.web3) {
+            const { success, message } = await ethereum.init({
+              id: this.voteId,
+              stakeHeight: 10754080,
+              endHeight: 11769152
+            })
+            if (success) this.provider = ethereum
+            else {
+              this.status = STATUS_INITIAL
+              this.error = message
+            }
+          } else {
+            this.status = STATUS_INITIAL
+            this.error = 'We could not find MetaMask or Mist. Please make sure you have one of these extensions installed.'
+          }
+        }
+
+        if (this.selectedClient === 'ledger') {
+
+          const browser = detect()
+          if (browser && browser.name.indexOf('chrome') === -1) {
+            this.status = STATUS_INITIAL
+            return this.error = 'The ledger connection currently only works in google chrome or chromium.'
+          }
+
+          if (this.isMobile()) {
+            this.status = STATUS_INITIAL
+            return this.error = 'The ledger connection currently only works on the desktop.'
+          }
+
+          // TODO allow for base-aepp url input
+
+          // Try Ledger
+          const success = await aeternity.initLedger({
+            id: this.voteId,
+            stakeHeight: 67000,
+            endHeight: 80000
+          })
+          if (success) {
+            this.provider = aeternity
+          } else {
+            this.status = STATUS_INITIAL
+            this.error = 'An error occured while connecting to your ledger or phone through the base-aepp. If you have the base-aepp open on your desktop, close it now and try again.'
+          }
+        }
+
+        if (this.provider) {
+          const result = await this.provider.getCurrentStatus()
+          this.activeOption = result.activeOption
+          this.selectedId = this.activeOption ? this.activeOption : this.selectedId
+          if (String(this.provider.balance) === '0') {
+            this.status = STATUS_INITIAL
+            this.error = `Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account`
+          } else {
+            this.status = result.status
+            this.saveSelectedWallet()
+          }
+        } else {
+          this.status = STATUS_INITIAL
+        }
+      },
+      isMobile () {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      },
+      saveSelectedWallet () {
+        if (localStorage) localStorage.setItem(this.storeKey, this.selectedClient)
+      },
+      retrieveSelectedWallet () {
+        return null
+        if (localStorage) {
+          return localStorage.getItem(this.storeKey)
+        } else {
+          return null
+        }
       },
       async sendVote () {
         this.status = STATUS_LOADING
@@ -330,58 +471,9 @@
       }
     },
     async mounted () {
-
-      if (window.parent !== window) {
-        const success = await aeternity.initBase({
-          id: this.voteId,
-          stakeHeight: 67000,
-          endHeight: 80000
-        })
-        if (success) {
-          this.provider = aeternity
-        } else {
-          console.warn('Could not init aeternity base')
-        }
-      }
-
-      if ((window.ethereum || window.web3) && !this.provider) {
-        const success = await ethereum.init({
-          id: this.voteId,
-          stakeHeight: 10754080,
-          endHeight: 11769152
-        })
-        if (success) this.provider = ethereum
-        else {
-          console.warn('Could not init ethereum')
-        }
-      }
-
-      if (!this.provider) {
-        // Try Ledger
-        const success = await aeternity.initLedger({
-          id: this.voteId,
-          stakeHeight: 67000,
-          endHeight: 80000
-        })
-
-        if (success) this.provider = aeternity
-        else {
-          this.status = STATUS_INIT_FAILED
-          return console.warn('Could not init aeternity ledger')
-        }
-      }
-
-      const result = await this.provider.getCurrentStatus()
-      this.activeOption = result.activeOption
-      this.selectedId = this.activeOption ? this.activeOption : this.selectedId
-
-      if (String(this.provider.balance) === '0') {
-        this.status = STATUS_ERROR
-        this.error = `Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account`
-      } else {
-        this.status = result.status
-      }
-
+      this.selectedClient = this.retrieveSelectedWallet()
+      if (this.selectedClient) this.connectWallet()
+      else this.status = STATUS_INITIAL
     }
   }
 </script>

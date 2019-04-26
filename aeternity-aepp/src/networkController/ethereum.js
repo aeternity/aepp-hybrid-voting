@@ -34,11 +34,13 @@ ethereum.init = async (vote) => {
 
       ethereum.web3 = new Web3(window.ethereum)
     } else if (typeof window.web3 !== 'undefined') {
-      console.warn('Using web3 detected from external source. If you find that your accounts don\'t appear or you have 0 Fluyd, ensure you\'ve configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask')
       // Use Mist/MetaMask's provider
       ethereum.web3 = new Web3(window.web3.currentProvider)
     } else {
-      return false;
+      return {
+        success: false,
+        message: 'Could not find any Ethereum client! Make you have your client configured correctly.'
+      }
     }
 
     SimpleVote.setProvider(ethereum.web3.currentProvider)
@@ -48,8 +50,10 @@ ethereum.init = async (vote) => {
 
 
     if (accs.length === 0) {
-      console.warn('Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.')
-      return false
+      return {
+        success: false,
+        message: 'Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.'
+      }
     }
 
     ethereum.address = accs[0]
@@ -58,11 +62,16 @@ ethereum.init = async (vote) => {
     const { address } = await SimpleVote.deployed()
     ethereum.voteReceiverAddress = address
 
-    return true
+    return {
+      success: true,
+      message: ''
+    }
   } catch (e) {
-    console.warn(e)
-    console.warn('There was an error fetching your accounts. Do you have Metamask, Mist installed or an Ethereum node running? If not, you might want to look into that')
-    return false
+    console.error(e)
+    return {
+      success: false,
+      message: 'An error occurred. Make sure Metamask is configured correctly.'
+    }
   }
 }
 
