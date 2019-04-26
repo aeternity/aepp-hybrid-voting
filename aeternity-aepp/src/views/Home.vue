@@ -263,7 +263,7 @@
           </AeButton>
         </div>
 
-        <div v-if="hasVotingError" class="w-full flex justify-center">
+        <div v-if="hasVotingError || hasVotingTimeout" class="w-full flex justify-center">
           <AeButton extend class="my-4" fill="primary" face="round" @click="removeVote">
             Try again
           </AeButton>
@@ -371,7 +371,7 @@
           if (window.ethereum || window.web3) {
             const { success, message } = await ethereum.init({
               id: this.voteId,
-              stakeHeight: 10754080,
+              stakeHeight: 10768963,  // 10754080,
               endHeight: 11769152
             })
             if (success) this.provider = ethereum
