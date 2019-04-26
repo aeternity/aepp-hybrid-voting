@@ -61,6 +61,7 @@
             Account
           </div>
           <ae-identity-light
+            :collapsed="provider && selectedClient === 'baseaepp'"
             :balance="Number(provider.balance)"
             :currency="provider.network === 'aeternity' ? 'AE' : 'ETH'"
             :address="provider.address" :active="true"
@@ -471,9 +472,17 @@
       }
     },
     async mounted () {
+
       this.selectedClient = this.retrieveSelectedWallet()
       if (this.selectedClient) this.connectWallet()
-      else this.status = STATUS_INITIAL
+      else {
+        if (window.parent !== window) {
+          this.selectedClient = 'baseaepp'
+          await this.connectWallet();
+          if(this.provider) return
+        }
+        this.status = STATUS_INITIAL
+      }
     }
   }
 </script>
