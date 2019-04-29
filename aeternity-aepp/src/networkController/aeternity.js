@@ -93,14 +93,14 @@ aeternity.getCurrentStatus = async () => {
       .filter(tx => tx.tx.sender_id === aeternity.address)
       .filter(tx => {
         try {
-          const payload = JSON.parse(tx.tx.payload)
-          return payload.vote && payload.vote.id && payload.vote.option && payload.vote.id === aeternity.vote.id
+          const payload = JSON.parse(tx.tx.payload);
+          return payload.vote && payload.vote.id && payload.vote.option !== undefined && payload.vote.id === aeternity.vote.id
         } catch {
           return false
         }
       })
       .map(tx => {
-        const payload = JSON.parse(tx.tx.payload)
+        const payload = JSON.parse(tx.tx.payload);
         return {
           height: tx.block_height,
           nonce: tx.tx.nonce,
