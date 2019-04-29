@@ -187,7 +187,13 @@
               Your vote
             </div>
             <div class="mt-2">
-              Foundation Reward: {{activeOption}} %
+              Foundation Reward: <span class="font-bold">{{activeOption}} %</span>
+            </div>
+            <div v-if="activeOption === 0" >
+              You did vote <span class="font-bold">NO</span> on this.
+            </div>
+            <div v-else class="flex justify-between">
+              You did vote <span class="font-bold">YES</span> on this.
             </div>
             <div class="text-gray-700">
               Explanation Explanation Explanation Explanation Explanation Explanation.
@@ -236,6 +242,12 @@
                 <div class="flex justify-between">
                   <div>Foundation Reward:</div>
                   <div class="font-bold">{{selectedId}}%</div>
+                </div>
+                <div v-if="selectedId === 0" class="flex justify-between">
+                  You will vote <span class="font-bold">NO</span> on this.
+                </div>
+                <div v-else class="flex justify-between">
+                  You will vote <span class="font-bold">YES</span> on this.
                 </div>
               </div>
             </div>
