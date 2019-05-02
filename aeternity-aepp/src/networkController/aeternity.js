@@ -4,8 +4,7 @@ import BigNumber from 'bignumber.js'
 
 // HELPER
 const atomsToAe = (atoms) => (new BigNumber(atoms)).dividedBy(new BigNumber(1000000000000000000)).toFormat(4)
-const STATUS_INITIAL = 0, STATUS_VOTE_SELECTED = 1, STATUS_LOADING = 2, STATUS_VOTE_SUCCESS = 3,
-  STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5
+
 
 const aeternity = {
   network: 'aeternity',
@@ -82,7 +81,7 @@ aeternity.initProvider = async (vote) => {
   }
 }
 
-aeternity.getCurrentStatus = async () => {
+aeternity.getActiveVote = async () => {
   let filteredVotingTxs = []
   try {
     const middlewareUrl = 'https://testnet.mdw.aepps.com'
@@ -113,28 +112,18 @@ aeternity.getCurrentStatus = async () => {
       .sort((tx1, tx2) => tx2.nonce - tx1.nonce)
 
   } catch (e) {
-    if (aeternity.height > aeternity.vote.endHeight) {
-      aeternity.status = STATUS_VOTE_CLOSED
-    } else {
-      aeternity.status = STATUS_INITIAL
-    }
+    return false
   }
 
   if (filteredVotingTxs.length === 0) {
-    if (aeternity.height > aeternity.vote.endHeight) {
-      aeternity.status = STATUS_VOTE_CLOSED
-    } else {
-      aeternity.status = STATUS_INITIAL
-    }
+    return false
   } else {
-    aeternity.status = STATUS_VOTE_SUCCESS
-    aeternity.activeOption = filteredVotingTxs[0].voteOption
+    return filteredVotingTxs[0].voteOption
   }
+}
 
-  return {
-    status: aeternity.status,
-    activeOption: aeternity.activeOption
-  }
+aeternity.isVoteOpen = () => {
+  return aeternity.height < aeternity.vote.endHeight
 }
 
 aeternity.sendVote = async (id) => {
@@ -147,10 +136,7 @@ aeternity.sendVote = async (id) => {
 
   try {
     await aeternity.client.spend(0, aeternity.voteReceiverAddress, { payload: JSON.stringify(vote) })
-    return {
-      status: STATUS_VOTE_SUCCESS,
-      activeOption: id
-    }
+    return  id
   } catch (e) {
     console.warn(e)
     return false

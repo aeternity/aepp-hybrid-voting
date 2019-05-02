@@ -1,9 +1,24 @@
 <template>
   <div>
+    <!-- error -->
+    <div class="flex justify-center fixed items-start bottom-0 left-0 top-0 right-0 z-50"
+         style="background-color: rgba(255, 255, 255, 0.8);" v-if="statusError">
+      <div class="bg-white rounded-lg p-8 shadow-lg mx-4" style="margin-top: 10%; max-width: 500px;">
+        <div class="text-xl">
+          {{error.headline}}
+        </div>
+        <div class="text-red-500 mb-6" v-html="error.text">
+        </div>
+        <AeButton fill="secondary" extend face="round" @click="error.cb">
+          Back
+        </AeButton>
+      </div>
+    </div>
+    <!-- initial overlay -->
     <div class="flex justify-center fixed items-start bottom-0 left-0 top-0 right-0 z-50"
          style="background-color: rgba(255, 255, 255, 0.8);" v-if="(isLoading || isInitial) && !provider">
       <div class="bg-white rounded-lg p-8 shadow-lg mx-4" style="margin-top: 10%; max-width: 500px;">
-        <div v-if="!error && isInitial">
+        <div v-if="isInitial">
           <div v-if="!isMobile()">
             <div class="text-xl">
               Lets get started!
@@ -11,7 +26,7 @@
             <div>
               What wallet would you like to connect?
             </div>
-            <div class="flex flex-col mt-6 h-48 justify-between" v-if="!isMobile()">
+            <div class="flex flex-col mt-6 h-48 justify-between">
               <ae-check type="radio" value="ledger" v-model="selectedClient">
                 <div class="ml-3">
                   <strong>Ledger / Hardware Wallet</strong><br/>
@@ -20,7 +35,7 @@
               </ae-check>
               <ae-check type="radio" value="baseaepp" v-model="selectedClient">
                 <div class="ml-3">
-                  <strong>Base Aepp</strong><br/>
+                  <strong>Base æpp</strong><br/>
                   For Aeternity Mainnet Tokens
                 </div>
               </ae-check>
@@ -40,33 +55,23 @@
           <!-- MOBILE -->
           <div v-else>
             <div class="text-xl">
-              Oh no...
+              Voting with the æternity Base æpp
             </div>
             <div class="mt-4">
-              On mobile devices only the base aepp is supported. Please visit
-              <a class="text-blue-600 clearfix w-full text-center block my-4" target="_blank" href="https://base.aepps.com">https://base.aepps.com</a>
+              On mobile devices only the æternity Base æpp is supported. Please visit
+              <a class="text-blue-600 clearfix w-full text-center block my-4" target="_blank"
+                 href="https://base.aepps.com">https://base.aepps.com</a>
               or open this page on a desktop browser.
             </div>
             <div class="mt-6">
               <AeButton fill="primary" extend face="round" @click="openBaseAepp">
-                Open Base Aepp
+                Open Base æpp
               </AeButton>
             </div>
           </div>
         </div>
         <div v-if="isLoading">
           <BiggerLoader></BiggerLoader>
-        </div>
-        <div v-if="error">
-          <div class="text-xl">
-            Oh no...
-          </div>
-          <div class="text-red-500 mb-6">
-            {{error}}
-          </div>
-          <AeButton fill="secondary" extend face="round" @click="error = ''">
-            Back
-          </AeButton>
         </div>
       </div>
     </div>
@@ -159,7 +164,7 @@
         </div>
       </div>
     </div>
-    <!-- POLL -->
+    <!-- POLLHEADER -->
     <div class="flex flex-col mx-4">
       <div class="rounded-t-lg p-4 shadow" style="background-color: #001833">
         <h1 class="text-xl text-white">
@@ -180,6 +185,7 @@
           </div>
         </div>
       </div>
+      <!-- POLLBODY -->
       <div class="bg-white rounded-b-lg shadow">
         <div v-if="isSuccessful" class="p-4">
           <div class="px-4 pt-2">
@@ -189,10 +195,10 @@
             <div class="mt-2">
               Foundation Reward: <span class="font-bold">{{activeOption}} %</span>
             </div>
-            <div v-if="activeOption === 0" >
+            <div v-if="activeOption === 0">
               You did vote <span class="font-bold">NO</span> on this.
             </div>
-            <div v-else class="flex justify-between">
+            <div v-else>
               You did vote <span class="font-bold">YES</span> on this.
             </div>
             <div class="text-gray-700">
@@ -253,7 +259,7 @@
             </div>
           </div>
         </div>
-
+        <!-- LOADER AND ERRORS IN POLL BODY -->
         <div class="flex w-full h-full justify-center items-center py-6" v-if="isLoading && provider">
           <BiggerLoader></BiggerLoader>
         </div>
@@ -280,6 +286,7 @@
           </div>
         </div>
       </div>
+
       <!-- BUTTONS -->
       <div class="mt-2">
         <div v-if="isSuccessful" class="w-full flex justify-center">
@@ -350,7 +357,7 @@
         return this.status === STATUS_INITIAL
       },
       showOptions () {
-        return this.status === STATUS_SHOW_OPTIONS || this.status === STATUS_INIT_FAILED || this.status === STATUS_INITIAL
+        return this.status === STATUS_SHOW_OPTIONS || this.status === STATUS_INIT_FAILED
       },
       isLoading () {
         return this.status === STATUS_LOADING
@@ -369,14 +376,29 @@
       },
       initFailed () {
         return this.status === STATUS_INIT_FAILED
+      },
+      statusError () {
+        return this.status === STATUS_ERROR
       }
     },
     methods: {
+      removeError () {
+        this.status = STATUS_INITIAL
+        this.error = ''
+      },
       removeVote () {
         this.activeOption = null
         this.status = STATUS_SHOW_OPTIONS
       },
-      openBaseAepp() {
+      setError (body, callback = this.removeError, headline = 'Oh no...') {
+        this.error = {
+          text: body,
+          cb: callback,
+          headline: headline
+        }
+        this.status = STATUS_ERROR
+      },
+      openBaseAepp () {
         window.open('https://base.aepps.com')
       },
       async connectWallet () {
@@ -391,12 +413,14 @@
             if (success) {
               this.provider = aeternity
             } else {
-              this.status = STATUS_INITIAL
-              this.error = 'An error occured while connecting to the base-aepp. Please make sure your base-aepp is up to date.'
+              this.setError('An error occured while connecting to the Base æpp. Please make sure your Base æpp is up to date.')
             }
           } else {
-            this.status = STATUS_INITIAL
-            this.error = 'We could not find the base-aepp. Please make sure you run this aepp inside the base-aepp.'
+            this.setError(
+              'For the best Base æpp voting experience please open <a class="underline" href="http://aeternity.com/aepp-hybrid-voting/">http://aeternity.com/aepp-hybrid-voting/</a> inside the Base æpps browser in your mobile device.',
+              this.removeError,
+              'Voting with the æternity Base æpp'
+            )
           }
         }
 
@@ -409,12 +433,10 @@
             })
             if (success) this.provider = ethereum
             else {
-              this.status = STATUS_INITIAL
-              this.error = message
+              this.setError(message)
             }
           } else {
-            this.status = STATUS_INITIAL
-            this.error = 'We could not find MetaMask or Mist. Please make sure you have one of these extensions installed.'
+            this.setError('We could not find MetaMask or Mist. Please make sure you have one of these extensions installed.')
           }
         }
 
@@ -422,13 +444,11 @@
 
           const browser = detect()
           if (browser && browser.name.indexOf('chrome') === -1) {
-            this.status = STATUS_INITIAL
-            return this.error = 'The ledger connection currently only works in google chrome or chromium.'
+            return this.setError('The ledger connection currently only works in google chrome or chromium.')
           }
 
           if (this.isMobile()) {
-            this.status = STATUS_INITIAL
-            return this.error = 'The ledger connection currently only works on the desktop.'
+            return this.setError('The ledger connection currently only works on the desktop.')
           }
 
           // TODO allow for base-aepp url input
@@ -442,39 +462,38 @@
           if (success) {
             this.provider = aeternity
           } else {
-            this.status = STATUS_INITIAL
-            this.error = 'An error occured while connecting to your ledger or phone through the base-aepp. If you have the base-aepp open on your desktop, close it now and try again.'
+            this.setError('An error occured while connecting to your ledger or phone through the base-aepp. If you have the base-aepp open on your desktop, close it now and try again.')
           }
         }
 
         if (this.provider) {
-          const result = await this.provider.getCurrentStatus()
-          this.activeOption = result.activeOption
+          this.activeOption = await this.provider.getActiveVote()
           this.selectedId = this.activeOption ? this.activeOption : this.selectedId
-          if (String(this.provider.balance) === '0') {
-            this.status = STATUS_INITIAL
-            this.error = `Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account`
-          } else {
-            this.status = result.status
-            this.saveSelectedWallet()
+
+          if (typeof this.activeOption === 'number') {
+            this.status = STATUS_VOTE_SUCCESS
           }
-        } else {
+
+          if (String(this.provider.balance) === '0') {
+            this.setError(`Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account`)
+            this.provider = null
+          }
+
+          if (!this.statusError) {
+            const voteOpen = this.provider.isVoteOpen()
+            if (!voteOpen) return this.status = STATUS_VOTE_CLOSED
+          }
+
+          if (this.isLoading) {
+            this.status = STATUS_SHOW_OPTIONS
+          }
+
+        } else if (!this.statusError) {
           this.status = STATUS_INITIAL
         }
       },
       isMobile () {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-      },
-      saveSelectedWallet () {
-        if (localStorage) localStorage.setItem(this.storeKey, this.selectedClient)
-      },
-      retrieveSelectedWallet () {
-        return null
-        if (localStorage) {
-          return localStorage.getItem(this.storeKey)
-        } else {
-          return null
-        }
       },
       async sendVote () {
         this.status = STATUS_LOADING
@@ -491,9 +510,9 @@
 
           if (result === 'TIMEOUT') {
             this.status = STATUS_VOTE_TIMEOUT
-          } else if (result) {
+          } else if (result === this.selectedId) {
             this.status = STATUS_VOTE_SUCCESS
-            this.activeOption = result.activeOption
+            this.activeOption = result
             this.selectedId = this.activeOption
           } else {
             this.status = STATUS_VOTE_FAIL
@@ -505,16 +524,13 @@
     },
     async mounted () {
 
-      this.selectedClient = this.retrieveSelectedWallet()
-      if (this.selectedClient) this.connectWallet()
-      else {
-        if (window.parent !== window && this.isMobile()) {
-          this.selectedClient = 'baseaepp'
-          await this.connectWallet()
-          if (this.provider) return
-        }
-        this.status = STATUS_INITIAL
+      if (window.parent !== window && this.isMobile()) {
+        this.selectedClient = 'baseaepp'
+        await this.connectWallet()
+        if (this.provider) return
       }
+      this.status = STATUS_INITIAL
+
     }
   }
 </script>

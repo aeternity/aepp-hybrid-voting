@@ -2,15 +2,12 @@ import Web3 from 'web3'
 import SimpleVoteABI from './SimpleVote.json'
 import AETokenABI from './AEToken.json'
 
-let AEToken = null;
-let SimpleVote = null;
+let AEToken = null
+let SimpleVote = null
 // HELPER
 
-const STATUS_INITIAL = 0, STATUS_VOTE_SELECTED = 1, STATUS_LOADING = 2, STATUS_VOTE_SUCCESS = 3,
-  STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5
-
 const ethereum = {
-  network: "ethereum",
+  network: 'ethereum',
   address: null,
   height: null,
   stakeAtHeight: null,
@@ -30,7 +27,7 @@ const ethereum = {
 ethereum.init = async (vote) => {
   try {
     if (typeof window.ethereum !== 'undefined') {
-      await window.ethereum.enable();
+      await window.ethereum.enable()
 
       ethereum.web3 = new Web3(window.ethereum)
     } else if (typeof window.web3 !== 'undefined') {
@@ -43,13 +40,12 @@ ethereum.init = async (vote) => {
       }
     }
 
-    AEToken = new ethereum.web3.eth.Contract(AETokenABI, ethereum.tokenContractAddress);
-    SimpleVote = new ethereum.web3.eth.Contract(SimpleVoteABI, ethereum.votingContractAddress);
+    AEToken = new ethereum.web3.eth.Contract(AETokenABI, ethereum.tokenContractAddress)
+    SimpleVote = new ethereum.web3.eth.Contract(SimpleVoteABI, ethereum.votingContractAddress)
 
     ethereum.vote = vote
     const accs = await ethereum.web3.eth.getAccounts()
     ethereum.height = (await ethereum.web3.eth.getBlock('latest')).number
-
 
     if (accs.length === 0) {
       return {
@@ -60,9 +56,8 @@ ethereum.init = async (vote) => {
 
     ethereum.address = accs[0]
     await ethereum.updateEthBalance(ethereum.address)
-    const result = await AEToken.methods.balanceOf(ethereum.address).call(ethereum.vote.stakeHeight);
+    const result = await AEToken.methods.balanceOf(ethereum.address).call(ethereum.vote.stakeHeight)
     ethereum.stakeAtHeight = String(Number(result / Math.pow(10, 18)))
-
 
     return {
       success: true,
@@ -77,34 +72,32 @@ ethereum.init = async (vote) => {
   }
 }
 
-ethereum.getCurrentStatus = async () => {
-  const id = await SimpleVote.methods.getVote(ethereum.address).call();
+ethereum.getActiveVote = async () => {
+  try {
+    const id = await SimpleVote.methods.getVote(ethereum.address).call()
 
-  if (typeof id !== 'number') {
-    if (ethereum.height > ethereum.vote.endHeight) {
-      ethereum.status = STATUS_VOTE_CLOSED
+    if (typeof id === 'undefined') {
+      return null
     } else {
-      ethereum.status = STATUS_INITIAL
+      console.log(Number(id))
+      return Number(id)
     }
-  } else {
-    ethereum.status = STATUS_VOTE_SUCCESS
-    ethereum.activeOption = id
+  } catch (e) {
+    console.error(e)
+    return null
   }
 
-  return {
-    status: ethereum.status,
-    activeOption: ethereum.activeOption
-  }
+}
+
+ethereum.isVoteOpen = () => {
+  return ethereum.height < ethereum.vote.endHeight
 }
 
 ethereum.sendVote = async (id) => {
   try {
-    const response = await SimpleVote.methods.vote(id).send({from: ethereum.address}).catch(e => console.error(e))
-    if(response) {
-      return {
-        status: STATUS_VOTE_SUCCESS,
-        activeOption: id
-      }
+    const response = await SimpleVote.methods.vote(id).send({ from: ethereum.address }).catch(e => console.error(e))
+    if (response) {
+      return id
     } else {
       return false
     }
@@ -113,7 +106,6 @@ ethereum.sendVote = async (id) => {
     return false
   }
 }
-
 
 ethereum.updateEthBalance = async (acc) => {
   const balance = await ethereum.web3.eth.getBalance(acc)
