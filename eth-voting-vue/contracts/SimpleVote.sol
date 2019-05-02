@@ -19,6 +19,7 @@ contract SimpleVote {
         require(_vote <= maxVoteValue, "Voted for value higher than allowed");
         getVote[msg.sender] = _vote;
         if(hasVoted[msg.sender] == false) {
+            hasVoted[msg.sender] == true
             voters.push(msg.sender);
             totalVotes++;
         }
