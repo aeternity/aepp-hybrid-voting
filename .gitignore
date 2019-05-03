@@ -1,4 +1,4 @@
 .idea/
 *.logs
 node_modules/
-aeternity-aepp/temp
+hybrid-voting-aepp/dist
