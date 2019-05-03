@@ -208,7 +208,7 @@
               Your Vote
             </div>
             <div class="mt-2">
-              Shared Reward: <span class="font-bold">{{activeOption}}%</span>
+              Development Reward: <span class="font-bold">{{activeOption}}%</span>
             </div>
             <div v-if="activeOption === 0">
               You did vote <span class="font-bold">AGAINST</span> sharing mining reward.
@@ -249,7 +249,7 @@
               <AeRange steps="1" min="0" max="20" v-model="selectedId"></AeRange>
             </div>
             <div class="flex justify-center">
-              <div class="text-center mt-2" style="width: 190px">
+              <div class="text-center mt-2" style="width: 220px">
                 <div class="text-xl">
                   Your Vote
                 </div>
@@ -258,7 +258,7 @@
                   <div class="font-bold">{{100-selectedId}}%</div>
                 </div>
                 <div class="flex justify-between mb-2">
-                  <div>Shared Reward:</div>
+                  <div>Development Reward:</div>
                   <div class="font-bold">{{selectedId}}%</div>
                 </div>
                 <div class="flex align-left">
@@ -312,7 +312,7 @@
         </div>
         <div v-if="showOptions" class="w-full flex justify-center">
           <AeButton extend :disabled="!provider" class="my-4" fill="primary" face="round" @click="sendVote">
-            Confirm
+            CONFIRM YOUR VOTE
           </AeButton>
         </div>
 
