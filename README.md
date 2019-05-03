@@ -4,73 +4,47 @@ To build is a hybrid voting-aepp that works with Ethereum AE ERC20 Token and Aet
 
 People give their vote by calling a voting option in a voting smart contract on chain OR doing transactions. At a given, past/future block-height on Aeternity and Ethereum all votes will be counted (publicly verifiable). 
 
-# Timeline
+# Vote Participation Methods
+ 1. Ethereum Aeternity ERC-20 Tokens using Metamask/Ledger
+ 2. Aeternity Mainnet Tokens with Ledger on Desktop
+ 3. Aeternity Mainnet Tokens with Base-Aepp on Mobile
+ 4. Aeternity Mainnet Tokens with AirGap Vault on Mobile
 
-2 Sprints, 4 Weeks until 25th of April.
+(For testing mode ensure that the aepp is still shows the testnet banner on top. On aeternity use the latest staging base-aepp stage-identity.aepps.com and choose testnet, or use kovan testnet for ethereum.)
 
-# Team
+## 1. Ethereum Aeternity ERC-20 Tokens using Metamask/Ledger
+Requirement: ETH + AE-ERC-20 available in Metamask (e.g. using Ledger)
+ - Open http://aeternity.com/aepp-hybrid-voting/ in the brower you have Metamask in
+ - Choose Metamask and allow the website to read your account information
+ - Check if the displayed account is correct, if not, choose another on in Metamask and reload  
+ - Set your prefered vote and confirm with in the website
+ - Confirm the metamask popup with the transaction data (only pay ethereum transaction fee, no aeternity-erc-20 tokens)
 
-- Piwo
-- Nikita
-- Dario
-- Keno
-- Base aepp team
-- Ledger HW team (fixed/done)
+## 2. Aeternity Mainnet Tokens on Ledger
+Requirement: AE Mainnet Tokens available on Ledger
+ - Open base-aepp using Chrome on desktop
+ - In the top-right corner press connect and choose the ledger tap, then follow the steps and confirm your address using ledger
+ - In another tab open http://aeternity.com/aepp-hybrid-voting/
+ - Check if the displayed account is correct
+ - Set your prefered vote and confirm with in the website
+ - Confirm the transaction using ledger, if this fails try again and confirm in with as little wait as possible
 
-Product Coordinator: Emin
+## 3. Aeternity Mainnet Tokens with Base-Aepp on Mobile
+Requirement: AE Mainnet Tokens available in Base-Aepp on a mobile device
+ - Open base-aepp on your phone, ensure you have the latest version (0.8.0)
+ - Open http://aeternity.com/aepp-hybrid-voting/ using the aepps browser in base-aepp or choose the voting aepp icon
+ - Check if the displayed account is correct
+ - Set your prefered vote and confirm with in the website
+ - Confirm the transaction on the base-aepp popup
 
-# Teams
-
-- Dario: Design, A/B/C/D/E/F/G, https://vote.aepps.com/, use components
-- Piwo/Keno: Aeternity
-- Nikita: Ethereum
-- Stoyan: regarding Airgab and Ledger Support
-
-# Specs
-
-- Hybrid Ethereum / Aeternity Application
-- Voting on-chain
-- Different voting options, only vote choice (multiple answers, one choice)
-- Voting Result based on specific block-height (snapshot of AE and ETH)
-- Script to count and verify votes on given block-height
-- Snapshot **before/after** the vote ended (balance at height)
-- (Don't) show a live vote count
-- Don't count the phase 0 and 1 adresses on Ethereum
-
-# Must-haves
-
-- Voting with ERC20 token on Ethereum with MetaMask (or other Web3 Browser)
-- Voting with AE token on Minerva Mainnet via Base Aepp
-- Voting with AE accounts participating in the token migration (locked tokens)
-- AirGap Voting Support
-- Desktop Ledger Support (fixed/done)
-
-# Blockers that need to be resolved
-
-- Base aepp Airgap and Ledger Support (all need to do contract calling)
-- Vote by making a spend TX
-- Aepp inside the base aepp triggeres the transaction
-- Ledger app is broken after update (needs fix!). Everyone who didn't updated can currently still use it.
-
-# Notes
-
-- User: accidentally send their tokens to the voting contract/address (should be resolved through frontend)
-
-Sources of Staking Data:
-- 1. ERC 20 active tokens at blockheight X
-- 2. ERC 20 migrated tokens at blockheight X (excl phase 0, 1)
-- 3. AE tokens at blockheight Y (where Y ~= X)
-
-Sources of Signaling for Options:
-- Ethereum Contract for 1. Data Source
-- Aeternity SpendTx for 2. and 3. Data Sources
-
-WHERE
-Sources 1.,2. are provided by Nikita
-Source 3. provided by Piwo
-
-AND
-Signaling ETH provided by Nikita
-Signaling AE provided by Piwo
-
-Planning: https://app.zenhub.com/workspaces/aepp-hybrid-voting-5c9e22dc850e6a34fc6eeeca/boards?repos=178413901
+## 4. Aeternity Mainnet Tokens with AirGap Vault on Mobile
+Requirement: AE Mainnet Tokens available on a separate mobile device in AirGap Vault
+ - Open base-aepp on your phone, ensure you have the latest version (0.8.0) and that you are using a different phone from the one running AirGap Vault
+ - In base-aepp in the bottom bar in the middle open the account switcher and choose "Create a vault for AirGap"
+ - Follow the steps to connect your already existing vault by scanning the QR code provided when choosing sync account using offline device in your AirGap Vault app
+ - Open http://aeternity.com/aepp-hybrid-voting/ using the aepps browser in base-aepp or choose the voting aepp icon
+ - Check if the displayed account is correct
+ - Set your prefered vote and confirm with in the website
+ - Scan the QR code from base-aepp using your AirGap Vault to sign
+ - Choose offline device to display the signed transaction QR code in AirGap Vault
+ - click "Done" in your base-aepp then scan the signed transaction QR code from AirGap Vault to send the transaction
