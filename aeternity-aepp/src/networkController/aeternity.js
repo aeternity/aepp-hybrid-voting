@@ -5,7 +5,6 @@ import BigNumber from 'bignumber.js'
 // HELPER
 const atomsToAe = (atoms) => (new BigNumber(atoms)).dividedBy(new BigNumber(1000000000000000000)).toFormat(4)
 
-
 const aeternity = {
   network: 'aeternity',
   client: null,
@@ -64,14 +63,17 @@ aeternity.initLedger = async (vote) => {
 
 aeternity.initProvider = async (vote) => {
   try {
+    console.log(await aeternity.client.getNodeInfo().catch(console.error))
+
     aeternity.vote = vote
     aeternity.address = await aeternity.client.address()
     aeternity.height = await aeternity.client.height()
-    aeternity.stakeAtHeight = await aeternity.client.balance(aeternity.address, { height: aeternity.vote.stakeHeight })
-      .then(balance => `${atomsToAe(balance)}`)
-      .catch(() => '0')
     aeternity.balance = await aeternity.client.balance(aeternity.address)
       .then(balance => `${atomsToAe(balance)}`.replace(',', ''))
+      .catch(() => '0')
+    const requestedHeight = Math.min(aeternity.height, aeternity.vote.stakeHeight);
+    aeternity.stakeAtHeight = await aeternity.client.balance(aeternity.address, { height: requestedHeight })
+      .then(balance => `${atomsToAe(balance)}`)
       .catch(() => '0')
 
     return true
@@ -92,14 +94,14 @@ aeternity.getActiveVote = async () => {
       .filter(tx => tx.tx.sender_id === aeternity.address)
       .filter(tx => {
         try {
-          const payload = JSON.parse(tx.tx.payload);
+          const payload = JSON.parse(tx.tx.payload)
           return payload.vote && payload.vote.id && payload.vote.option !== undefined && payload.vote.id === aeternity.vote.id
         } catch {
           return false
         }
       })
       .map(tx => {
-        const payload = JSON.parse(tx.tx.payload);
+        const payload = JSON.parse(tx.tx.payload)
         return {
           height: tx.block_height,
           nonce: tx.tx.nonce,
@@ -136,11 +138,16 @@ aeternity.sendVote = async (id) => {
 
   try {
     await aeternity.client.spend(0, aeternity.voteReceiverAddress, { payload: JSON.stringify(vote) })
-    return  id
+    return id
   } catch (e) {
     console.warn(e)
     return false
   }
+}
+
+aeternity.verifyAddress = async () => {
+  const currAddress = await aeternity.client.address()
+  return currAddress !== aeternity.address
 }
 
 export default aeternity

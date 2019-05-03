@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@aeternity/aepp-components": "https://github.com/aeternity/aepp-components.git#develop",
-    "@aeternity/aepp-sdk": "^2.4.1",
+    "@aeternity/aepp-sdk": "^3.1.0",
     "axios": "^0.18.0",
     "bignumber.js": "^8.1.1",
     "detect-browser": "^4.5.0",

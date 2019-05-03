@@ -56,7 +56,9 @@ ethereum.init = async (vote) => {
 
     ethereum.address = accs[0]
     await ethereum.updateEthBalance(ethereum.address)
-    const result = await AEToken.methods.balanceOf(ethereum.address).call(ethereum.vote.stakeHeight)
+    let tokenHeight = Math.min(ethereum.height, ethereum.vote.stakeHeight);
+    const result = await AEToken.methods.balanceOf(ethereum.address).call(tokenHeight)
+
     ethereum.stakeAtHeight = String(Number(result / Math.pow(10, 18)))
 
     return {
@@ -113,6 +115,11 @@ ethereum.updateEthBalance = async (acc) => {
     ethereum.balance = '0'
   }
   ethereum.balance = (balance / Math.pow(10, 18)).toString()
+}
+
+ethereum.verifyAddress = async () => {
+  const accs = await ethereum.web3.eth.getAccounts()
+  return accs[0] !== ethereum.address
 }
 
 export default ethereum

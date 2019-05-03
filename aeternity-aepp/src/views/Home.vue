@@ -10,7 +10,7 @@
         <div class="text-red-500 mb-6" v-html="error.text">
         </div>
         <AeButton fill="secondary" extend face="round" @click="error.cb">
-          Back
+          Ok
         </AeButton>
       </div>
     </div>
@@ -41,7 +41,7 @@
               </ae-check>
               <ae-check type="radio" value="metamask" v-model="selectedClient">
                 <div class="ml-3">
-                  <strong>Mist / MetaMask</strong><br/>
+                  <strong>MetaMask</strong><br/>
                   For ERC20 Tokens
                 </div>
               </ae-check>
@@ -90,7 +90,12 @@
           />
           <hr class="border-t border-gray-200"/>
           <div class="label mb-2">
-            Voting power at block {{provider.vote.stakeHeight}}
+            <template v-if="provider.height < provider.vote.stakeHeight">
+              Estimated voting power at block {{provider.vote.stakeHeight}}
+            </template>
+            <template v-else>
+              Voting power at block {{provider.vote.stakeHeight}}
+            </template>
           </div>
           <ae-text face="mono-base">
             {{provider.stakeAtHeight}} AE
@@ -343,13 +348,13 @@
         selectedClient: null,
         error: null,
         voteId: 1,
-        height: 0,
         activeOption: null,
         status: STATUS_LOADING,
         provider: null,
         activeHelp: null,
         selectedId: 0,
-        storeKey: 'selectedWallet'
+        storeKey: 'selectedWallet',
+        interval: null
       }
     },
     computed: {
@@ -407,8 +412,8 @@
           if (window.parent !== window) {
             const success = await aeternity.initBase({
               id: this.voteId,
-              stakeHeight: 67000,
-              endHeight: 80000
+              stakeHeight: 80541,
+              endHeight: 80541
             })
             if (success) {
               this.provider = aeternity
@@ -428,7 +433,7 @@
           if (window.ethereum || window.web3) {
             const { success, message } = await ethereum.init({
               id: this.voteId,
-              stakeHeight: 10768963,  // 10754080,
+              stakeHeight: 11769152,  // 10754080,
               endHeight: 11769152
             })
             if (success) this.provider = ethereum
@@ -456,8 +461,8 @@
           // Try Ledger
           const success = await aeternity.initLedger({
             id: this.voteId,
-            stakeHeight: 67000,
-            endHeight: 80000
+            stakeHeight: 80541,
+            endHeight: 80541
           })
           if (success) {
             this.provider = aeternity
@@ -520,6 +525,15 @@
         } catch (e) {
           this.status = STATUS_VOTE_FAIL
         }
+      },
+      async checkAndReloadProvider() {
+        if(!this.provider) return
+
+        const changesDetected = await this.provider.verifyAddress()
+        if(changesDetected) {
+          this.setError('Your account changed. Please reload this page.',() => {window.location.reload()}, 'Significant changes detected');
+          clearInterval(this.interval)
+        }
       }
     },
     async mounted () {
@@ -530,7 +544,10 @@
         if (this.provider) return
       }
       this.status = STATUS_INITIAL
-
+      this.interval = setInterval(this.checkAndReloadProvider, 1000)
+    },
+    beforeDestroy () {
+      clearInterval(this.interval);
     }
   }
 </script>
