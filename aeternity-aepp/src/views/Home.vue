@@ -550,13 +550,14 @@
       }
     },
     async mounted() {
-
+      console.log('is iframe', window.parent !== window)
+      console.log('is mobile', this.isMobile(), navigator.userAgent)
       if (window.parent !== window && this.isMobile()) {
         this.selectedClient = 'baseaepp'
         await this.connectWallet()
         if (this.provider) return
       }
-      this.status = STATUS_INITIAL
+      if(!this.statusError) this.status = STATUS_INITIAL
       this.interval = setInterval(this.checkAndReloadProvider, 1000)
     },
     beforeDestroy() {
