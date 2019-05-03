@@ -63,8 +63,6 @@ aeternity.initLedger = async (vote) => {
 
 aeternity.initProvider = async (vote) => {
   try {
-    console.log(await aeternity.client.getNodeInfo().catch(console.error))
-
     aeternity.vote = vote
     aeternity.address = await aeternity.client.address()
     aeternity.height = await aeternity.client.height()
