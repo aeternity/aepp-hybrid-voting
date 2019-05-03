@@ -10,7 +10,7 @@
         <div class="text-red-500 mb-6" v-html="error.text">
         </div>
         <AeButton fill="secondary" extend face="round" @click="error.cb">
-          Ok
+          {{error.cta}}
         </AeButton>
       </div>
     </div>
@@ -406,11 +406,12 @@
         this.activeOption = null
         this.status = STATUS_SHOW_OPTIONS
       },
-      setError(body, callback = this.removeError, headline = 'Oh no...') {
+      setError(body, callback = this.removeError, headline = 'Oh no...', cta = 'Ok') {
         this.error = {
           text: body,
           cb: callback,
-          headline: headline
+          headline: headline,
+          cta: cta
         }
         this.status = STATUS_ERROR
       },
@@ -491,7 +492,7 @@
           }
 
           if (String(this.provider.balance) === '0') {
-            this.setError(`Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account`)
+            this.setError(`Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account`, () => {window.location.reload()}, 'Oh no...', 'Reload')
             this.provider = null
           }
 
@@ -544,7 +545,7 @@
         if (changesDetected) {
           this.setError('Your account changed. Please reload this page.', () => {
             window.location.reload()
-          }, 'Significant changes detected')
+          }, 'Significant changes detected', 'Reload')
           clearInterval(this.interval)
         }
       }
