@@ -29,20 +29,20 @@
             <div class="flex flex-col mt-6 h-48 justify-between">
               <ae-check type="radio" value="ledger" v-model="selectedClient">
                 <div class="ml-3">
-                  <strong>Ledger / Hardware Wallet</strong><br/>
-                  For Aeternity Mainnet Tokens
+                  <strong>Ledger</strong><br/>
+                  for aeternity Mainnet Tokens
                 </div>
               </ae-check>
               <ae-check type="radio" value="baseaepp" v-model="selectedClient">
                 <div class="ml-3">
-                  <strong>Base æpp</strong><br/>
-                  For Aeternity Mainnet Tokens
+                  <strong>Base aepp (incl. AirGap Vault)</strong><br/>
+                  for aeternity Mainnet Tokens
                 </div>
               </ae-check>
               <ae-check type="radio" value="metamask" v-model="selectedClient">
                 <div class="ml-3">
-                  <strong>MetaMask</strong><br/>
-                  For ERC20 Tokens
+                  <strong>MetaMask (e.g. using Ledger)</strong><br/>
+                  for aeternity ERC-20 Tokens
                 </div>
               </ae-check>
             </div>
@@ -55,17 +55,17 @@
           <!-- MOBILE -->
           <div v-else>
             <div class="text-xl">
-              Voting with the æternity Base æpp
+              Voting with the aeternity Base aepp
             </div>
             <div class="mt-4">
-              On mobile devices only the æternity Base æpp is supported. Please visit
+              On mobile devices only the aeternity Base aepp is supported. Please visit
               <a class="text-blue-600 clearfix w-full text-center block my-4" target="_blank"
                  href="https://base.aepps.com">https://base.aepps.com</a>
               or open this page on a desktop browser.
             </div>
             <div class="mt-6">
               <AeButton fill="primary" extend face="round" @click="openBaseAepp">
-                Open Base æpp
+                Open Base aepp
               </AeButton>
             </div>
           </div>
@@ -136,7 +136,7 @@
           </div>
         </div>
         <div class="helpRow" @click="activeHelp = activeHelp === 2 ? null : 2">
-          <span>How to vote with AE on æternity?</span>
+          <span>How to vote with AE on aeternity?</span>
           <span class="text-3xl ae-text-color" v-if="activeHelp !== 2">+</span>
           <span class="text-3xl ae-text-color" v-if="activeHelp === 2">&times;</span>
         </div>
@@ -173,11 +173,25 @@
     <div class="flex flex-col mx-4">
       <div class="rounded-t-lg p-4 shadow" style="background-color: #001833">
         <h1 class="text-xl text-white">
-          Question Question Question Question Question?
+          Block Reward Initiative (BRI)
         </h1>
         <p class="text-gray-400 mt-2 mb-2">
-          Explanation Explanation Explanation Explanation Explanation Explanation.
+          To transform aeternity into a self-sustaining platform, we propose the Block Reward Initiative (BRI), through
+          which <span class="no-wrap">~0–20%</span> of miner rewards will be allocated to development.
         </p>
+        <p class="text-gray-400 font-bold mt-2 mb-2">
+          Further Information:
+        </p>
+        <div class="text-gray-400 information-links mt-2 mb-2">
+          <a
+            href="https://blog.aeternity.com/aeternity-first-on-chain-governance-vote-decentralization-2-0-5e0c8a01891a">Detailed
+            Explanation in Blog Post</a>
+        </div>
+        <div class="text-gray-400 information-links mt-2 mb-2">
+          <a
+            href="https://forum.aeternity.com/t/discussion-block-reward-initiative-and-first-on-chain-governance-vote/3278/47">Community
+            Discussion in Forum</a>
+        </div>
         <hr class="border-t border-gray-800" v-if="provider"/>
         <div class="w-full flex justify-center" v-if="provider">
           <div class="label">
@@ -191,19 +205,16 @@
         <div v-if="isSuccessful" class="p-4">
           <div class="px-4 pt-2">
             <div class="label">
-              Your vote
+              Your Vote
             </div>
             <div class="mt-2">
-              Foundation Reward: <span class="font-bold">{{activeOption}} %</span>
+              Shared Reward: <span class="font-bold">{{activeOption}}%</span>
             </div>
             <div v-if="activeOption === 0">
-              You did vote <span class="font-bold">NO</span> on this.
+              You did vote <span class="font-bold">AGAINST</span> sharing mining reward.
             </div>
             <div v-else>
-              You did vote <span class="font-bold">YES</span> on this.
-            </div>
-            <div class="text-gray-700">
-              Explanation Explanation Explanation Explanation Explanation Explanation.
+              You did vote <span class="font-bold">FOR</span> sharing {{activeOption}}% of mining reward.
             </div>
           </div>
         </div>
@@ -229,7 +240,7 @@
             <div class="flex justify-between">
               <div style="color: #76818c;">0%</div>
               <div>
-                Select Foundation Reward
+                Block Reward Share
               </div>
               <div style="color: #76818c;">20%</div>
             </div>
@@ -243,18 +254,22 @@
                   Your Vote
                 </div>
                 <div class="flex justify-between">
-                  <div>Mining Reward:</div>
+                  <div>Miner Reward:</div>
                   <div class="font-bold">{{100-selectedId}}%</div>
                 </div>
-                <div class="flex justify-between">
-                  <div>Foundation Reward:</div>
+                <div class="flex justify-between mb-2">
+                  <div>Shared Reward:</div>
                   <div class="font-bold">{{selectedId}}%</div>
                 </div>
-                <div v-if="selectedId === 0" class="flex justify-between">
-                  You will vote <span class="font-bold">NO</span> on this.
-                </div>
-                <div v-else class="flex justify-between">
-                  You will vote <span class="font-bold">YES</span> on this.
+                <div class="flex align-left">
+                  <div v-if="selectedId === 0">
+                    You will vote <span class="font-bold">AGAINST</span><br/>
+                    sharing mining reward.
+                  </div>
+                  <div v-else>
+                    You will vote <span class="font-bold">FOR</span><br/>
+                    sharing mining reward.
+                  </div>
                 </div>
               </div>
             </div>
@@ -314,7 +329,7 @@
 </template>
 
 <script>
-  import { AeButton, AeIdenticon, AeText } from '@aeternity/aepp-components/'
+  import {AeButton, AeIdenticon, AeText} from '@aeternity/aepp-components/'
   import BiggerLoader from '../components/BiggerLoader'
   import aeternity from '../networkController/aeternity'
   import ethereum from '../networkController/ethereum'
@@ -322,7 +337,7 @@
   import AeRange from '../components/AeRange'
   import AeBackdrop from '@aeternity/aepp-components/src/components/ae-backdrop/ae-backdrop'
   import AeCheck from '@aeternity/aepp-components/src/components/ae-check/ae-check'
-  import { detect } from 'detect-browser'
+  import {detect} from 'detect-browser'
 
   const STATUS_INITIAL = 0, STATUS_SHOW_OPTIONS = 1, STATUS_LOADING = 2, STATUS_VOTE_SUCCESS = 3,
     STATUS_VOTE_FAIL = 4, STATUS_VOTE_CLOSED = 5, STATUS_ERROR = 6, STATUS_INIT_FAILED = 7, STATUS_VOTE_TIMEOUT = 8
@@ -339,7 +354,7 @@
       BiggerLoader,
       AeButton
     },
-    data () {
+    data() {
       return {
         selectedClient: null,
         error: null,
@@ -354,44 +369,44 @@
       }
     },
     computed: {
-      isInitial () {
+      isInitial() {
         return this.status === STATUS_INITIAL
       },
-      showOptions () {
+      showOptions() {
         return this.status === STATUS_SHOW_OPTIONS || this.status === STATUS_INIT_FAILED
       },
-      isLoading () {
+      isLoading() {
         return this.status === STATUS_LOADING
       },
-      isSuccessful () {
+      isSuccessful() {
         return this.status === STATUS_VOTE_SUCCESS
       },
-      hasVotingError () {
+      hasVotingError() {
         return this.status === STATUS_VOTE_FAIL
       },
-      hasVotingTimeout () {
+      hasVotingTimeout() {
         return this.status === STATUS_VOTE_TIMEOUT
       },
-      votingClosed () {
+      votingClosed() {
         return this.status === STATUS_VOTE_CLOSED
       },
-      initFailed () {
+      initFailed() {
         return this.status === STATUS_INIT_FAILED
       },
-      statusError () {
+      statusError() {
         return this.status === STATUS_ERROR
       }
     },
     methods: {
-      removeError () {
+      removeError() {
         this.status = STATUS_INITIAL
         this.error = ''
       },
-      removeVote () {
+      removeVote() {
         this.activeOption = null
         this.status = STATUS_SHOW_OPTIONS
       },
-      setError (body, callback = this.removeError, headline = 'Oh no...') {
+      setError(body, callback = this.removeError, headline = 'Oh no...') {
         this.error = {
           text: body,
           cb: callback,
@@ -399,10 +414,10 @@
         }
         this.status = STATUS_ERROR
       },
-      openBaseAepp () {
+      openBaseAepp() {
         window.open('https://base.aepps.com')
       },
-      async connectWallet () {
+      async connectWallet() {
         this.status = STATUS_LOADING
         if (this.selectedClient === 'baseaepp') {
           if (window.parent !== window) {
@@ -414,20 +429,20 @@
             if (success) {
               this.provider = aeternity
             } else {
-              this.setError('An error occured while connecting to the Base æpp. Please make sure your Base æpp is up to date.')
+              this.setError('An error occured while connecting to the Base aepp. Please make sure your Base aepp is up to date.')
             }
           } else {
             this.setError(
-              'For the best Base æpp voting experience please open <a class="underline" href="http://aeternity.com/aepp-hybrid-voting/">http://aeternity.com/aepp-hybrid-voting/</a> inside the Base æpps browser in your mobile device.',
+              'For the best Base aepp voting experience please open <a class="underline" href="http://aeternity.com/aepp-hybrid-voting/">http://aeternity.com/aepp-hybrid-voting/</a> inside the Base aepps browser in your mobile device.',
               this.removeError,
-              'Voting with the æternity Base æpp'
+              'Voting with the aeternity Base aepp'
             )
           }
         }
 
         if (this.selectedClient === 'metamask') {
           if (window.ethereum || window.web3) {
-            const { success, message } = await ethereum.init({
+            const {success, message} = await ethereum.init({
               id: this.voteId,
               stakeHeight: 11769152,  // 10754080,
               endHeight: 11769152
@@ -493,10 +508,10 @@
           this.status = STATUS_INITIAL
         }
       },
-      isMobile () {
+      isMobile() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
       },
-      async sendVote () {
+      async sendVote() {
         this.status = STATUS_LOADING
         try {
           // TIMEOUT
@@ -532,7 +547,7 @@
         }
       }
     },
-    async mounted () {
+    async mounted() {
 
       if (window.parent !== window && this.isMobile()) {
         this.selectedClient = 'baseaepp'
@@ -561,5 +576,17 @@
 
   .ae-text-color {
     color: #ff0d6a;
+  }
+
+  .no-wrap {
+    white-space: nowrap;
+  }
+
+  .align-left {
+    text-align: left;
+  }
+
+  .information-links a {
+    text-decoration: underline;
   }
 </style>

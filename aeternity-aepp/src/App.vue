@@ -5,7 +5,7 @@
     -->
     <div class="min-h-screen">
       <div class="w-full h-16 flex justify-center items-center" style="background-color: red">
-        <div class="text-base md:text-2xl">THIS VERSION IS RUNNING ON ETH / AE <strong>TESTNET</strong></div>
+        <div class="text-base md:text-2xl"><strong>TEST VERSION</strong> RUNNING ON ETH KOVAN / AE <strong>TESTNET</strong></div>
       </div>
       <div class="bg-white w-full shadow h-12 p-1 relative hidden md:block mb-8">
         <div class="flex h-full">
