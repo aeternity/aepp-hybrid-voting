@@ -19,8 +19,8 @@ const groupBy = (xs, key) => xs.reduce((acc, x) => Object.assign({}, acc, {
 
 const countStakes = async () => {
     const votingAcc = 'ak_11111111111111111111111111111111273Yts';
-    const votingStakeHeight = 67000;
-    const votingEndingHeight = 80000;
+    const votingStakeHeight = 80541;
+    const votingEndingHeight = 80541;
     const voteId = 1;
 
     // 1. fetch all txs towards voting account from middleware
@@ -32,7 +32,7 @@ const countStakes = async () => {
         .filter(tx => { // filter transactions with valid voting payload
             try {
                 const payload = JSON.parse(tx.tx.payload);
-                return payload.vote && payload.vote.id && payload.vote.option && payload.vote.id === voteId;
+                return payload.vote && payload.vote.id && payload.vote.option !== undefined && payload.vote.id === voteId;
             } catch (e) {
                 return false;
             }
@@ -64,9 +64,17 @@ const countStakes = async () => {
     console.log("3. check stake for each voter account at height");
     const client = await getClient();
     const votingAccountStakes = await Promise.all(votingAccounts.map(async (vote) => {
-        const balanceAtHeight = await client.balance(vote.account, {height: votingStakeHeight}).catch((e) => {
+        const balanceAtHeight = await client.balance(vote.account, {height: votingStakeHeight}).catch(async (e) => {
             console.error(`3. choose stake 0 for account ${vote.account} (${e.message})`);
-            return '0'; // account balance will fail if account didn't exist at votingStakeHeight, so stake is 0
+
+            if (e.message.includes("Height not available")) {
+                // account balance will fail if not yet at votingStakeHeight, use current height for a temporary result
+                console.error("CAREFUL: WILL USE NON-FINAL RESULT!");
+                return await client.balance(vote.account).catch(() => '0');
+            } else {
+                // account balance will fail if account didn't exist at votingStakeHeight, so stake is 0
+                return '0';
+            }
         });
         return {...vote, ...{stake: balanceAtHeight}} // append stake to vote object
     }));
@@ -90,7 +98,7 @@ const countStakes = async () => {
 
     let jsonString = JSON.stringify(stakesForOption, null, 2);
     fs.writeFileSync("./ae-votes.json", jsonString + '\n');
-    console.log("did write result to ./ae-votes.json file")
+    console.log("did write detailed result to ./ae-votes.json file")
 };
 
 countStakes();
