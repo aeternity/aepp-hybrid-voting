@@ -177,20 +177,20 @@
         </h1>
         <p class="text-gray-400 mt-2 mb-2">
           To transform aeternity into a self-sustaining platform, we propose the Block Reward Initiative (BRI), through
-          which <span class="no-wrap">~0–20%</span> of miner rewards will be allocated to development.
+          which <span class="no-wrap">0 to 20%</span> of miner rewards will be allocated to development.
         </p>
         <p class="text-gray-400 font-bold mt-2 mb-2">
           Further Information:
         </p>
         <div class="text-gray-400 information-links mt-2 mb-2">
-          <a
-            href="https://blog.aeternity.com/aeternity-first-on-chain-governance-vote-decentralization-2-0-5e0c8a01891a">Detailed
-            Explanation in Blog Post</a>
+          <a target="_blank"
+             href="https://blog.aeternity.com/aeternity-first-on-chain-governance-vote-decentralization-2-0-5e0c8a01891a">
+            Detailed Explanation in Blog Post</a>
         </div>
         <div class="text-gray-400 information-links mt-2 mb-2">
-          <a
-            href="https://forum.aeternity.com/t/discussion-block-reward-initiative-and-first-on-chain-governance-vote/3278/47">Community
-            Discussion in Forum</a>
+          <a target="_blank"
+             href="https://forum.aeternity.com/t/discussion-block-reward-initiative-and-first-on-chain-governance-vote/3278/47">
+            Community Discussion in Forum</a>
         </div>
         <hr class="border-t border-gray-800" v-if="provider"/>
         <div class="w-full flex justify-center" v-if="provider">
@@ -537,12 +537,14 @@
           this.status = STATUS_VOTE_FAIL
         }
       },
-      async checkAndReloadProvider () {
+      async checkAndReloadProvider() {
         if (!this.provider) return
 
         const changesDetected = await this.provider.verifyAddress()
         if (changesDetected) {
-          this.setError('Your account changed. Please reload this page.', () => {window.location.reload()}, 'Significant changes detected')
+          this.setError('Your account changed. Please reload this page.', () => {
+            window.location.reload()
+          }, 'Significant changes detected')
           clearInterval(this.interval)
         }
       }
@@ -557,7 +559,7 @@
       this.status = STATUS_INITIAL
       this.interval = setInterval(this.checkAndReloadProvider, 1000)
     },
-    beforeDestroy () {
+    beforeDestroy() {
       clearInterval(this.interval)
     }
   }
