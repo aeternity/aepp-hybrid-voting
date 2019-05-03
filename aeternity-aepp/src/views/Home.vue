@@ -180,13 +180,9 @@
         </p>
         <hr class="border-t border-gray-800" v-if="provider"/>
         <div class="w-full flex justify-center" v-if="provider">
-          <div class="label" v-if="provider && provider.network === 'ethereum'">
-            {{provider.vote.endHeight - provider.height}} Blocks and
-            ~{{Math.round((provider.vote.endHeight - provider.height) * 13 / 60 / 60 / 24)}} Days left
-          </div>
-          <div class="label" v-if="provider && provider.network === 'aeternity'">
-            {{provider.vote.endHeight - provider.height}} Blocks and
-            ~{{Math.round((provider.vote.endHeight - provider.height) * 3 / 60 / 24)}} Days left
+          <div class="label">
+            ~{{Math.round((1557871200000 - Date.now()) / 1000 / 60 / 60 / 24)}} Days left, ends
+            {{new Date(1557871200000).toDateString()}} at {{new Date(1557871200000).toLocaleTimeString()}}
           </div>
         </div>
       </div>
@@ -526,12 +522,12 @@
           this.status = STATUS_VOTE_FAIL
         }
       },
-      async checkAndReloadProvider() {
-        if(!this.provider) return
+      async checkAndReloadProvider () {
+        if (!this.provider) return
 
         const changesDetected = await this.provider.verifyAddress()
-        if(changesDetected) {
-          this.setError('Your account changed. Please reload this page.',() => {window.location.reload()}, 'Significant changes detected');
+        if (changesDetected) {
+          this.setError('Your account changed. Please reload this page.', () => {window.location.reload()}, 'Significant changes detected')
           clearInterval(this.interval)
         }
       }
@@ -547,7 +543,7 @@
       this.interval = setInterval(this.checkAndReloadProvider, 1000)
     },
     beforeDestroy () {
-      clearInterval(this.interval);
+      clearInterval(this.interval)
     }
   }
 </script>

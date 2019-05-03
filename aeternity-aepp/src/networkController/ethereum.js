@@ -92,7 +92,7 @@ ethereum.getActiveVote = async () => {
 }
 
 ethereum.isVoteOpen = () => {
-  return ethereum.height < ethereum.vote.endHeight
+  return Date.now() < 1557871200000
 }
 
 ethereum.sendVote = async (id) => {
