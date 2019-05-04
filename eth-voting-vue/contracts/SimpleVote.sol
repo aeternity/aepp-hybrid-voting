@@ -20,10 +20,11 @@ contract SimpleVote {
     function vote(int8 _vote) public returns (bool) {
         require(block.timestamp < 1557921600, "Voting is over at May 15 2019 at 12:00:00 AM CEST");
         require(_vote <= maxVoteValue, "Voted for value higher than allowed");
-        hasVoted[msg.sender] = true;
         getVote[msg.sender] = _vote;
         if(hasVoted[msg.sender] == false) {
             voters.push(msg.sender);
+            hasVoted[msg.sender] = true;
+
         }
     }
 }
