@@ -372,7 +372,7 @@
         status: STATUS_LOADING,
         provider: null,
         activeHelp: null,
-        selectedId: 0,
+        selectedId: 10,
         storeKey: 'selectedWallet',
         interval: null
       }
