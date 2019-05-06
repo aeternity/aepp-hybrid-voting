@@ -522,7 +522,7 @@
             new Promise(resolve => {
               setTimeout(() => {
                 resolve('TIMEOUT')
-              }, 60000)
+              }, 120000)
             })
           ])
 
