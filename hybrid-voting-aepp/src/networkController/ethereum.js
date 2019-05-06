@@ -20,8 +20,10 @@ const ethereum = {
   status: null,
   activeOption: null,
   contractAddress: null,
-  votingContractAddress: '0x863d8e96B5D00d2342fc46c527B002326b9813c2', //TESTNET: '0x7EE889FEb74a8e9D573a58f6B8ea1d4B1C30986d',
-  tokenContractAddress: '0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d' //TESTNET: '0x35d8830ea35e6Df033eEdb6d5045334A4e34f9f9'
+  votingContractAddress: '0x863d8e96B5D00d2342fc46c527B002326b9813c2', // MAINNET
+  // votingContractAddress: '0xe91995f7766630f4d654a0c44ac562a60b61bacc', //TESTNET
+  tokenContractAddress: '0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d'  // MAINNET
+  // tokenContractAddress: '0x35d8830ea35e6Df033eEdb6d5045334A4e34f9f9' // TESTNET
 }
 
 ethereum.init = async (vote) => {
@@ -56,7 +58,7 @@ ethereum.init = async (vote) => {
 
     ethereum.address = accs[0]
     await ethereum.updateEthBalance(ethereum.address)
-    let tokenHeight = Math.min(ethereum.height, ethereum.vote.stakeHeight);
+    let tokenHeight = Math.min(ethereum.height, ethereum.vote.stakeHeight)
     const result = await AEToken.methods.balanceOf(ethereum.address).call(tokenHeight)
 
     ethereum.stakeAtHeight = String(Number(result / Math.pow(10, 18)))
@@ -76,13 +78,18 @@ ethereum.init = async (vote) => {
 
 ethereum.getActiveVote = async () => {
   try {
-    const id = await SimpleVote.methods.getVote(ethereum.address).call()
+    const hasVoted = await SimpleVote.methods.hasVoted(ethereum.address).call()
+    if (!hasVoted) {
+      return null
+    }
 
+    const id = await SimpleVote.methods.getVote(ethereum.address).call()
     if (typeof id === 'undefined') {
       return null
     } else {
       return Number(id)
     }
+
   } catch (e) {
     console.error(e)
     return null

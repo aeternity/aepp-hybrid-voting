@@ -69,9 +69,9 @@
         }
         @each $name in -webkit-slider-thumb -moz-range-thumb -ms-thumb {
           &::#{$name} {
-            height: rem(15px);
-            width: rem(15px);
-            border-radius: rem(48px);
+            height: rem(26px);
+            width: rem(26px);
+            border-radius: rem(150px);
             background: map-get($colors, thumb-color);
             cursor: pointer;
           }
@@ -83,7 +83,7 @@
     }
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
-      margin-top: rem(-6px);
+      margin-top: rem(-13px);
     }
     &::-moz-range-thumb {
       border: none;
