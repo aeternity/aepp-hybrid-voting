@@ -81,7 +81,6 @@ ethereum.getActiveVote = async () => {
     if (typeof id === 'undefined') {
       return null
     } else {
-      console.log(Number(id))
       return Number(id)
     }
   } catch (e) {

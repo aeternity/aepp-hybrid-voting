@@ -93,8 +93,9 @@ aeternity.getActiveVote = async () => {
         try {
           const payload = JSON.parse(tx.tx.payload)
           return payload.vote && payload.vote.id && payload.vote.option !== undefined && payload.vote.id === aeternity.vote.id
-        } catch {
-          return false
+        } catch (e) {
+          console.warn(e)
+          return null
         }
       })
       .map(tx => {
@@ -111,13 +112,12 @@ aeternity.getActiveVote = async () => {
       .sort((tx1, tx2) => tx2.nonce - tx1.nonce)
 
   } catch (e) {
-    return false
+    return null
   }
 
   if (filteredVotingTxs.length === 0) {
-    return false
+    return null
   } else {
-    console.log(filteredVotingTxs)
     return filteredVotingTxs[0].voteOption
   }
 }

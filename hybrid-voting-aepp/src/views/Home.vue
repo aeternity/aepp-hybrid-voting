@@ -90,7 +90,7 @@
           />
           <hr class="border-t border-gray-200"/>
           <div class="label mb-2">
-            <template v-if="provider.height < provider.vote.stakeHeight">
+            <template v-if="!votingClosed">
               Estimated voting power at block {{provider.vote.stakeHeight}}
             </template>
             <template v-else>
@@ -194,15 +194,18 @@
         </div>
         <hr class="border-t border-gray-800" v-if="provider"/>
         <div class="w-full flex justify-center" v-if="provider">
-          <div class="label">
+          <div class="label" v-if="!votingClosed">
             ~{{Math.round((1557871200000 - Date.now()) / 1000 / 60 / 60 / 24)}} Days left, ends
             {{new Date(1557871200000).toDateString()}} at {{new Date(1557871200000).toLocaleTimeString()}}
+          </div>
+          <div v-else class="label">
+            Vote closed on {{new Date(1557871200000).toDateString()}} at {{new Date(1557871200000).toLocaleTimeString()}}
           </div>
         </div>
       </div>
       <!-- POLLBODY -->
       <div class="bg-white rounded-b-lg shadow">
-        <div v-if="isSuccessful" class="p-4">
+        <div v-if="isSuccessful || (activeOption !== null && votingClosed)" class="p-4">
           <div class="px-4 pt-2">
             <div class="label">
               Your Vote
@@ -296,7 +299,7 @@
             </div>
           </div>
         </div>
-        <div v-if="votingClosed">
+        <div v-if="activeOption === null && votingClosed">
           <div class="text-2xl font-bold text-center my-8">
             Voting closed at height {{provider.vote.endHeight}}
           </div>
@@ -319,6 +322,12 @@
         <div v-if="hasVotingError || hasVotingTimeout" class="w-full flex justify-center">
           <AeButton extend class="my-4" fill="primary" face="round" @click="removeVote">
             Try again
+          </AeButton>
+        </div>
+
+        <div v-if="votingClosed" class="w-full flex justify-center">
+          <AeButton extend :disabled="true" class="my-4" fill="primary" face="round" @click="sendVote">
+            Voting closed
           </AeButton>
         </div>
 
