@@ -3,12 +3,12 @@ const axios = require('axios');
 const fs = require('fs');
 const BigNumber = require('bignumber.js');
 
-const middlewareUrl = "https://testnet.mdw.aepps.com";
+const middlewareUrl = "https://mainnet.mdw.aepps.com";
 
 const getClient = () => {
     return ChainNode({
-        url: 'https://sdk-testnet.aepps.com',
-        internalUrl: 'https://sdk-testnet.aepps.com',
+        url: 'https://sdk-mainnet.aepps.com',
+        internalUrl: 'https://sdk-mainnet.aepps.com',
         networkId: 'ae_uat'
     });
 };
