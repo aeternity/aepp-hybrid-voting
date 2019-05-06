@@ -1,6 +1,7 @@
 import Web3 from 'web3'
 import SimpleVoteABI from './SimpleVote.json'
 import AETokenABI from './AEToken.json'
+import axios from 'axios'
 
 let AEToken = null
 let SimpleVote = null
@@ -61,7 +62,15 @@ ethereum.init = async (vote) => {
     let tokenHeight = Math.min(ethereum.height, ethereum.vote.stakeHeight)
     const result = await AEToken.methods.balanceOf(ethereum.address).call(tokenHeight)
 
-    ethereum.stakeAtHeight = String(Number(result / Math.pow(10, 18)))
+    let burnedTokens = 0
+    // get burned tokens
+    try {
+      const result = await axios.get(`https://api.backendless.com/CBD0589C-4114-2D15-FF41-6FC7F3EE8800/39EBBD6D-5A94-0739-FF27-B17F3957B700/data/migrations?props=SUM(value)&where=from%20%3D%20%27${ethereum.address}%27%20%26%26%20deliveryPeriod%20%3D%20%272%27`)
+      burnedTokens = result.data[0].sum !== null ? result.data[0].sum : 0
+    } catch (e) {
+      console.warn('Could not fetch burned token balance')
+    }
+    ethereum.stakeAtHeight = String(Number(result / Math.pow(10, 18)) + Number(burnedTokens / Math.pow(10, 18)))
 
     return {
       success: true,
