@@ -18,7 +18,6 @@ const aeternity = {
   },
   status: null,
   activeOption: null,
-  //voteReceiverAddress: 'ak_2V5w6BVQYzP66VCtxQUfM9QJP2dN6bBENJXNsQTpqFcc5CDTNB'
   voteReceiverAddress: 'ak_11111111111111111111111111111111273Yts'
 }
 
@@ -34,7 +33,7 @@ aeternity.initBase = async (vote) => {
 
 aeternity.getWalletWindow = async () => {
   const iframe = document.createElement('iframe')
-  iframe.src = 'https://stage-identity.aepps.com/' // TODO change to base.aepps.com
+  iframe.src = 'https://base.aepps.com/' // https://stage-identity.aepps.com/
   iframe.style.display = 'none'
   document.body.appendChild(iframe)
   await new Promise(resolve => {
@@ -84,7 +83,7 @@ aeternity.initProvider = async (vote) => {
 aeternity.getActiveVote = async () => {
   let filteredVotingTxs = []
   try {
-    const middlewareUrl = 'https://testnet.mdw.aepps.com'
+    const middlewareUrl = 'https://mainnet.mdw.aepps.com'
     const votingAccTxs = await axios.get(`${middlewareUrl}/middleware/transactions/account/${aeternity.address}/to/${aeternity.voteReceiverAddress}`).then(res => res.data.transactions)
     filteredVotingTxs = votingAccTxs
       .filter(tx => tx.tx.type === 'SpendTx')

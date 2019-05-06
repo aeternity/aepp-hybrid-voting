@@ -1,12 +1,17 @@
 [
   {
     "constant": true,
-    "inputs": [],
-    "name": "totalVotes",
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "hasVoted",
     "outputs": [
       {
         "name": "",
-        "type": "int256"
+        "type": "bool"
       }
     ],
     "payable": false,
@@ -15,21 +20,35 @@
   },
   {
     "constant": true,
-    "inputs": [
+    "inputs": [],
+    "name": "totalVotes",
+    "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
     ],
-    "name": "votes",
-    "outputs": [
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
+        "name": "_vote",
         "type": "int8"
       }
     ],
+    "name": "vote",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -94,24 +113,5 @@
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_vote",
-        "type": "int8"
-      }
-    ],
-    "name": "vote",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
   }
 ]

@@ -20,8 +20,8 @@ const ethereum = {
   status: null,
   activeOption: null,
   contractAddress: null,
-  votingContractAddress: '0x7EE889FEb74a8e9D573a58f6B8ea1d4B1C30986d', // TODO: This is Ethereum Kovan Network now, change to Ethereum main net.
-  tokenContractAddress: '0x35d8830ea35e6Df033eEdb6d5045334A4e34f9f9' // TODO: This is Ethereum Kovan Network now, change to Ethereum main net.
+  votingContractAddress: '0x863d8e96B5D00d2342fc46c527B002326b9813c2', //TESTNET: '0x7EE889FEb74a8e9D573a58f6B8ea1d4B1C30986d',
+  tokenContractAddress: '0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d' //TESTNET: '0x35d8830ea35e6Df033eEdb6d5045334A4e34f9f9'
 }
 
 ethereum.init = async (vote) => {
