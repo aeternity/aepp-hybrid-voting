@@ -434,9 +434,9 @@
             }
           } else {
             this.setError(
-              'For the best Base aepp voting experience please open <a class="underline" href="http://aeternity.com/aepp-hybrid-voting/">http://aeternity.com/aepp-hybrid-voting/</a> inside the Base aepps browser in your mobile device.',
+              'For the best Base æpp voting experience please open the voting æpp inside the Base æpp on your mobile device.',
               this.removeError,
-              'Voting with the aeternity Base aepp'
+              'Voting with the aeternity Base æpp'
             )
           }
         }
@@ -484,19 +484,20 @@
         }
 
         if (this.provider) {
-          this.activeOption = await this.provider.getActiveVote()
-          this.selectedId = this.activeOption ? this.activeOption : this.selectedId
-
-          if (typeof this.activeOption === 'number') {
-            this.status = STATUS_VOTE_SUCCESS
-          }
 
           if (String(this.provider.balance) === '0') {
-            this.setError(`Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account`, () => {window.location.reload()}, 'Oh no...', 'Reload')
+            this.setError(`Your balance is 0 ${this.provider.network === 'aeternity' ? 'AE' : 'ETH'}, please add tokens to your account ${this.provider.address.substr(0, 20)}...`, () => {window.location.reload()}, 'Oh no...', 'Reload')
             this.provider = null
           }
 
           if (!this.statusError) {
+            this.activeOption = await this.provider.getActiveVote()
+            this.selectedId = this.activeOption ? this.activeOption : this.selectedId
+
+            if (typeof this.activeOption === 'number') {
+              this.status = STATUS_VOTE_SUCCESS
+            }
+
             const voteOpen = this.provider.isVoteOpen()
             if (!voteOpen) return this.status = STATUS_VOTE_CLOSED
           }
