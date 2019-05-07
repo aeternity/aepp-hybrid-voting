@@ -3,3 +3,4 @@
 node_modules/
 hybrid-voting-aepp/dist
 ae-votes.json
+eth-votes.json
