@@ -7,6 +7,8 @@ const aggregateVotes = async () => {
     let aeVotes = JSON.parse(fs.readFileSync("./ae-votes.json"));
     let totalStake = aeVotes.map(vote => vote.totalStake).reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
     console.log(`Total Stake: ${atomsToAe(totalStake)} AE`);
+
+
     let percentageVotes = aeVotes.map(vote => {
         return {
             option: vote.option,
@@ -15,6 +17,14 @@ const aggregateVotes = async () => {
         }
     });
     console.log(percentageVotes);
+
+
+    let votesWithoutZero = aeVotes.filter(vote => vote.option !== '0');
+    let totalStakeWithoutZero = votesWithoutZero.map(vote => vote.totalStake).reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
+    let weightedAverages = votesWithoutZero
+        .map(vote => new BigNumber(vote.option).multipliedBy(new BigNumber(vote.totalStake)))
+        .reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
+    console.log(`Weighted Average of 1% to 20%: ${weightedAverages.dividedBy(totalStakeWithoutZero).toFixed(8)} %`);
 };
 
 aggregateVotes();
