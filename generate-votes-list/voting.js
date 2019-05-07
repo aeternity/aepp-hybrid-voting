@@ -84,6 +84,27 @@ async function start() {
         lastCount = i;
         bar.tick();
     }
+    // 4. sum up stake by votes for options
+    console.log('4. sum up stake by votes for options')
+    const votesByOption = {}
+
+    Object.values(json).map(vote => {
+      if (!votesByOption.hasOwnProperty(vote.vote)) votesByOption[vote.vote] = [vote]
+      else votesByOption[vote.vote].push(vote)
+    })
+
+    const stakesForOption = Object.keys(votesByOption).reduce(function (acc, option) {
+      const votes = votesByOption[option]
+
+      const totalStake = votes.reduce((acc, vote) => { // sum up stakes using bignumber
+        return acc.add(new web3.utils.BN(vote.totalBalance))
+      }, new web3.utils.BN('0')).toString()
+
+      acc.push({ option: option, totalStake: totalStake, votes: votes }) // add stakes and votes for option to final result
+      return acc
+    }, [])
+    console.log(`4. did sum stakes for ${stakesForOption.length} options\n`)
+    json = stakesForOption
     saveJSON();
 }
 
