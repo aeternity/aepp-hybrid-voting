@@ -28,7 +28,7 @@ process
     if (code == 0) {
       if (fs.existsSync("./.cfg"))
         fs.unlinkSync("./.cfg");
-      console.log(`File saved: votes.json.`);
+      console.log(`File saved: ethVotes.json.`);
     }
   })
   .on('SIGINT', onexit)
@@ -115,11 +115,11 @@ async function setupProgressBar() {
 }
 
 function checkConfig() {
-    if (fs.existsSync("./.cfg") && fs.existsSync("./votes.json")) {
+    if (fs.existsSync("./.cfg") && fs.existsSync("./ethVotes.json")) {
       let input = fs.readFileSync("./.cfg");
       let jsonConfig = JSON.parse(input);
       lastCount = jsonConfig.lastCount;
-      input = fs.readFileSync("./votes.json");
+      input = fs.readFileSync("./ethVotes.json");
       json = JSON.parse(input);
     }
 }
@@ -129,7 +129,7 @@ function saveJSON() {
     jsonString = jsonString.replace(/: "/gm, ': ')
     jsonString = jsonString.replace(/",$/gm, ',')
     jsonString = jsonString.replace(/"$/gm, '')
-    fs.writeFileSync("./votes.json", jsonString+'\n') ;
+    fs.writeFileSync("./ethVotes.json", jsonString+'\n') ;
   }
 
   function saveCFG() {
