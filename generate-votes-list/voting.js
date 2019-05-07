@@ -126,9 +126,6 @@ function checkConfig() {
 
 function saveJSON() {
     let jsonString = JSON.stringify(json, Object.keys(json).concat(["vote", "totalBalance", "burnedTokens", "ownedTokens"]), 2);
-    jsonString = jsonString.replace(/: "/gm, ': ')
-    jsonString = jsonString.replace(/",$/gm, ',')
-    jsonString = jsonString.replace(/"$/gm, '')
     fs.writeFileSync("./eth-votes.json", jsonString+'\n') ;
   }
 
