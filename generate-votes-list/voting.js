@@ -28,7 +28,7 @@ process
     if (code == 0) {
       if (fs.existsSync("./.cfg"))
         fs.unlinkSync("./.cfg");
-      console.log(`File saved: votes.json.`);
+      console.log(`File saved: eth-votes.json.`);
     }
   })
   .on('SIGINT', onexit)
@@ -84,6 +84,27 @@ async function start() {
         lastCount = i;
         bar.tick();
     }
+    // 4. sum up stake by votes for options
+    console.log('4. sum up stake by votes for options')
+    const votesByOption = {}
+
+    Object.values(json).map(vote => {
+      if (!votesByOption.hasOwnProperty(vote.vote)) votesByOption[vote.vote] = [vote]
+      else votesByOption[vote.vote].push(vote)
+    })
+
+    const stakesForOption = Object.keys(votesByOption).reduce(function (acc, option) {
+      const votes = votesByOption[option]
+
+      const totalStake = votes.reduce((acc, vote) => { // sum up stakes using bignumber
+        return acc.add(new web3.utils.BN(vote.totalBalance))
+      }, new web3.utils.BN('0')).toString()
+
+      acc.push({ option: option, totalStake: totalStake, votes: votes }) // add stakes and votes for option to final result
+      return acc
+    }, [])
+    console.log(`4. did sum stakes for ${stakesForOption.length} options\n`)
+    json = stakesForOption
     saveJSON();
 }
 
@@ -94,27 +115,24 @@ async function setupProgressBar() {
 }
 
 function checkConfig() {
-    if (fs.existsSync("./.cfg") && fs.existsSync("./votes.json")) {
+    if (fs.existsSync("./.cfg") && fs.existsSync("./eth-votes.json")) {
       let input = fs.readFileSync("./.cfg");
       let jsonConfig = JSON.parse(input);
       lastCount = jsonConfig.lastCount;
-      input = fs.readFileSync("./votes.json");
+      input = fs.readFileSync("./eth-votes.json");
       json = JSON.parse(input);
     }
 }
 
 function saveJSON() {
     let jsonString = JSON.stringify(json, Object.keys(json).concat(["vote", "totalBalance", "burnedTokens", "ownedTokens"]), 2);
-    jsonString = jsonString.replace(/: "/gm, ': ')
-    jsonString = jsonString.replace(/",$/gm, ',')
-    jsonString = jsonString.replace(/"$/gm, '')
-    fs.writeFileSync("./votes.json", jsonString+'\n') ;
+    fs.writeFileSync("./eth-votes.json", jsonString+'\n') ;
   }
-  
+
   function saveCFG() {
     fs.writeFileSync("./.cfg", JSON.stringify({ lastCount: lastCount }))
   }
-  
+
   function saveState() {
     saveJSON();
     saveCFG();
