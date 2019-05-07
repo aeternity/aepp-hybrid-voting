@@ -5,11 +5,25 @@ const atomsToAe = (atoms) => (new BigNumber(atoms)).dividedBy(new BigNumber(1000
 
 const aggregateVotes = async () => {
     let aeVotes = JSON.parse(fs.readFileSync("./ae-votes.json"));
-    let totalStake = aeVotes.map(vote => vote.totalStake).reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
+    let ethVotes = JSON.parse(fs.readFileSync("../eth-spendtx-voting-count/eth-votes.json"));
+
+    // Merge aevotes and ethvotes
+    let allVotes = aeVotes;
+
+
+    Object.keys(ethVotes).map(voteOption => {
+        if (!allVotes.hasOwnProperty(voteOption)) allVotes[voteOption] = ethVotes[voteOption]
+        else {
+            allVotes[voteOption].totalStake = new BigNumber(aeVotes[voteOption].totalStake).plus(new BigNumber(ethVotes[voteOption].totalStake))
+            allVotes[voteOption].votes = [...aeVotes[voteOption].votes, ...ethVotes[voteOption].votes]
+        }
+    });
+
+    let totalStake = allVotes.map(vote => vote.totalStake).reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
     console.log(`Total Stake: ${atomsToAe(totalStake)} AE`);
 
 
-    let percentageVotes = aeVotes.map(vote => {
+    let percentageVotes = allVotes.map(vote => {
         return {
             option: vote.option,
             stake: `${atomsToAe(vote.totalStake)} AE`,
@@ -19,7 +33,7 @@ const aggregateVotes = async () => {
     console.log(percentageVotes);
 
 
-    let votesWithoutZero = aeVotes.filter(vote => vote.option !== '0');
+    let votesWithoutZero = allVotes.filter(vote => vote.option !== '0');
     let totalStakeWithoutZero = votesWithoutZero.map(vote => vote.totalStake).reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
     let weightedAverages = votesWithoutZero
         .map(vote => new BigNumber(vote.option).multipliedBy(new BigNumber(vote.totalStake)))
