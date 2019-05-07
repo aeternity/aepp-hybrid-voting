@@ -29,10 +29,16 @@ const countStakes = async () => {
     const filteredVotingTxs = votingAccTxs
         .filter(tx => tx.tx.type === 'SpendTx') // filter spend transactions
         .filter(tx => tx.tx.payload !== '') // filter transactions with empty payload
+        .filter(tx => tx.block_height <= votingEndingHeight)
         .filter(tx => { // filter transactions with valid voting payload
             try {
                 const payload = JSON.parse(tx.tx.payload);
-                return payload.vote && payload.vote.id && payload.vote.option !== undefined && payload.vote.id === voteId;
+                return payload.vote && payload.vote.id &&
+                  payload.vote.option !== undefined &&
+                  payload.vote.id === voteId &&
+                  typeof payload.vote.option === 'number' &&
+                  payload.vote.option >= 0 &&
+                  payload.vote.option <= 20;
             } catch (e) {
                 return false;
             }
@@ -53,9 +59,8 @@ const countStakes = async () => {
     // 2. filter multiple votes by same account, filter txs for valid voting payload, filter txs for specific vote
     console.log("2. filter multiple votes by same account, filter txs for valid voting payload, filter txs for specific vote");
     const votingAccounts = Object.values(groupBy(filteredVotingTxs, 'account')).map((txs) => {
-        const beforeEndingTxs = txs.filter(tx => tx.height <= votingEndingHeight); // filter votes before votingEndingHeight
-        const highestNonce = Math.max(...beforeEndingTxs.map(tx => tx.nonce), 0);
-        return beforeEndingTxs.find(tx => tx.nonce === highestNonce); // only show vote with highest nonce
+        const highestNonce = Math.max(...txs.map(tx => tx.nonce), 0);
+        return txs.find(tx => tx.nonce === highestNonce); // only show vote with highest nonce
     }).filter(vote => vote); // filter accounts with no votes before votingEndingHeight
     console.log(`2. ${votingAccounts.length} remaining latest voting accounts remaining\n`);
 
