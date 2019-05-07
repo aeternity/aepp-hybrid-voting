@@ -41,7 +41,6 @@ function onexit() {
   process.exit(1);
 }
 
-
 async function start() {
     console.log("Starting...");
     checkConfig();
@@ -131,11 +130,11 @@ function saveJSON() {
     jsonString = jsonString.replace(/"$/gm, '')
     fs.writeFileSync("./votes.json", jsonString+'\n') ;
   }
-  
+
   function saveCFG() {
     fs.writeFileSync("./.cfg", JSON.stringify({ lastCount: lastCount }))
   }
-  
+
   function saveState() {
     saveJSON();
     saveCFG();

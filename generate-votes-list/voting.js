@@ -131,11 +131,11 @@ function saveJSON() {
     jsonString = jsonString.replace(/"$/gm, '')
     fs.writeFileSync("./votes.json", jsonString+'\n') ;
   }
-  
+
   function saveCFG() {
     fs.writeFileSync("./.cfg", JSON.stringify({ lastCount: lastCount }))
   }
-  
+
   function saveState() {
     saveJSON();
     saveCFG();
