@@ -5,7 +5,7 @@ const atomsToAe = (atoms) => (new BigNumber(atoms)).dividedBy(new BigNumber(1000
 
 const aggregateVotes = async () => {
     let aeVotes = JSON.parse(fs.readFileSync("./ae-votes.json"));
-    let ethVotes = JSON.parse(fs.readFileSync("../eth-spendtx-voting-count/eth-votes.json"));
+    let ethVotes = JSON.parse(fs.readFileSync("../eth-contract-voting-count/eth-votes.json"));
 
     // Merge aevotes and ethvotes
     let allVotes = aeVotes;
