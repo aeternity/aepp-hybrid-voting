@@ -63,6 +63,7 @@ const countStakes = async () => {
         return txs.find(tx => tx.nonce === highestNonce); // only show vote with highest nonce
     }).filter(vote => vote); // filter accounts with no votes before votingEndingHeight
     console.log(`2. ${votingAccounts.length} remaining latest voting accounts remaining\n`);
+    console.log(`2. minimum voting height: ${Math.min(...votingAccounts.map(vote => vote.height))}`);
 
 
     // 3. check stake for each voter account at height
