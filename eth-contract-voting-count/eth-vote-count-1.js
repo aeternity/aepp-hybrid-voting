@@ -19,7 +19,7 @@ const groupBy = (xs, key) => xs.reduce((acc, x) => Object.assign({}, acc, {
     [x[key]]: (acc[x[key]] || []).concat(x)
 }), {});
 
-async function start() {
+async function countVotes() {
     console.log("Starting...");
 
     // Check if vote has already ended and if we can get final balances
@@ -105,6 +105,7 @@ async function start() {
 
     console.log(`3. did sum stakes for ${stakesForOption.length} options\n`);
     saveJSON(stakesForOption);
+    return stakesForOption;
 }
 
 function saveJSON(json) {
@@ -113,4 +114,6 @@ function saveJSON(json) {
     console.log(`Finished.`)
 }
 
-start();
+module.exports = {
+    countVotes: countVotes
+};

@@ -17,7 +17,7 @@ const groupBy = (xs, key) => xs.reduce((acc, x) => Object.assign({}, acc, {
     [x[key]]: (acc[x[key]] || []).concat(x)
 }), {});
 
-const countStakes = async () => {
+const countVotes = async () => {
     const votingAcc = 'ak_11111111111111111111111111111111273Yts';
     const votingStakeHeight = 80541;
     const votingEndingHeight = 80541;
@@ -34,11 +34,11 @@ const countStakes = async () => {
             try {
                 const payload = JSON.parse(tx.tx.payload);
                 return payload.vote && payload.vote.id &&
-                  payload.vote.option !== undefined &&
-                  payload.vote.id === voteId &&
-                  typeof payload.vote.option === 'number' &&
-                  payload.vote.option >= 0 &&
-                  payload.vote.option <= 20;
+                    payload.vote.option !== undefined &&
+                    payload.vote.id === voteId &&
+                    typeof payload.vote.option === 'number' &&
+                    payload.vote.option >= 0 &&
+                    payload.vote.option <= 20;
             } catch (e) {
                 return false;
             }
@@ -105,6 +105,9 @@ const countStakes = async () => {
     let jsonString = JSON.stringify(stakesForOption, null, 2);
     fs.writeFileSync("./ae-votes.json", jsonString + '\n');
     console.log("did write detailed result to ./ae-votes.json file")
+    return stakesForOption;
 };
 
-countStakes();
+module.exports = {
+    countVotes: countVotes
+};

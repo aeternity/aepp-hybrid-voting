@@ -1,18 +1,18 @@
-const fs = require('fs');
 const BigNumber = require('bignumber.js');
 
-const atomsToAe = (atoms) => (new BigNumber(atoms)).dividedBy(
-    new BigNumber(1000000000000000000)).toFixed(4);
+const aeVoteCount = require('./ae-vote-count-1');
+const ethVoteCount = require('../eth-contract-voting-count/eth-vote-count-2');
 
-const aggregateVotes = () => {
-  let aeVotes = JSON.parse(fs.readFileSync('./ae-votes.json'));
-  let ethVotes = JSON.parse(
-      fs.readFileSync('../eth-contract-voting-count/eth-votes.json'));
+const atomsToAe = (atoms) => (new BigNumber(atoms)).dividedBy(
+    new BigNumber(1000000000000000000)).toFixed(0);
+
+const aggregateVotes = async () => {
+    let aeVotes = await aeVoteCount.countVotes();
+    let ethVotes = await ethVoteCount.countVotes();
 
   // Merge aevotes and ethvotes
   let allVotes = [];
-
-  for (let i = 0; i <= 20; i++) {
+    for (let i = 0; i <= 20; i++) {
     allVotes.push({
       option: String(i),
       totalStake: new BigNumber('0'),
@@ -62,7 +62,7 @@ const aggregateVotes = () => {
           new BigNumber(vote.totalStake))).
       reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
   console.log(`Weighted Average of 1% to 20%: ${weightedAverages.dividedBy(
-      totalStakeWithoutZero).toFixed(8)} %`);
+      totalStakeWithoutZero)} %`);
 };
 
 aggregateVotes();

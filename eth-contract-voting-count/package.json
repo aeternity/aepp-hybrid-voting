@@ -2,7 +2,7 @@
   "name": "generate-votes-list",
   "version": "1.0.0",
   "description": "Script generating a JSON file containing all voters, their votes and balances",
-  "main": "voting.js",
+  "main": "eth-vote-count-1.js",
   "dependencies": {
     "axios": "^0.18.0",
     "bignumber.js": "^8.1.1",
@@ -11,7 +11,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node voting.js"
+    "start": "node eth-vote-count-1.js"
   },
   "author": "",
   "license": "ISC"

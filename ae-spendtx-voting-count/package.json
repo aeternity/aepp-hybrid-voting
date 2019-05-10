@@ -2,9 +2,9 @@
   "name": "ae-spendtx-voting-experiment",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "ae-vote-count-1.js",
   "scripts": {
-    "start": "node $NODE_DEBUG_OPTION index.js",
+    "start": "node $NODE_DEBUG_OPTION ae-vote-count-1.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
