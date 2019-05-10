@@ -36,7 +36,6 @@ const aggregateVotes = async () => {
     });
 
     let totalStake = allVotes.map(vote => vote.totalStake).reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
-    console.log(`Total Stake: ${atomsToAe(totalStake)} AE`);
 
     let percentageVotes = allVotes.map(vote => {
         return {
@@ -50,6 +49,14 @@ const aggregateVotes = async () => {
     let votesWithoutZero = allVotes.filter(vote => vote.option !== '0');
     let totalStakeWithoutZero = votesWithoutZero.map(vote => vote.totalStake).reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
     let weightedAverages = votesWithoutZero.map(vote => new BigNumber(vote.option).multipliedBy(new BigNumber(vote.totalStake))).reduce((acc, cur) => acc.plus(cur), new BigNumber(0));
+
+    let consideredVotesCount = allVotes.reduce((acc, cur) => {
+        acc.push(...cur.votes);
+        return acc;
+    }, []).length;
+
+    console.log(`Voting Accounts: ${consideredVotesCount}`);
+    console.log(`Total Stake: ${atomsToAe(totalStake)} AE`);
     console.log(`Weighted Average of 1% to 20%: ${weightedAverages.dividedBy(totalStakeWithoutZero)}%`);
 };
 
