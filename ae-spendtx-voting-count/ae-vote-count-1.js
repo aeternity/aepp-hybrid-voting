@@ -69,21 +69,25 @@ const countVotes = async () => {
     // 3. check stake for each voter account at height
     console.log("3. check stake for each voter account at height");
     const client = await getClient();
-    const votingAccountStakes = await Promise.all(votingAccounts.map(async (vote) => {
+    const votingAccountStakes = [];
+    for (let vote of votingAccounts) {
         const balanceAtHeight = await client.balance(vote.account, {height: votingStakeHeight}).catch(async (e) => {
             console.error(`3. choose stake 0 for account ${vote.account} (${e.message})`);
 
             if (e.message.includes("Height not available")) {
                 // account balance will fail if not yet at votingStakeHeight, use current height for a temporary result
                 console.error("CAREFUL: WILL USE NON-FINAL RESULT!");
-                return await client.balance(vote.account).catch(() => '0');
+                return await client.balance(vote.account).catch((e) => {
+                    console.error(e);
+                    return '0'
+                });
             } else {
                 // account balance will fail if account didn't exist at votingStakeHeight, so stake is 0
                 return '0';
             }
         });
-        return {...vote, ...{stake: balanceAtHeight}} // append stake to vote object
-    }));
+        votingAccountStakes.push({...vote, ...{stake: balanceAtHeight}}) // append stake to vote object
+    }
     console.log(`3. did check ${votingAccountStakes.length} accounts balance at height ${votingStakeHeight}\n`);
 
 
@@ -91,7 +95,9 @@ const countVotes = async () => {
     console.log("4. sum up stake by votes for options");
     const votesByOption = groupBy(votingAccountStakes, 'voteOption');
     const stakesForOption = Object.keys(votesByOption).reduce(function (acc, option) {
-        const votes = votesByOption[option];
+        const votes = votesByOption[option]
+            .sort((a, b) => a.account.localeCompare(b.account))
+            .sort((a, b) => a.height - b.height);
 
         const totalStake = votes.reduce((acc, vote) => { // sum up stakes using bignumber
             return acc.plus(new BigNumber(vote.stake))
@@ -107,6 +113,8 @@ const countVotes = async () => {
     console.log("did write detailed result to ./ae-votes.json file")
     return stakesForOption;
 };
+
+countVotes();
 
 module.exports = {
     countVotes: countVotes
