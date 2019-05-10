@@ -1,7 +1,7 @@
-# voting.js
+# eth-vote-count-1.js
 Script generating a JSON file containing all voters, their votes and balances
 
-# voting-version2.js
+# eth-vote-count-2.js
 the same as above, but checking the token burnings using the Backendless table instead of Ethereum's past events
 
 # server.js
