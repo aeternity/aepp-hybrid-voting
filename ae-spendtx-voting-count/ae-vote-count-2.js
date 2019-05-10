@@ -1,15 +1,12 @@
 const {ChainNode} = require('@aeternity/aepp-sdk');
-const axios = require('axios');
 const fs = require('fs');
 const BigNumber = require('bignumber.js');
 
-const middlewareUrl = "https://mainnet.mdw.aepps.com";
 
 const getClient = () => {
     return ChainNode({
         url: 'https://sdk-mainnet.aepps.com',
         internalUrl: 'https://sdk-mainnet.aepps.com',
-        networkId: 'ae_uat'
     });
 };
 
@@ -17,19 +14,41 @@ const groupBy = (xs, key) => xs.reduce((acc, x) => Object.assign({}, acc, {
     [x[key]]: (acc[x[key]] || []).concat(x)
 }), {});
 
+const range = (start, end) => {
+    return Array(end - start + 1).fill().map((_, idx) => start + idx)
+};
+
 const countVotes = async () => {
     const votingAcc = 'ak_11111111111111111111111111111111273Yts';
     const votingStakeHeight = 80541;
     const votingEndingHeight = 80541;
+    const votingStartHeight = 74000;
     const voteId = 1;
 
-    // 1. fetch all txs towards voting account from middleware
-    console.log("1. fetch all txs towards voting account from middleware");
-    const votingAccTxs = await axios.get(`${middlewareUrl}/middleware/transactions/account/${votingAcc}`).catch(console.error).then(res => res.data);
-    const filteredVotingTxs = votingAccTxs
+    const client = await getClient();
+
+    const height = await client.height();
+    const lastConsideredHeight = height < votingEndingHeight ? height : votingEndingHeight;
+    const consideredBlockHeights = range(votingStartHeight, lastConsideredHeight);
+
+    // 1. fetch all txs towards voting account from node
+    console.log("1. fetch all txs towards voting account from node");
+
+    const consideredTransactions = [];
+    for (let height of consideredBlockHeights) {
+        if (height % 100 == 0) process.stdout.write(`${height}, `);
+        const generation = await client.getGeneration(height);
+
+        for (let microBlock of generation.microBlocks) {
+            consideredTransactions.push(...(await client.getMicroBlockTransactions(microBlock)))
+        }
+    }
+
+    const filteredVotingTxs = consideredTransactions
         .filter(tx => tx.tx.type === 'SpendTx') // filter spend transactions
+        .filter(tx => tx.tx.recipientId === votingAcc) // filter spend transactions
         .filter(tx => tx.tx.payload !== '') // filter transactions with empty payload
-        .filter(tx => tx.block_height <= votingEndingHeight)
+        .filter(tx => tx.blockHeight <= votingEndingHeight)
         .filter(tx => { // filter transactions with valid voting payload
             try {
                 const payload = JSON.parse(tx.tx.payload);
@@ -46,10 +65,10 @@ const countVotes = async () => {
         .map(tx => { // map data to extract needed information
             const payload = JSON.parse(tx.tx.payload);
             return {
-                height: tx.block_height,
+                height: tx.blockHeight,
                 nonce: tx.tx.nonce,
                 txHash: tx.hash,
-                account: tx.tx.sender_id,
+                account: tx.tx.senderId,
                 voteOption: payload.vote.option
             }
         });
@@ -68,7 +87,6 @@ const countVotes = async () => {
 
     // 3. check stake for each voter account at height
     console.log("3. check stake for each voter account at height");
-    const client = await getClient();
     const votingAccountStakes = [];
     for (let vote of votingAccounts) {
         const balanceAtHeight = await client.balance(vote.account, {height: votingStakeHeight}).catch(async (e) => {
@@ -111,7 +129,6 @@ const countVotes = async () => {
     let jsonString = JSON.stringify(stakesForOption, null, 2);
     fs.writeFileSync("./ae-votes.json", jsonString + '\n');
     console.log("did write detailed result to ./ae-votes.json file")
-    return stakesForOption;
 };
 
 // countVotes();
