@@ -3,8 +3,8 @@ const AeComputeVotingTx = require('./ae-compute-voting-transactions');
 
 const getClient = () => {
     return ChainNode({
-        url: 'http://192.168.0.100:3013',
-        internalUrl: 'http://192.168.0.100:3113',
+        url: 'http://127.0.0.1:3013',
+        internalUrl: 'http://127.0.0.1:3113',
     });
 };
 
@@ -43,7 +43,7 @@ const countVotes = async () => {
     return await AeComputeVotingTx.computeTransactions(filteredVotingTxs, client);
 };
 
-countVotes();
+// countVotes();
 
 module.exports = {
     countVotes: countVotes

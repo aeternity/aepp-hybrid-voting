@@ -114,6 +114,8 @@ function saveJSON(json) {
     console.log(`Finished.`)
 }
 
+// countVotes();
+
 module.exports = {
     countVotes: countVotes
 };

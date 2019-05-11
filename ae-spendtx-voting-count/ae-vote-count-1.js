@@ -26,7 +26,7 @@ const countVotes = async () => {
     return await AeComputeVotingTx.computeTransactions(votingAccTxs, await getClient());
 };
 
-countVotes();
+// countVotes();
 
 module.exports = {
     countVotes: countVotes

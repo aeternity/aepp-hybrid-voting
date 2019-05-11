@@ -12,7 +12,7 @@ const groupBy = (xs, key) => xs.reduce((acc, x) => Object.assign({}, acc, {
 const filterValidVoteTransactions = (tx) => {
     const isSpendTx = tx.tx.type === 'SpendTx';
     const hasNonemptyPayload = () => tx.tx.payload !== '';
-    const isBeforeVoteEnd = tx.block_height <= votingEndingHeight;
+    const isBeforeVoteEnd = tx.block_height <= votingEndingHeight || tx.blockHeight <= votingEndingHeight;
 
     const isValidPayload = () => { // filter transactions with valid voting payload
         try {
@@ -34,10 +34,10 @@ const filterValidVoteTransactions = (tx) => {
 const transformVoteTransactions = (tx) => {
     const payload = JSON.parse(tx.tx.payload);
     return {
-        height: tx.block_height,
+        height: tx.block_height || tx.blockHeight,
         nonce: tx.tx.nonce,
         txHash: tx.hash,
-        account: tx.tx.sender_id,
+        account: tx.tx.sender_id || tx.tx.senderId,
         voteOption: payload.vote.option
     }
 };
