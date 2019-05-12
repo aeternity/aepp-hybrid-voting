@@ -12,10 +12,6 @@ const getClient = () => {
     });
 };
 
-const groupBy = (xs, key) => xs.reduce((acc, x) => Object.assign({}, acc, {
-    [x[key]]: (acc[x[key]] || []).concat(x)
-}), {});
-
 const countVotes = async () => {
     const votingAcc = 'ak_11111111111111111111111111111111273Yts';
 
