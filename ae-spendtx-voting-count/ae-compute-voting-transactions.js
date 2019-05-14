@@ -63,16 +63,18 @@ const computeTransactions = async (votingAccTxs, client) => {
     const votingAccountStakes = [];
     for (let vote of votingAccounts) {
         const balanceAtHeight = await client.balance(vote.account, {height: votingStakeHeight}).catch(async (e) => {
-            console.error(`3. choose stake 0 for account ${vote.account} (${e.message})`);
 
             if (e.message.includes("Height not available")) {
                 // account balance will fail if not yet at votingStakeHeight, use current height for a temporary result
+                console.error(`3. choose current balance for account ${vote.account}`);
                 console.error("CAREFUL: WILL USE NON-FINAL RESULT!");
                 return await client.balance(vote.account).catch((e) => {
+                    console.error(`3. choose stake 0 for account ${vote.account} (${e.message})`);
                     console.error(e);
                     return '0'
                 });
             } else {
+                console.error(`3. choose stake 0 for account ${vote.account} (${e.message})`);
                 // account balance will fail if account didn't exist at votingStakeHeight, so stake is 0
                 return '0';
             }
