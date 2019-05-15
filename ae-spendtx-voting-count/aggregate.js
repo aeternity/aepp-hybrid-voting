@@ -1,7 +1,7 @@
 const BigNumber = require('bignumber.js');
 
 const aeVoteCount = require('./ae-vote-count-1');
-const ethVoteCount = require('../eth-contract-voting-count/eth-vote-count-2');
+const ethVoteCount = require('../eth-contract-voting-count/eth-vote-count-1');
 
 const atomsToAe = (atoms) => (new BigNumber(atoms)).dividedBy(new BigNumber(1000000000000000000)).toFormat(0);
 
