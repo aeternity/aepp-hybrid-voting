@@ -1,0 +1,1858 @@
+[
+  {
+    "option": "0",
+    "totalStake": "2958062194320732579516880",
+    "votes": [
+      {
+        "height": 76452,
+        "nonce": 1,
+        "txHash": "th_hk4tVoXVczWs37PzqeuCVjK2LKjN8uug95Jk5vTGuJbNv3MHh",
+        "account": "ak_mUUE8BX6V9UEMxHSfbBGTsXtYypDh26VM6YTnrthE6ErNvrFb",
+        "voteOption": 0,
+        "stake": "635630860090000000000"
+      },
+      {
+        "height": 76907,
+        "nonce": 1,
+        "txHash": "th_gTECM9M9SFN774LLmcfwRbUAV3GHTt4Lb8hrswtERZLUdbsXg",
+        "account": "ak_2YEwYWVpmBQe1NyU3QfThv1tguF9W5Q9UPAyRi3tRHVaS3u7Uv",
+        "voteOption": 0,
+        "stake": "119999999982760000000000"
+      },
+      {
+        "height": 76960,
+        "nonce": 43,
+        "txHash": "th_4oJcty6EvXcdtQnjB6fgM7A6YqXyEcHvF1Z8u6emBkX915ArD",
+        "account": "ak_gxMtcfvnd7aN9XdpmdNgRRETnLL4TNQ4uJgyLzcbBFa3vx6Da",
+        "voteOption": 0,
+        "stake": "1478111349999714080"
+      },
+      {
+        "height": 77049,
+        "nonce": 1,
+        "txHash": "th_Ctwf1qEymNXhm6DZcGkCJsjmyCvHmpiKT54op8CVdmYKvV9cv",
+        "account": "ak_VZpAfmCadXLfsRdvB1BG5rkHBNn8gPBcai5VPkVm12VbqETk6",
+        "voteOption": 0,
+        "stake": "12097899982760000000000"
+      },
+      {
+        "height": 77188,
+        "nonce": 1,
+        "txHash": "th_o94xBX7h6bk5LCUauBTWSwfupwBFNJ2EZf4TFUc1maXpM1Nqg",
+        "account": "ak_2igKamqmmv8tVWFTjbYX7B9MKKiLw6Q2pNi5qnByZjx3aYXr5D",
+        "voteOption": 0,
+        "stake": "174530098812580000000"
+      },
+      {
+        "height": 77188,
+        "nonce": 2,
+        "txHash": "th_24nC144dm1w6rPgws7m4cb8FcS5GXK8ozf5J1bhSP1Q43sBHdG",
+        "account": "ak_mNk6Wb4WjHxpwhKkSJaeV5s8CmGTNrjbTAr7fgWFRdYTCji6q",
+        "voteOption": 0,
+        "stake": "99999965860000000000"
+      },
+      {
+        "height": 77261,
+        "nonce": 2,
+        "txHash": "th_zofCxYfjmmdQfYQDXPrsWd6g88FV5eaKoT5ckRhiCwCr8UToA",
+        "account": "ak_2iEXm89XiAMQnwJD1KfUnoxjqPUyP3ZavL98zGEqhnryXioeXt",
+        "voteOption": 0,
+        "stake": "26642406128410000000000"
+      },
+      {
+        "height": 77273,
+        "nonce": 2,
+        "txHash": "th_VxqTKVzF1tgLxWVgdx84L2gbhACj1Js3aNVM1TAh2JiyWGCEL",
+        "account": "ak_2eDBo9oiAEWBDdrB3XpH1bNoF84YokacgkTjPeK3bLuhKGnFmf",
+        "voteOption": 0,
+        "stake": "7187364876869999982130"
+      },
+      {
+        "height": 77345,
+        "nonce": 2,
+        "txHash": "th_82mCzChyRXkrUkRLjJYLz7b8hYxQGs3BUd4agqEs4mhKHXWUi",
+        "account": "ak_2p2fAinvW9Vft9UGsJZ1MZEzNCLMqHqgTNub2VzTqR2fiYJo6m",
+        "voteOption": 0,
+        "stake": "119999982759999982130"
+      },
+      {
+        "height": 77594,
+        "nonce": 6,
+        "txHash": "th_oy1AZ1Koaf1Zvhr4KCDzvKp8KF7dZAeiG1MbE2h2RWkNA37UD",
+        "account": "ak_TGZ7mto1w8JG6KjqRi27UBF7rHQ1X3eF55uRdfv22QEHfEMBs",
+        "voteOption": 0,
+        "stake": "8896980000000000"
+      },
+      {
+        "height": 78057,
+        "nonce": 3,
+        "txHash": "th_2oZsaoxtFhQhbwttf5HNV9W1d1mg8DCPfmw2zD1L4kVL9gPdfL",
+        "account": "ak_P1XzPJGvRCJoZdoPqcESLNbDRd23SHz9T3do1J79fAW6L5eKr",
+        "voteOption": 0,
+        "stake": "56669525020000000000"
+      },
+      {
+        "height": 78239,
+        "nonce": 14,
+        "txHash": "th_Pa67NrAnUEUHy7HZySTYcoKqqG5hHK27nfqhWS3XL5SR9jMn8",
+        "account": "ak_2juYLmcp1yvn2pxeMwUWhwEyKQZ2D9HRgHgQg6SwjakfGAhoDv",
+        "voteOption": 0,
+        "stake": "0"
+      },
+      {
+        "height": 78354,
+        "nonce": 1,
+        "txHash": "th_27b2rg6rgZMiEY6JZVY9vZqZhxCNE7kbwY9yHqi1bRREXnmeH8",
+        "account": "ak_2JT3SDbYYMfxzLPV8ZzX8ZcvXXvFnZWxPotZ89Yo9oy5TdTj67",
+        "voteOption": 0,
+        "stake": "2764972342679999981920"
+      },
+      {
+        "height": 78773,
+        "nonce": 4,
+        "txHash": "th_2LcvFev7TJmNf24XztXit5edmYGVnswnCVfBZvftFGoadvwaVL",
+        "account": "ak_2UhhmZEWBQaakbFqds3MswuawMArnQBnuWoWRcK1gQWf4DJuh7",
+        "voteOption": 0,
+        "stake": "2073622387625429999928310"
+      },
+      {
+        "height": 78777,
+        "nonce": 3,
+        "txHash": "th_2DUY9tcxHExTQTyYoQBY8GrmuHr4KJQ4T9Bbc7TNeSqxMKczn3",
+        "account": "ak_2EAFEXRRvoijoxG4nZTdnET93JoYAGYhuVoGPJ7Vk7LabbYNSA",
+        "voteOption": 0,
+        "stake": "260895174221759999964260"
+      },
+      {
+        "height": 79343,
+        "nonce": 1,
+        "txHash": "th_inVRxkQCrnVzSY5D9fwQoCo29sdE46WnHCRPk1g3YHNwp3zZh",
+        "account": "ak_2oBVBfVrzCoMNXD7xqc6EW22vFiEQnEMsJ14KgedfJ2qywmSL3",
+        "voteOption": 0,
+        "stake": "54496429982760000000000"
+      },
+      {
+        "height": 79482,
+        "nonce": 2,
+        "txHash": "th_SUKNARToaHYf8ukJqwAmxhmHMrX9JQAN7PMJSho5JnD4qopJH",
+        "account": "ak_cUujAAsHJDJMdtxdL2YWYKKowdSdtV5c22j8BgeczMjpUu3Tr",
+        "voteOption": 0,
+        "stake": "5114558782759999981920"
+      },
+      {
+        "height": 79681,
+        "nonce": 1,
+        "txHash": "th_v8Wd9FPRwD5kWwCr34QShRz22tMgNnBSfbKfoKR161LkVo9XS",
+        "account": "ak_NUwdPdMDyazosWXV7hQuVx6pjuAjzsAhwhimsEedxR6V7fNfE",
+        "voteOption": 0,
+        "stake": "109999999982759999982130"
+      },
+      {
+        "height": 79703,
+        "nonce": 2,
+        "txHash": "th_6y2xvXi1RMRFzAst8Bs3r6frNWFnNai8Pf5WBcCnBFtyk3TQA",
+        "account": "ak_2eTx4yjGeoibFCLqqmEmk9yHXJVZBwhS4x1SmekrSdbcfNEzun",
+        "voteOption": 0,
+        "stake": "7105999965860000000000"
+      },
+      {
+        "height": 79703,
+        "nonce": 2,
+        "txHash": "th_cHnhhPa8JKeofukSEeMe5XnsuKN8sTzVq4BaM3C8aKYD5tQM8",
+        "account": "ak_2PE2U4Q31pMuuBjfVPvq2phsnR9U4XunaXvYVbXUqUrY89oNQL",
+        "voteOption": 0,
+        "stake": "98999965860000000000"
+      },
+      {
+        "height": 79703,
+        "nonce": 1,
+        "txHash": "th_DRysgyno42nud5mTWhsQBXeX9Z9H6d98K41NUwgaDjK8jtyoN",
+        "account": "ak_rxTKzDqnDaD8QoFVn6o7p2XGzmnm2QM8xMnuye3uaMKxbkuT7",
+        "voteOption": 0,
+        "stake": "9999982760000000000"
+      },
+      {
+        "height": 79749,
+        "nonce": 1,
+        "txHash": "th_276C9LHKKUA4ox6KeWu5DQX4Mu3s49VETngdDARHdPeYBm6nFp",
+        "account": "ak_2vcntna5ck67j57mjQkaHUcbp5D6XwvH5JZuxtoJAqe1sPofDt",
+        "voteOption": 0,
+        "stake": "21452140650650000000000"
+      },
+      {
+        "height": 79847,
+        "nonce": 3,
+        "txHash": "th_2VnrsY4cb4Joq1kA4TCRXdxqtgrzXYH2KXMuGFLNHsaHoLTsGd",
+        "account": "ak_2Wy3C9F1fXA8R7k84ay2kHp6daHgsv4rPnPwyiZMjdkSGvwG7i",
+        "voteOption": 0,
+        "stake": "12823542423020000000000"
+      },
+      {
+        "height": 80228,
+        "nonce": 1,
+        "txHash": "th_22CsFPWSs7Ft2XdSCdum2esobx3kpQLLAwTWkH8T8iayKFxoqH",
+        "account": "ak_eWLy1abbkNgpk7JWXiMamQ5N5XhDJeXuQNYbGoda8u9TA2zar",
+        "voteOption": 0,
+        "stake": "242661999982760000000000"
+      }
+    ]
+  },
+  {
+    "option": "1",
+    "totalStake": "2794456763197383884696984",
+    "votes": [
+      {
+        "height": 76960,
+        "nonce": 4,
+        "txHash": "th_Dihp5MxSpRyaG6Yu35dpeGVh9ticY4HVS9kVo5L6JBPFGicWY",
+        "account": "ak_2pRSPbAG37nzBLS4E6diyEKR6ToEKwDXeRucg3UCjmCbDApWMe",
+        "voteOption": 1,
+        "stake": "15460691244390001607664"
+      },
+      {
+        "height": 76960,
+        "nonce": 6,
+        "txHash": "th_2nhfRCpb7RcYzNRCcxNYrUWA7DM37txEXC7c47mdTJtb215Ruu",
+        "account": "ak_NudNi1o9WMNUYJ7ppuB9sTgnoPTZ98P84zEfBxKh6o5QvYY2u",
+        "voteOption": 1,
+        "stake": "140030506945819999946320"
+      },
+      {
+        "height": 77575,
+        "nonce": 2,
+        "txHash": "th_2BdRXQHoEcWYZKs52KjLyj2zhsdAXGxboPNx8fUZgf8Bnef6tR",
+        "account": "ak_AxGgz2zsJFqTLE2NwFnprJqYpZ7YiBPT4iq2uTubtpePkyqDq",
+        "voteOption": 1,
+        "stake": "6420873882760000000000"
+      },
+      {
+        "height": 78240,
+        "nonce": 80,
+        "txHash": "th_9Htpuvh49FFRKhDYsP8GXVedU4EqZqWg3ZPE5JJq15RwhfimL",
+        "account": "ak_2U9npwtfsYARSBXzTEiqvHRErYA9hrhGonU4i3dziEewu1AGiE",
+        "voteOption": 1,
+        "stake": "0"
+      },
+      {
+        "height": 79083,
+        "nonce": 1,
+        "txHash": "th_Q71gUk2bipMwz2ddMpHxZdKdvQPitsDJ1npNLfYwfBE8hN9fb",
+        "account": "ak_28QQtwi5KSoe12zPJnbUTVpBzmcgacJkptmPzeyoPSzCwnAXmF",
+        "voteOption": 1,
+        "stake": "8354334526760000000000"
+      },
+      {
+        "height": 79476,
+        "nonce": 1,
+        "txHash": "th_2kQJtcxRGXzKQJYZsyKond9Veg1HUNRWQPY2DgjLusvkCQ4BvC",
+        "account": "ak_Z9tkQjuFYb4cU938PTBJyfi44xLcJTy1hHP18ecTM4cE1CbDS",
+        "voteOption": 1,
+        "stake": "171504182760000000000"
+      },
+      {
+        "height": 79936,
+        "nonce": 1,
+        "txHash": "th_7wQ6BeRxg8d4oVEFsATPXsGoznBSWjtsxGKHXiVdzQp1AHFRh",
+        "account": "ak_sDZavzfNwHDkLMLJLZvxV3v9vCHh9296JyQnHAzE3KEgw8tCn",
+        "voteOption": 1,
+        "stake": "12072115360320000000000"
+      },
+      {
+        "height": 79937,
+        "nonce": 1,
+        "txHash": "th_2mVuN7rUbtMrGn2s3ejmBphuZ2sNZLWrzYhiLL9pVQ2jVntEAT",
+        "account": "ak_2TGqGgLLi4RRT8aSBEcDYWh8MXCLBUKq58R9JRh23ES33yX7jv",
+        "voteOption": 1,
+        "stake": "793304046860002000000"
+      },
+      {
+        "height": 80214,
+        "nonce": 1,
+        "txHash": "th_V83XRcbEQ3Vf3cVWDG5QA8qKdvqQV3C2KynwxcAuKRyhmvkoh",
+        "account": "ak_2jLgzwCCftn16Ey63zyNKkB37BvxnSuSaYdH52XcYkYm7VXuWf",
+        "voteOption": 1,
+        "stake": "59998998162760000000000"
+      },
+      {
+        "height": 80216,
+        "nonce": 1,
+        "txHash": "th_rHhowHG3TvsdyygBdfrXTTr1W9hZW92U8ZHjfd5ycsLqrFFDL",
+        "account": "ak_CMq5XsRuKb3fzLDjNUTxM4qE8yEjnX3tz74y5h2SEhTwqhmnM",
+        "voteOption": 1,
+        "stake": "11999999982760000000000"
+      },
+      {
+        "height": 80430,
+        "nonce": 6,
+        "txHash": "th_Zbgfi5NTiJgfbn6yjVxqZ5jxuQ6AxWN8kLGycPPt8H32yhamU",
+        "account": "ak_V82iANJuhnKyrYWqdPJFfL73oF2fC83exxwqE635pCyKAxT9r",
+        "voteOption": 1,
+        "stake": "2497940866213799998983000"
+      },
+      {
+        "height": 80436,
+        "nonce": 4,
+        "txHash": "th_WP6oLzE3Xo4jr57w2cHhudSrAu13DHGCHxqMH8g8Qj6kioSSu",
+        "account": "ak_2wQHwg9H7yXQ1u3rKHRPRGaCFKMitsPxK3G861n8rgetZYcNfT",
+        "voteOption": 1,
+        "stake": "41213568648393882160000"
+      }
+    ]
+  },
+  {
+    "option": "2",
+    "totalStake": "94375055096160000007295",
+    "votes": [
+      {
+        "height": 77726,
+        "nonce": 1,
+        "txHash": "th_SS4jQQ64L5tteidHKS7dqRteQ69RNe8nLiYhddWAuYGXNb41F",
+        "account": "ak_7AsbdSYtpPef7FjfAMfwUZS7rQZ4wirtaeJ8VWBXKkdJJYPVu",
+        "voteOption": 2,
+        "stake": "2874312382760000000000"
+      },
+      {
+        "height": 77726,
+        "nonce": 47,
+        "txHash": "th_FMrvRaLZnoq23WH3Wx9x6DWp37pgxnZupkyCzJHHMwcz1pPGM",
+        "account": "ak_reSCNPEYDTyuJyQ8NY3GQaAQgvGrbJvjvvxr5R96YmSQMiJrG",
+        "voteOption": 2,
+        "stake": "7295"
+      },
+      {
+        "height": 78646,
+        "nonce": 3,
+        "txHash": "th_N3VJSrNqpNqC4qyR9dCoMhUM3XCRhpD3x7xyoK4D3mMpZwiVS",
+        "account": "ak_MBuh1w2d1xy3V8XuFCyA3xKPSwtVr7RXB5xxSQgijP9agFZcC",
+        "voteOption": 2,
+        "stake": "91500742713400000000000"
+      }
+    ]
+  },
+  {
+    "option": "3",
+    "totalStake": "629447174796909999911564",
+    "votes": [
+      {
+        "height": 76684,
+        "nonce": 4,
+        "txHash": "th_pB6ot7VikTLzn4QyXw4JTtDTjAac8n4abMFTSyZsW8T9tWaZd",
+        "account": "ak_yc6LoFV3cUDziHR97hba4NAmkKbcRWPhP4TpLdr47JkEEyJCk",
+        "voteOption": 3,
+        "stake": "139965519999964260"
+      },
+      {
+        "height": 77252,
+        "nonce": 1,
+        "txHash": "th_vgf6VPyrjp5ZFG9N6fhCLkf5phyYebzAPWhpgsXQDYdVUsYde",
+        "account": "ak_2Hb2ZafFQ6fXZSYUtJKDDBMfRujj1Lbqh3mnqyEGE3m8BcJSyj",
+        "voteOption": 3,
+        "stake": "52542664689760000000000"
+      },
+      {
+        "height": 77252,
+        "nonce": 1,
+        "txHash": "th_2PRAysahcRzjP7SCdcaw9kLdN6sKfDnSR1v9M7yDFkRYb5tk8x",
+        "account": "ak_2mAo29xB4h69CtPRaqWvXD7nsxoUDBLBYsXXSFQ9QT47wjkkqg",
+        "voteOption": 3,
+        "stake": "13498355382760000000000"
+      },
+      {
+        "height": 77252,
+        "nonce": 2,
+        "txHash": "th_AAvshi2SLWktSYJGbwFfYs3Gm4tt7SXWA9e37SA1SJBKWHUC4",
+        "account": "ak_2Ywxg6y4tdK8zaNU5xis2oKgeN17XgHC2KHHGp4E7CteyvhNkY",
+        "voteOption": 3,
+        "stake": "48893606497760000018784"
+      },
+      {
+        "height": 77345,
+        "nonce": 3,
+        "txHash": "th_2F2GxhozYpAgM7GmWYmJdwCVkRGiz4WA7o5GmpmxDz4sJhWQxi",
+        "account": "ak_YBrxVdr6C8JG1ypvECJcC35indPLfS8M4wf1KcMcM1KLouDRX",
+        "voteOption": 3,
+        "stake": "88688050143759999982130"
+      },
+      {
+        "height": 77835,
+        "nonce": 1,
+        "txHash": "th_2iLh8Dqh8NBXzEPLqGiPb73e73XpbmqQ6r5zNo7mnRmPh4EFCv",
+        "account": "ak_hzhGsT7dEgjmdDRCvdbJaeb4HTqRPvDzCVqBRbyfj8PCSuwcT",
+        "voteOption": 3,
+        "stake": "6998999982760000000000"
+      },
+      {
+        "height": 77867,
+        "nonce": 1,
+        "txHash": "th_2hifcEz2kjZd98xbnRZVbhGQSGBwoip5PLLJ69SXTGxVF9d7U3",
+        "account": "ak_EkZy8ghTzoPQFFzkMmfb7HkjhRFQLJCoUjkJt5upLe4Xo9pmV",
+        "voteOption": 3,
+        "stake": "798999982760000000000"
+      },
+      {
+        "height": 78847,
+        "nonce": 1,
+        "txHash": "th_2TNsDfngxTAHBZ1SCJkMTN7rXBbwbRVdcNAciVgarAZCAu2trD",
+        "account": "ak_jVZ6WPiG7jnigCwvs4psBnCaH42EdAqKarvNAWviSoyeQZWgd",
+        "voteOption": 3,
+        "stake": "14449999982760000000000"
+      },
+      {
+        "height": 78905,
+        "nonce": 1,
+        "txHash": "th_AvrL5W7ju8tNvXNUgBy6qqG64nyTHNRnSgdNHSdsS1GujmBq5",
+        "account": "ak_2J1eKmLiQSSmHXUk4bKpJQ1QuTCN2xZyBCXMSdSeqVVDTjPZwr",
+        "voteOption": 3,
+        "stake": "399999999982760000000000"
+      },
+      {
+        "height": 78978,
+        "nonce": 5,
+        "txHash": "th_mv7cTjNLmXb149nF1gnjb3LAWQpFxFByeApZnMhHnDcoT1kaA",
+        "account": "ak_Zj8WtbAjMPZLuD9zEr6z8Ww3CzQr5DW2HeSETEK6sugdgSxa9",
+        "voteOption": 3,
+        "stake": "3576358186309999946390"
+      }
+    ]
+  },
+  {
+    "option": "5",
+    "totalStake": "1403079750911761731898389",
+    "votes": [
+      {
+        "height": 76611,
+        "nonce": 4,
+        "txHash": "th_oaP7HBgLitpzVxJxenrtiHZcjseVSqo89zY57bSSWFkvWmAXy",
+        "account": "ak_24waQM9QBQp11HZgCM9vpLfou6Dynva2Arm3N3FVzSwAQZtGuZ",
+        "voteOption": 5,
+        "stake": "399661538810000000000"
+      },
+      {
+        "height": 76955,
+        "nonce": 1,
+        "txHash": "th_evUQhiknuk9ZQv1fFXaqBHqUVxufPPkUVWeoaEQpj56Rg7iRH",
+        "account": "ak_qgTpzdSbFf9bcLNSfiF7yRr3SDMECT3CaJZPfyQo4ELYiZPh9",
+        "voteOption": 5,
+        "stake": "25514819864460000000000"
+      },
+      {
+        "height": 77004,
+        "nonce": 2,
+        "txHash": "th_2pgUQngNTQtDuQVi6x5Hr8byZiuEdRRii8Mzroz7Z3JEtJZK8X",
+        "account": "ak_t6nCD9RkpBZ8J6NLbL7fDhM4sLKRtJBtytZVZsiHUWm6Vyu51",
+        "voteOption": 5,
+        "stake": "32250481145630000000000"
+      },
+      {
+        "height": 77033,
+        "nonce": 1,
+        "txHash": "th_2VW25T25cF9xrLpBFaqvNgQTNoreCAwu8zKaKNgnT3dy1QFmAi",
+        "account": "ak_2RMGLMnh5Vc8A6153QwoBsfcp2xo55FXckxope9yniazBMMMR1",
+        "voteOption": 5,
+        "stake": "3999982760000000000"
+      },
+      {
+        "height": 77340,
+        "nonce": 1,
+        "txHash": "th_2iSt2YEMxM8dpSzzhPoQ8UXnK31vWTW6dKTAgsGDeiWUUavXgk",
+        "account": "ak_2Wm6rqgPC9WR298Ne2bbj8DJ2iNfN7Mje7cW6fsNwVGR31zq6B",
+        "voteOption": 5,
+        "stake": "3999982760000000000"
+      },
+      {
+        "height": 77443,
+        "nonce": 1,
+        "txHash": "th_2vVfmzqWd2qmXbeUqDvSEnkE1rmZkJt2rxLEZcTeb44KbYc5KG",
+        "account": "ak_TaufPa3rcAjHPtcTQhy7ssPM6RyehZxZB5tPkeuQd2xCixtRw",
+        "voteOption": 5,
+        "stake": "4654193911970000000000"
+      },
+      {
+        "height": 77666,
+        "nonce": 16,
+        "txHash": "th_2kAgzNUw7GXZnQW8UEV9iSww4ptMaDRvJqxtThbYNhEY8ppPwk",
+        "account": "ak_2P8JrJ6R3KVs47nZmRsZxsLrP4bTdtY362UJkEPH1UtAbGT6TE",
+        "voteOption": 5,
+        "stake": "44811934650000000000"
+      },
+      {
+        "height": 77847,
+        "nonce": 1,
+        "txHash": "th_gfQPNoxM4H9SdeHk1mWEoqh2qB9QEzxYjiaZCqoX3KEfA4UBY",
+        "account": "ak_gusigoajZy27dDYbhzx8YWne4fFCHwm3tJjP5XqGHgvkFR4VE",
+        "voteOption": 5,
+        "stake": "16720979982760000000000"
+      },
+      {
+        "height": 78069,
+        "nonce": 1,
+        "txHash": "th_52KDT4PLKf66iizbxPyrVi4ABPjdaTRijKFYSQUveynTvAxVU",
+        "account": "ak_2FBtz2MzPkixBRbw65n5z8ae1Fk6epuTrXYu6LQkZ3BxHMSKYn",
+        "voteOption": 5,
+        "stake": "108179482760000000000"
+      },
+      {
+        "height": 78143,
+        "nonce": 14,
+        "txHash": "th_2tEZKkDD5G4KUtjGokU2VM7xT1ABSNDKC8dugwiUybJvXz1w8F",
+        "account": "ak_3tpg546WjKkQAH1fsbaDd2Kqa8CXxuZQ7H9cw8uJbH1tXhKxC",
+        "voteOption": 5,
+        "stake": "30151628596473999471424"
+      },
+      {
+        "height": 78576,
+        "nonce": 6,
+        "txHash": "th_2HvUXitZQzsvmTTyKhRhv3YXVdGPePdwYaaxdcBhihDEhMRqTX",
+        "account": "ak_2nxVreqHwufEEFJ3qmoezpsrCmpbJ5swnDSwKqbZ29zTUxZWhS",
+        "voteOption": 5,
+        "stake": "22403199982759999910300"
+      },
+      {
+        "height": 78892,
+        "nonce": 14,
+        "txHash": "th_gRuT6q1sUPNCDyWUBtM8ph6PaJj3ejBrUvv3MHo17yzHnFShB",
+        "account": "ak_afAfo8NQnRiqUTNsQYkbNHS8S1zootvb2aWHRxKKstp1F8TSy",
+        "voteOption": 5,
+        "stake": "133770332449999766220"
+      },
+      {
+        "height": 78938,
+        "nonce": 1,
+        "txHash": "th_2HscsZEVWe9R32R2ubGh9PSPxfKXphmw1SvgtPAT5N6dQZHLdw",
+        "account": "ak_e9yojMbtEdCWmZPUvEY7waVD8abrGx5ZyTd5nnQbSmSney8zG",
+        "voteOption": 5,
+        "stake": "347973999982760000000000"
+      },
+      {
+        "height": 79175,
+        "nonce": 193439,
+        "txHash": "th_mKJXNJQPqdkCaUosRE6U9n8rYCqTbdsPKXqRaa3qNuA7zU3C1",
+        "account": "ak_nv5B93FPzRHrGNmMdTDfGdd5xGZvep3MVSpJqzcQmMp59bBCv",
+        "voteOption": 5,
+        "stake": "413052260200040662479435"
+      },
+      {
+        "height": 79383,
+        "nonce": 1,
+        "txHash": "th_Abvw3KwJk6WYeR7bYLk6njkrEir1MkXiZ6iGran6Ri4w1wyft",
+        "account": "ak_tXQBxCBcfm2AR8AidxEajQ1BukH2vZtRuytAvEohLaCYYtqnr",
+        "voteOption": 5,
+        "stake": "8932746548157073600000"
+      },
+      {
+        "height": 79584,
+        "nonce": 1,
+        "txHash": "th_zDvk6SAkaDe86LTy42nZPPrzKwjNZAXaqtD93pbY6X1j6CWkw",
+        "account": "ak_2cJ2MVpPXBjTeDDkgRjTnNckG7krU8i1xvnTd6hHoejsGPwNjd",
+        "voteOption": 5,
+        "stake": "199710092692680000000000"
+      },
+      {
+        "height": 79717,
+        "nonce": 2,
+        "txHash": "th_Pqis8VwAh6NaKGqRh71XNXTVKpouAs9TbVLp5znq9i3UZ8yor",
+        "account": "ak_2T7tMjhTBT7zKFuEUNTkK3Ze6nAzV2DsJTpUm6sUsaK7BTmKWR",
+        "voteOption": 5,
+        "stake": "1439023570860000000000"
+      },
+      {
+        "height": 79903,
+        "nonce": 1,
+        "txHash": "th_2mLXHHwgJKqBSCsVoiBb63tzuEQ6dYSREeCaqrbosY3Wgoca4k",
+        "account": "ak_n2SDbZeYK6396wAUzMRzHcioEJrAf5LrVrVu49TA57i37o3Zy",
+        "voteOption": 5,
+        "stake": "10049051734550000000000"
+      },
+      {
+        "height": 79931,
+        "nonce": 11,
+        "txHash": "th_2nkLJz4yfZZAt1BvnyEzZM3JTLDxQMVN9vQFc7MPs4ZKxYS74X",
+        "account": "ak_2MvpCVtsnjiNoysX1km4uGHA4APgakoWN1QSpxqqiKxQuBoGf6",
+        "voteOption": 5,
+        "stake": "278529700023659999874560"
+      },
+      {
+        "height": 80017,
+        "nonce": 1,
+        "txHash": "th_oCV8ZKWh3428811yr1Gn1n3bb6TuX15x95sCo5oPuTdMgCaTy",
+        "account": "ak_HcQacd8e3SB9DBdR6r7KdbyBRWYGRKYrJSVm14sMwwjZgLu9U",
+        "voteOption": 5,
+        "stake": "13448209420000000000"
+      },
+      {
+        "height": 80298,
+        "nonce": 18,
+        "txHash": "th_2f8M4qaxUr2hqcP3DkyHXn5LMG6yqN2idxrqE7YkQZdqEzepn9",
+        "account": "ak_2funFWG5FchhpXLJuwS51w7KW51m7rLvWCUozKMsH95w2WMUyZ",
+        "voteOption": 5,
+        "stake": "4965859996796450"
+      },
+      {
+        "height": 80317,
+        "nonce": 1,
+        "txHash": "th_2E8BYj6ywYPA2bsiPAZauZEMq6R38RHewF3jFPm1sQ9HAU4PkE",
+        "account": "ak_2LdKQTG2LEHc17GJMwWMhgpJwgwc1N397J75d9X9CgbBnrgqyb",
+        "voteOption": 5,
+        "stake": "172629014280000000000"
+      },
+      {
+        "height": 80370,
+        "nonce": 1,
+        "txHash": "th_2jourF3s9tQUr7yqSjxoxWNg5ybeCh7qzH7SDzDCNjmrPZQiAA",
+        "account": "ak_KzCSb7o1x8ntrM7FFeyfQDswEggSvzvPGZwUWuPjpdmDhdBvs",
+        "voteOption": 5,
+        "stake": "291277382760000000000"
+      },
+      {
+        "height": 80370,
+        "nonce": 1,
+        "txHash": "th_27y9tiQFMXRijxh6i6xH3ExNgAQsHYhWPGEYNS163AiZva3SyF",
+        "account": "ak_R8yPQUVwrucMeuYEBezpBwzwHrM5wteC8xyGbCE8XrYTfz9Km",
+        "voteOption": 5,
+        "stake": "10525789848490000000000"
+      }
+    ]
+  },
+  {
+    "option": "6",
+    "totalStake": "3893329890699999999997",
+    "votes": [
+      {
+        "height": 76921,
+        "nonce": 1,
+        "txHash": "th_Hnq5UxBD6sZP19woJtEC57DxEWFjdAZpW7ww1y1E3mJkYs94m",
+        "account": "ak_jWuWWP7v3CydrCntCXVTYkstHKo1EYvLtjuqG2DBA2aFo1Zw2",
+        "voteOption": 6,
+        "stake": "3893172225760000000000"
+      },
+      {
+        "height": 77857,
+        "nonce": 3,
+        "txHash": "th_2qPjkrUmaS7xoMwYxnJzcEiKfzC8NF1FEEfwqUArczYxJZqWuN",
+        "account": "ak_2BBoeYe7dY5G1NcgVJGrTzUUefvKhhwG28XCSCzYX3iBRKfTyZ",
+        "voteOption": 6,
+        "stake": "99768660000000000"
+      },
+      {
+        "height": 79777,
+        "nonce": 12,
+        "txHash": "th_2TjivSN6Vbg9mYyUunituA28sfdfv3DQHUaPN7cTWFi9JVLe29",
+        "account": "ak_2Mg6cHQ4xTTRCeJVPkBJ4B1m6y2WGkAvegLArxn7bWEzi1q2kM",
+        "voteOption": 6,
+        "stake": "57896279999999997"
+      }
+    ]
+  },
+  {
+    "option": "7",
+    "totalStake": "700009896940000000000",
+    "votes": [
+      {
+        "height": 74667,
+        "nonce": 5,
+        "txHash": "th_nU8Z4TgR7AvYnWhdpM9Gt3pKUnquPg7f1oGbw1WJfDLEocoYq",
+        "account": "ak_2iGw3hJeQ1Y3U2KspkpgevRMuLSJpvGovgX8cAdMwSMXv2tQVS",
+        "voteOption": 7,
+        "stake": "9914180000000000"
+      },
+      {
+        "height": 77587,
+        "nonce": 1,
+        "txHash": "th_2DuGL7wq9HFYtxEiyggh2NWGSfA25X6o1GoW5pm98wqAm6x8Rr",
+        "account": "ak_29Hwdx9PBM7kZh3VwRCKPJCCy3gxygUwAfxzQHT4h1josqkboY",
+        "voteOption": 7,
+        "stake": "699999982760000000000"
+      }
+    ]
+  },
+  {
+    "option": "8",
+    "totalStake": "510336982760000000000",
+    "votes": [
+      {
+        "height": 77536,
+        "nonce": 1,
+        "txHash": "th_3tEQnsBCnKzezJLsXwoHFz6hSWVUkKNRUVCUtv21LZ756QR83",
+        "account": "ak_2LE2o3gfKwKXsJwWfnb85NT5zcJznw9TYWTLWE6K8vhajg2VQb",
+        "voteOption": 8,
+        "stake": "510336982760000000000"
+      }
+    ]
+  },
+  {
+    "option": "9",
+    "totalStake": "4059908880000000000",
+    "votes": [
+      {
+        "height": 74356,
+        "nonce": 1,
+        "txHash": "th_2TtX7XhFZqHDPprGK4ef8ysmVCkLHnAqKKhvyDTZY7QXzDBm9T",
+        "account": "ak_AWbWFrZ6GFw62D3adVYDiR2CQ4SEn5txV57356k71gncJGqmi",
+        "voteOption": 9,
+        "stake": "9982760000000000"
+      },
+      {
+        "height": 76176,
+        "nonce": 1,
+        "txHash": "th_Q3Yn9Q6iK5Mi4xD6r6FPEahH9sGC5sDF2Hiew9iYsGd1iTcdn",
+        "account": "ak_267ameCMqd4zCBVRmBM4iEXkxFtKmBCuJAKmTBRY5nynmeYmaP",
+        "voteOption": 9,
+        "stake": "49982760000000000"
+      },
+      {
+        "height": 76572,
+        "nonce": 2,
+        "txHash": "th_2vMZ2SCaneJqG58oHq2zAjRMhS5xSBp9akZZZzdnR9btEnfbCd",
+        "account": "ak_2i5gbyBWwtfYgfFm5JEGq4GYVY4Tcd6TvFN2qQMsksA9e2hV2a",
+        "voteOption": 9,
+        "stake": "3999943360000000000"
+      }
+    ]
+  },
+  {
+    "option": "10",
+    "totalStake": "218033888681587648970175",
+    "votes": [
+      {
+        "height": 76878,
+        "nonce": 2,
+        "txHash": "th_vusSs9765mZdMtu6xrCaQXUyA4uy9duYX9XWk1K24EenkoPcc",
+        "account": "ak_2qseF81bRJyLoi2ATGPYde2QK7F7uPtfssnqs7ceCpczfB5CBw",
+        "voteOption": 10,
+        "stake": "65899999983000"
+      },
+      {
+        "height": 76899,
+        "nonce": 28,
+        "txHash": "th_3eBgS9szsYXUxkqYYnLmtLL7ccFLExWuVymUrhdKiD7E5Wfk6",
+        "account": "ak_2eid5UDLCVxNvqL95p9UtHmHQKbiFQahRfoo839DeQuBo8A3Qc",
+        "voteOption": 10,
+        "stake": "1501103829999502250"
+      },
+      {
+        "height": 76993,
+        "nonce": 9,
+        "txHash": "th_24JFTR8RiAqFbJtV3S96tYD852b8wTX3wwYMqMyLT5AuFTBcYr",
+        "account": "ak_2pAiiCa1BRfQLSCCJYNh1QVjtRbVkDDKAkXBv9tx5tAN3EbDZT",
+        "voteOption": 10,
+        "stake": "0"
+      },
+      {
+        "height": 76994,
+        "nonce": 1,
+        "txHash": "th_2ETvmmXrHwQEtsfz2FigKZh3DRwVWt8bmSdPQQhPM6xsmShuZu",
+        "account": "ak_2a2BVx8jBKXhfAdwbShuFB7fk33sSAMFCQy3vBC2XYK3vF1nQs",
+        "voteOption": 10,
+        "stake": "10020100000000000000"
+      },
+      {
+        "height": 76994,
+        "nonce": 7,
+        "txHash": "th_2CzJRDfufSeQHTTg32rP9hJ6CKvr4k4Zu31793uTbKc9b7e9u4",
+        "account": "ak_2dzaotgU5LQGoVnkKzrKcazZCstjZFUeesRke4oZKNUqjLNuUh",
+        "voteOption": 10,
+        "stake": "8215593799957649734655"
+      },
+      {
+        "height": 77035,
+        "nonce": 3,
+        "txHash": "th_FcQg3yvsGePKLUcZiJXQD9fuBKUVqm9kcceXPdYugAmA8AWR7",
+        "account": "ak_DqsCmGnBjPop4GB5JUvTKDUZSfPpY5oAB3shbcG4JPrM2hQyY",
+        "voteOption": 10,
+        "stake": "677155925519999982130"
+      },
+      {
+        "height": 77127,
+        "nonce": 1,
+        "txHash": "th_2tsmbVksK3vkAfTHP8MWXotDetRZdnq3gtAZ24MC3JhX9dRuFt",
+        "account": "ak_2vzcm1fwgBjun32Uom8UZQvEVCAjMKzn2SfxogzDWquwUDPd4u",
+        "voteOption": 10,
+        "stake": "974999982740000000000"
+      },
+      {
+        "height": 77246,
+        "nonce": 1,
+        "txHash": "th_2PnzoZ1HeBKRoqx2dR4NUdcRRsHRLvp7xyU6jkXqtfS1uxLpZL",
+        "account": "ak_2PGoM13fprrS6fsXx47pwQyNSoKuefqiwNUmKdsMrw8XJ7jAYw",
+        "voteOption": 10,
+        "stake": "1999999982760000000000"
+      },
+      {
+        "height": 77349,
+        "nonce": 1,
+        "txHash": "th_26SJwRWGBW68WKYsh6cGHQhzZMCmAR4eHtV6g8ELiD9aPiwgsX",
+        "account": "ak_2fq1jNt5HkWgb2zHxXJ6BFrCfLUCkEnHnHspSdDexv8ukd6EQu",
+        "voteOption": 10,
+        "stake": "2997999963060000000000"
+      },
+      {
+        "height": 77465,
+        "nonce": 2,
+        "txHash": "th_2RVQgiNMt7aJnaeyDj8RZPzfm9J6yvwJQq5SbrkQcqGqEQWXk9",
+        "account": "ak_2EQ82JRy6HNk3zatd2tnz3UFwQHJWSknXkgtx3SRT7ftddijTJ",
+        "voteOption": 10,
+        "stake": "30498999965860000000000"
+      },
+      {
+        "height": 77524,
+        "nonce": 5,
+        "txHash": "th_BVu1R3G9jqXf7PEstWD57wHU1uDrV6C1cfjNg3oHmRd35CyS2",
+        "account": "ak_2GKnrWbkiBMFQonWSTY4okhFgXF6chCsNPoeZgwih7BgLpSZEt",
+        "voteOption": 10,
+        "stake": "9760000000000"
+      },
+      {
+        "height": 77567,
+        "nonce": 21,
+        "txHash": "th_CE17Ff6AQ9k1kcnvQxqikFn8eaSXsqzyyEkn5rw5hYRcpJXX5",
+        "account": "ak_ph6WKXdKXzL62u9REDnPJG1RDXLeC31bbZKicWRP7Gxq2J4zd",
+        "voteOption": 10,
+        "stake": "66123142899999839170"
+      },
+      {
+        "height": 77600,
+        "nonce": 2,
+        "txHash": "th_2T1AuRNd1R9vchQALN99iCKzdeLgsGHfyYNjF7djkxohcDSgHn",
+        "account": "ak_iqisWb3Tefof5TJT7NKe5BiiJakJRJMvjnTTz2iu1QHBan5RW",
+        "voteOption": 10,
+        "stake": "2839979982739999983000"
+      },
+      {
+        "height": 77766,
+        "nonce": 1,
+        "txHash": "th_2ikrk6crc7ayfjTzgHHDdqm5gVULUXrLuUn4c6WjW64t4gnJi8",
+        "account": "ak_2h1tnuA4EKCZsj9Q34gPKzeHe3ftGvQuxmeNUuAswPQNp3nhcf",
+        "voteOption": 10,
+        "stake": "999999982740000000000"
+      },
+      {
+        "height": 78088,
+        "nonce": 4,
+        "txHash": "th_qXqq3VWRcyfpTTn6Mq11ARieTXYM1Rf5zBQWmdWUixYswUfbR",
+        "account": "ak_gKicWLD3tnGeV1EDGPWpoqKCWruykrovUXwAKvaPsYSbQQany",
+        "voteOption": 10,
+        "stake": "1982702056169999945970"
+      },
+      {
+        "height": 78322,
+        "nonce": 1,
+        "txHash": "th_axTy1XgfRipwSvP2Dznrg3TUBhKsobCBhN2WsVvA8WszztmbR",
+        "account": "ak_2dbvRDUNDdaRtQV7XaDsyLuNX2Fgi1AwtPJmsxXVaE5oLsmY8k",
+        "voteOption": 10,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78330,
+        "nonce": 2,
+        "txHash": "th_RQ893ZREeqndYXXooR2DmpRDVu3Ru6Cygba4PaoVQ43MUvbiR",
+        "account": "ak_qQGA1MzxRrY7uY6sHUzqz7mMqzWHW2kWVVi9sp7ggJJ5E6P3n",
+        "voteOption": 10,
+        "stake": "1999965480000000000"
+      },
+      {
+        "height": 78810,
+        "nonce": 1,
+        "txHash": "th_2oHDm9UycoM3n93CTZz8euHnwz7ow8p6cC7ACTmVeFHQbtzVFQ",
+        "account": "ak_sJb1xuKbPvqwiHT7kk69x7eJG1kVnDHp2pFfMV7KepcrtB58Y",
+        "voteOption": 10,
+        "stake": "8875251342760000000000"
+      },
+      {
+        "height": 78862,
+        "nonce": 1,
+        "txHash": "th_Svw81EYZzsXbpq27H5jsy7ejVYSq5Z6oBv434co4Rdu8RwnZQ",
+        "account": "ak_2hYSPLf6JomUYUnyyRMdmzWCitkFX39dSavHLmdqmFcNcRmcfP",
+        "voteOption": 10,
+        "stake": "3709427426270000000000"
+      },
+      {
+        "height": 79180,
+        "nonce": 1,
+        "txHash": "th_2E4brQvxGLkcvNYrkJD924mwrYWfurutoSma1fCDN8qpPFKQr1",
+        "account": "ak_cs7MVmDHLiJF4tgknRK8WB2caK3oddwro3YEC6NSa2aQ8YpFf",
+        "voteOption": 10,
+        "stake": "18071733382760000000000"
+      },
+      {
+        "height": 79326,
+        "nonce": 1,
+        "txHash": "th_2K6LriVr1hPL8VXEuJaAwmjy3SEdeNrjEfrPLiSP17ZqhXTcwb",
+        "account": "ak_23vurzKkDZTJ3yGjVDQBA5v1RTyMbUaos3B3vUoXrdkWeKC8Y1",
+        "voteOption": 10,
+        "stake": "49999982760000000000"
+      },
+      {
+        "height": 79396,
+        "nonce": 1,
+        "txHash": "th_Ur5svPq3A5pGtGrYHfwoaBYg8YptSRMysP7qojmRQi891s9Nr",
+        "account": "ak_khcxRFHiktDXo5mHuTJFxVhKEWtTXqTHieA6gxHZKP2vN7txH",
+        "voteOption": 10,
+        "stake": "257107982740000000000"
+      },
+      {
+        "height": 79843,
+        "nonce": 1,
+        "txHash": "th_CsiK2YeSqpbMgVKog59XSTsNKH4RNqF4SP4V3tvPu9zs6Ps1j",
+        "account": "ak_V1UPAeZwzxNSfKnLgzwaC1sRZWq8MLgateD8vfTcPx46PGxqK",
+        "voteOption": 10,
+        "stake": "6403829982760000000000"
+      },
+      {
+        "height": 79886,
+        "nonce": 1,
+        "txHash": "th_4Hcef3H7LvwvPVetPUkeRAWL5HGxfFFGU8W5WaRPF52t4AbD8",
+        "account": "ak_fRpdz6oYMk1RXn2qSqkmL5eefBJHZaEprvcCVEFkxubaki8SX",
+        "voteOption": 10,
+        "stake": "6019767982760000000000"
+      },
+      {
+        "height": 79899,
+        "nonce": 1,
+        "txHash": "th_StHKH8vLN2kKue6QhCnMUiBVhAnNauwXqFvC3gYQNyHSVKGWw",
+        "account": "ak_2GTt9ZKCuGmJpGnsqwJTQ4JPjXaEvBgeHC1JKjDiW9Mcc6Vbqi",
+        "voteOption": 10,
+        "stake": "499982740000000000"
+      },
+      {
+        "height": 79995,
+        "nonce": 1,
+        "txHash": "th_2EPsEiDFcconj7NQZ1pPQ2o3ASHQkXctKSSUANwnfSi4wcXbsy",
+        "account": "ak_2kGJoSRJZukAvUb3j13Fzw8p5WAz3Nq18rkt7wBqb1AHGS6oVz",
+        "voteOption": 10,
+        "stake": "999896700000000000"
+      },
+      {
+        "height": 80018,
+        "nonce": 2,
+        "txHash": "th_28zFUD4nu9KQw5dNY9rPfXnmfvpkHbo2oHpvGhQvMgJH5nMHKG",
+        "account": "ak_2W2gCzHZXgd1oFd17Jaw3ijpkxKZyEwdQ5X1JT81BEGTzgnK8h",
+        "voteOption": 10,
+        "stake": "39174097341680000000000"
+      },
+      {
+        "height": 80209,
+        "nonce": 1,
+        "txHash": "th_2Vuy8m1e6jpexV7LngRiMEx3Vk79nS9EktZdg3R7SaxwSCfMtM",
+        "account": "ak_kZ7kuCdRc8KnuaqWjj4Q2Jfxzr41oJi7uLDEACMhdhN54jDFx",
+        "voteOption": 10,
+        "stake": "34175097382760000000000"
+      },
+      {
+        "height": 80367,
+        "nonce": 1,
+        "txHash": "th_MsmarX55ZwodzNjXDauVhMehNAVcPkv72Sd1Sja4fod8ixdtY",
+        "account": "ak_ant2tYZU4RhB8V8ztPfefPAsucD2vLbnNJ2e6mHwgzMQtKJLX",
+        "voteOption": 10,
+        "stake": "50026999982740000000000"
+      }
+    ]
+  },
+  {
+    "option": "11",
+    "totalStake": "4349779679999966000",
+    "votes": [
+      {
+        "height": 75043,
+        "nonce": 5,
+        "txHash": "th_2PuunU8BURzcwwstViqMrFPnMTcRao7ywFybe7fczydp3tpiQZ",
+        "account": "ak_2baWXBkmW2VtjTsDU1Vjk9zeM7cwLMe1AZMo4T4YzrRhh1UZf1",
+        "voteOption": 11,
+        "stake": "4349779679999966000"
+      }
+    ]
+  },
+  {
+    "option": "12",
+    "totalStake": "18442846900210399",
+    "votes": [
+      {
+        "height": 79776,
+        "nonce": 44,
+        "txHash": "th_24VH8LQgt6U38rhVSxYHdfCzbzPJtTFRG7BxrMiMxckfoD1mz5",
+        "account": "ak_mxCZ2rVRSjh6mXrey2vDujAvQiCkd51b5XdrrgrXWX4mQkzug",
+        "voteOption": 12,
+        "stake": "18442846900210399"
+      }
+    ]
+  },
+  {
+    "option": "13",
+    "totalStake": "184268345529999846997",
+    "votes": [
+      {
+        "height": 78344,
+        "nonce": 23,
+        "txHash": "th_2v3gjmcUm2r8rqBE25rx74e2zzZXtbcFzR7wDjHLu99X79oMqC",
+        "account": "ak_UQkorD6ZG4u2Ac8J2bEGEaE5jLABvWo6VHJhRDR9N7UnWHvzb",
+        "voteOption": 13,
+        "stake": "184268345529999846997"
+      }
+    ]
+  },
+  {
+    "option": "14",
+    "totalStake": "183860623193379999982130",
+    "votes": [
+      {
+        "height": 77963,
+        "nonce": 1,
+        "txHash": "th_hEcSeQFFAdCY2ZQXX1C5L5wviRn7NYRtxNq5q4GskLyho8izr",
+        "account": "ak_2coBQ7KXzid3E2HhyVGczZRmb425c1S4HwxoobZWJoLGfQtPKE",
+        "voteOption": 14,
+        "stake": "183860618244739999982130"
+      },
+      {
+        "height": 78319,
+        "nonce": 2,
+        "txHash": "th_2Ym8ge7f3msdvSJn4H5i7eFVgQo2nNrRSdYAAdLRKjgn96UcMr",
+        "account": "ak_FvB7TTPLtHQo8BuTKwhkNjsRXBimJCWVSPgcCDjDxwHmTaCDm",
+        "voteOption": 14,
+        "stake": "4948640000000000"
+      }
+    ]
+  },
+  {
+    "option": "15",
+    "totalStake": "85257568221529999884190",
+    "votes": [
+      {
+        "height": 76961,
+        "nonce": 1,
+        "txHash": "th_2Dc5WKVefwUGAfEbNbdwuDzYaDt6vjVDZdTAz6bDEcnEgR9ZAs",
+        "account": "ak_w3TYT4x6JfZL9SpHbezvoxg1wmHDbQCeLH7akwDVWZWe67kX2",
+        "voteOption": 15,
+        "stake": "4029657716740000000000"
+      },
+      {
+        "height": 77071,
+        "nonce": 2,
+        "txHash": "th_2N5H9SyzWMHXsE6WEBc4vYhY8dabenBgFSTa6zL82JknkhSbk6",
+        "account": "ak_23F6t3FfRWdumuw7gWwgTos6ohoTJ6Z88zDyESXipfM1fhA3Lu",
+        "voteOption": 15,
+        "stake": "6102992963059999982060"
+      },
+      {
+        "height": 77189,
+        "nonce": 1,
+        "txHash": "th_ZL1meTyHvgUPa9b68sgUCkwsA3MbonsFxFeiLhGvApzfVXkia",
+        "account": "ak_AiQGnvEgsbLQixVJABpTc9h7hXtP4Lt3sorCa9FbtvYfiBH6a",
+        "voteOption": 15,
+        "stake": "1740000000000"
+      },
+      {
+        "height": 77293,
+        "nonce": 2,
+        "txHash": "th_NrqLGcJV3vo2S4GPXd1pNtFEusBmfYTmwEazgpZq5kvYs31HL",
+        "account": "ak_W7vJeKZZZ5r29sJj4TBMDx6xhirnJ5rsFPUD6TgQoPeQ3fDuq",
+        "voteOption": 15,
+        "stake": "4963096284109999920000"
+      },
+      {
+        "height": 78324,
+        "nonce": 1,
+        "txHash": "th_q4atxLZHM21pMMnLAZyLnHVQuovWJJJvxQnMLchosQBJVXB6k",
+        "account": "ak_sZmsm49QULcgQgETFybEoqmFj5Sn2NukrtdzUaxwnnctKSXfU",
+        "voteOption": 15,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78981,
+        "nonce": 1,
+        "txHash": "th_2UmK9t8NTDd55TJq6nruf3JHe62rxnXip7ephDPfAWQradccCU",
+        "account": "ak_2eftMKVW8z5JvMD46j35Emviwr6baKdDN6JNWtiqUTKb66S2y1",
+        "voteOption": 15,
+        "stake": "757499965840000000000"
+      },
+      {
+        "height": 79175,
+        "nonce": 4,
+        "txHash": "th_EWPhdDRDtTURTqEYMedbcer6Wz7W6b95qMHR4Y4ck3W3J1boE",
+        "account": "ak_2nQZsDBJXsJv2ncfwH78KBUsXn2UaFT1EpgLtmR8oa9B2ci9yN",
+        "voteOption": 15,
+        "stake": "19402241253359999982130"
+      },
+      {
+        "height": 80535,
+        "nonce": 1,
+        "txHash": "th_d283AFEdiWP7tzZNJ7gqxUQS9JKJmi3wL3W8CfNon1QTkVfRo",
+        "account": "ak_TEsqFAXWaLoQqFZFpwNJXpecUzZP4AyuRL3G47nWYgW64Ladz",
+        "voteOption": 15,
+        "stake": "50000080053940000000000"
+      }
+    ]
+  },
+  {
+    "option": "16",
+    "totalStake": "1999982740000000000",
+    "votes": [
+      {
+        "height": 78322,
+        "nonce": 1,
+        "txHash": "th_eiKTSGrUkPrAZfrSR527gZnKimR5fNmLQXbXiiL2KzCvPaPu5",
+        "account": "ak_jCsHdWJxKBUFtRSe34gbLzpXK64mdRmfqUmKeHf9i5juHog6y",
+        "voteOption": 16,
+        "stake": "1999982740000000000"
+      }
+    ]
+  },
+  {
+    "option": "17",
+    "totalStake": "999827400000000000",
+    "votes": [
+      {
+        "height": 78324,
+        "nonce": 1,
+        "txHash": "th_2wJDimCmJWMK6hMKHEVGAZkTSAa9vi1Dj8fCwYUxit6yzBDvWG",
+        "account": "ak_9LQRzXoyYU1YM2WeWAj26UZGW12wTcoxbtaUFn3zZFBS77ter",
+        "voteOption": 17,
+        "stake": "999827400000000000"
+      }
+    ]
+  },
+  {
+    "option": "18",
+    "totalStake": "999896500000000000",
+    "votes": [
+      {
+        "height": 76693,
+        "nonce": 33,
+        "txHash": "th_2iBq3Go1jiXuyPq1Nrcd5c7Qy41f2fG3W9x7wdPJDs19di1BDt",
+        "account": "ak_2AJBRdZsRb7PBChjzn5N3e3vFGbQR2bt6u7F2s9pamRy1bZePK",
+        "voteOption": 18,
+        "stake": "999896500000000000"
+      }
+    ]
+  },
+  {
+    "option": "19",
+    "totalStake": "350497978980098963000",
+    "votes": [
+      {
+        "height": 79039,
+        "nonce": 113,
+        "txHash": "th_2Tm7sRMrvH3McLD3GADuuX49BN2Fm9NWY6jynxmH92YM4TMPi",
+        "account": "ak_6yBAbeyj86fjmwF9t1fsgrRcFZBGgc9GaDdqYmMMZmV39v388",
+        "voteOption": 19,
+        "stake": "348998096240098963000"
+      },
+      {
+        "height": 80267,
+        "nonce": 1,
+        "txHash": "th_2YEshqAXc7pZuLreQc7SnrqWer9Dqj63QGqfk8akQoFsFQLjuK",
+        "account": "ak_3Fj1hqbugDu3juGbNaFRQcb1jUcFmqiu629WhbdRcCeakV9hN",
+        "voteOption": 19,
+        "stake": "1499882740000000000"
+      }
+    ]
+  },
+  {
+    "option": "20",
+    "totalStake": "4497013777426259917903626",
+    "votes": [
+      {
+        "height": 76446,
+        "nonce": 10,
+        "txHash": "th_2UC7hujRjdPe7SAMt1vYwmQPAUt2YpdB6mWLVzn5ujU2eiS3hG",
+        "account": "ak_y87WkN4C4QevzjTuEYHg6XLqiWx3rjfYDFLBmZiqiro5mkRag",
+        "voteOption": 20,
+        "stake": "184275179999999991"
+      },
+      {
+        "height": 76555,
+        "nonce": 1,
+        "txHash": "th_ntadzEDheuDAY6aou3bp6t6ZMUwGLdwH4RvHYJwixVtDmVCqL",
+        "account": "ak_2g8cbj71EG3TnyDiitHGT4QRRtd7FTwbE8pgPD4GyhUmLYBqUM",
+        "voteOption": 20,
+        "stake": "16919982739999857130"
+      },
+      {
+        "height": 76877,
+        "nonce": 10,
+        "txHash": "th_29pm4pJ6EgVsiEqs228uUn9iDmdoqk2u9nqDd3TgTb4RXyKkDc",
+        "account": "ak_2m2456MPteanPqhJ71pQ6aQPGxofuJ97Eu8utXyjRYyz8MA6iw",
+        "voteOption": 20,
+        "stake": "567335126625520000000000"
+      },
+      {
+        "height": 76877,
+        "nonce": 1,
+        "txHash": "th_y4exiLCqGxcCLs8UcJWV2E1GQ9JNnerujhjhC3Ns9BghGHhmx",
+        "account": "ak_4JLQwifDmdVucg3TGm7sbxtoPnDDrbNLTjnSLgtxDfoamE5Sa",
+        "voteOption": 20,
+        "stake": "414600089082740000000000"
+      },
+      {
+        "height": 76878,
+        "nonce": 6,
+        "txHash": "th_2CKRNiy2PZxFZva8ZeWwjkNGRyyy7p7XCdU5kTKTgZc76GS7PT",
+        "account": "ak_2cJokSy6YHfoE9zuXMygYPkGb1NkrHsXqRUAAj3Y8jD7LdfnU7",
+        "voteOption": 20,
+        "stake": "1069765819999812997"
+      },
+      {
+        "height": 76878,
+        "nonce": 26,
+        "txHash": "th_2PPUx739vgfjYstyzKa22DuFrE66xrzPDzHvnKuBmVuBvszq1j",
+        "account": "ak_YCLYTjKNTLNE7E6M2hbfLPooPfzB7hutBTUchJUyQKGLjXPXj",
+        "voteOption": 20,
+        "stake": "3009948219999533124"
+      },
+      {
+        "height": 76881,
+        "nonce": 5,
+        "txHash": "th_2jCcH8MvSoNKHiZrsDCz5pFcY9uSARgYdqQzqn1m9f59Mq6C9u",
+        "account": "ak_2KcGRYm4E2Ee84wuEqJ278Pu2fZuiJkVKsZGrT9mDWyPoB1vuA",
+        "voteOption": 20,
+        "stake": "2798999955579999949000"
+      },
+      {
+        "height": 76899,
+        "nonce": 1,
+        "txHash": "th_p1apmhUgcYie49BPmgXZ4tBdoPp7r23BgsBuLZ8RBBppqhPav",
+        "account": "ak_MN5om7qHAyX3ivWZxLEknFLXCroCgzpdJnWpcp94PMcbkewRP",
+        "voteOption": 20,
+        "stake": "2735059866990000036000"
+      },
+      {
+        "height": 76907,
+        "nonce": 1,
+        "txHash": "th_2nDnAUn2GtozdxdwZ1KxK2PyM3YihnYkWTUoW2KeW1735s6uWR",
+        "account": "ak_2cL2jkv9Bd3jB5jqsPD572RuEaEY5EANeGHsM28rFnuPUeFVK2",
+        "voteOption": 20,
+        "stake": "3999982760000000000"
+      },
+      {
+        "height": 76907,
+        "nonce": 2,
+        "txHash": "th_1FAPAwhWLWys2zefrhK95wN939g5vtgW8HxXUTzkLnhxn21nQ",
+        "account": "ak_2NCNBDniRgfDd9BUBodgsS3fF6vw42cAedfpVyNnjobhvaTnwW",
+        "voteOption": 20,
+        "stake": "8999982759999981920"
+      },
+      {
+        "height": 76907,
+        "nonce": 5,
+        "txHash": "th_9mZGky2juFbjnHV5w8d9C4sREi4SqLrywRENjPKygThPsQCdx",
+        "account": "ak_2UqKYBBgVWfBeFYdn5sBS75B1cfLMPFSCy95xQoRo9SKNvvLgb",
+        "voteOption": 20,
+        "stake": "17515758559999999999998"
+      },
+      {
+        "height": 76907,
+        "nonce": 2,
+        "txHash": "th_2ZvMznzEoAw1YmGqGyc6rF6oE3DT5pxzUweU5Vr4k4j61uWBrc",
+        "account": "ak_fiWY7K6K6qk63KgtB2yZ3ZzDqxAzXoszriDQWu1ystk2QxA7P",
+        "voteOption": 20,
+        "stake": "75216999965860000000000"
+      },
+      {
+        "height": 76916,
+        "nonce": 7,
+        "txHash": "th_WVnEUBW6UYaFaR4F4beskL1bPBiLn7S6BJCABaEVboUaeCak4",
+        "account": "ak_xbvizAGoNweriBYz7rNaREa52yGePTiLM1p9uEZSu924MSPE7",
+        "voteOption": 20,
+        "stake": "10010159932059999928520"
+      },
+      {
+        "height": 76924,
+        "nonce": 1,
+        "txHash": "th_W44YzvmQt3JbxbNfjZQe1k4MPZajzve3LvSwb2fDR8Rc5fZT1",
+        "account": "ak_tP9d24XVYdPNsNAXGURtqBYHnZP4yXPKGZntVVWmdno7VznmD",
+        "voteOption": 20,
+        "stake": "19999982760000000000"
+      },
+      {
+        "height": 76938,
+        "nonce": 5,
+        "txHash": "th_2VMuJXcJgitPk2u5nanuJfoRFHDqKxJ75Z2TyDDa2P1UodqKi1",
+        "account": "ak_TAkYZvUsuoGoSieomrMMMQrQxbMmfSVygmh4fJeh3YCC6g8FT",
+        "voteOption": 20,
+        "stake": "785103487870000000000"
+      },
+      {
+        "height": 76946,
+        "nonce": 4,
+        "txHash": "th_2XHanbrGPpSKqtYhoLAHDdut21weHR7Ji3Mmn4C2CCKbovRNGo",
+        "account": "ak_uuTZ7VMEQmo1NC8f3u1YcS6YNEnG3fD4so76gjwaDgDsXeg3D",
+        "voteOption": 20,
+        "stake": "999930960000000000"
+      },
+      {
+        "height": 76958,
+        "nonce": 6,
+        "txHash": "th_2CcmfrbSC96An52ZM6Wiomt7GFAUTfmku5tiwDJ25tc1WF56mZ",
+        "account": "ak_227QbhnxivtnZBYcHpW4SA25cPgHErhF6htXntWdMeYBTgtS5n",
+        "voteOption": 20,
+        "stake": "1999895120000000000"
+      },
+      {
+        "height": 76963,
+        "nonce": 9,
+        "txHash": "th_2yNfX855xWhu87eq1VdpaFCFVonX9mhAFijSvhtrDYPCrTAcw",
+        "account": "ak_29w288qgD2jxfL4pqiJGK4BPeBFyXCPUa9h4M1d2JyKX1TXYg8",
+        "voteOption": 20,
+        "stake": "7294188206229999910650"
+      },
+      {
+        "height": 76963,
+        "nonce": 2,
+        "txHash": "th_22Xx7Fddq9Dn5GrBjmT2EHrBXhTGW6d5D3ib3QmjPVof8szgBA",
+        "account": "ak_biSJMGSZVFQ7hLrbWhfQBwo4QhY8SxEKQgiokZrXW7pn2MF1K",
+        "voteOption": 20,
+        "stake": "1000999772760000000000"
+      },
+      {
+        "height": 76968,
+        "nonce": 1,
+        "txHash": "th_sQmwfEVKmNqTREoxTD1u4ymy1C7GiiXHzthJeNyy7bGVUPXoR",
+        "account": "ak_26oMYD26tvwoNjfo3tMGnoyVv4rAWiPGTx1oniVYuf3CmtqnXY",
+        "voteOption": 20,
+        "stake": "7595249982760000000000"
+      },
+      {
+        "height": 76968,
+        "nonce": 2,
+        "txHash": "th_2HHBYgePe8qPiKo3zYoZKHmgPoy1sMHh7Bv5k9oBcHQA1rqJsK",
+        "account": "ak_2ixBjvGieXUy4HMWQMYDEFLaxro43Sn7Dwq25E1kiPL8C7NdG1",
+        "voteOption": 20,
+        "stake": "57908328231379999982130"
+      },
+      {
+        "height": 76968,
+        "nonce": 1,
+        "txHash": "th_2A44jc7XWUtmYip2XoZwCf867k7vT3EcCh3J9mHWsiSyC5P4Z5",
+        "account": "ak_2Qs3EK6ZW43BMJ1chF1pJkHmuoTMoQoMpVdP4BcAoLfgRXfZtG",
+        "voteOption": 20,
+        "stake": "2263982760000000000"
+      },
+      {
+        "height": 76968,
+        "nonce": 1,
+        "txHash": "th_NmUBGysc2DknUawBQPPMEL4TJy8psRftg76imGQ4t238mySgK",
+        "account": "ak_FfBC4vN1p4fEHRmptKJ3UoqyNcpNAsJt6pv4heekwpL9iy6tm",
+        "voteOption": 20,
+        "stake": "45273374952760000000000"
+      },
+      {
+        "height": 76999,
+        "nonce": 1,
+        "txHash": "th_cpha7BSyHmVyaGeXg6fScLeAkJFyhJre154kA2GHA4cZrvmTQ",
+        "account": "ak_AM8ELCR93MRNmxThXLkWdX1mkeAcCYTpcpaP4T5ocCvTYMwMc",
+        "voteOption": 20,
+        "stake": "131030598882760000000000"
+      },
+      {
+        "height": 77001,
+        "nonce": 1,
+        "txHash": "th_2TKQqsQiwYZ6dyr7e7fi1FQymHbCZPPqQEF9opwfHbhaVY4Bpe",
+        "account": "ak_TFm6MPeRXz4oiy5rQ9QRsFpaQb27GCc5ZEXCDhCFPYvYWxV5v",
+        "voteOption": 20,
+        "stake": "185235999982760023218604"
+      },
+      {
+        "height": 77002,
+        "nonce": 1,
+        "txHash": "th_8cFs118zSbMJMvwpss37ZU8v7mwwc2pgqphj3GgwPe9dPYJX6",
+        "account": "ak_273y8AigfUbWPtGqxfJjGXdqwsduzDwtrvZrKNkCrUqAy2HNiK",
+        "voteOption": 20,
+        "stake": "197996039982760008528762"
+      },
+      {
+        "height": 77004,
+        "nonce": 10,
+        "txHash": "th_2Y7jWsDcxq5dgbJjPzAEU5ET9fnjLpyPdJgiqLKV3xnZwtsWzM",
+        "account": "ak_2jn55t6g5uuP2YTzAMFsxsH84MPkybe97GJVEpduBsZfU4F4df",
+        "voteOption": 20,
+        "stake": "15349630747759999874210"
+      },
+      {
+        "height": 77004,
+        "nonce": 10,
+        "txHash": "th_2RFRNfSLE1trDgA2chpF1iuouZou4gfPbas3qPdHoDxMeZhd3d",
+        "account": "ak_u2gFpRN5nABqfqb5Q3BkuHCf8c7ytcmqovZ6VyKwxmVNE5jqa",
+        "voteOption": 20,
+        "stake": "299999955879989864000"
+      },
+      {
+        "height": 77017,
+        "nonce": 6,
+        "txHash": "th_r8XvuJWUFodM712pG3fuYcn2NiBszodmvwEg9e9XnobLuaHpp",
+        "account": "ak_2TJiSYSNZhgXb7rXTcEaoFpo6YC5iCiMRV7CocMFPsoyw5awDH",
+        "voteOption": 20,
+        "stake": "10316391716309999931130"
+      },
+      {
+        "height": 77022,
+        "nonce": 1,
+        "txHash": "th_2cLGE2UGiwt3v9Y1BMiNK8Ki2g93DX9tatNo2uVBq8tRdGMNtN",
+        "account": "ak_iYmR6rg6aH3srKQ6QtgmthXBHWD2iV5qevtPGtrc2RGcFrYsj",
+        "voteOption": 20,
+        "stake": "13418195538170000000000"
+      },
+      {
+        "height": 77034,
+        "nonce": 3,
+        "txHash": "th_2qWQb2NL1N52DNemRLeEEpqQQbnDbvXBUvPbJ7rd47zhsYYUmN",
+        "account": "ak_2BsMSazh8SL25VocbmK72oeRombgF6ifUvJHKvAUfnfGLdtxe4",
+        "voteOption": 20,
+        "stake": "67779530311619999764960"
+      },
+      {
+        "height": 77034,
+        "nonce": 1,
+        "txHash": "th_2waDYV1pQ7V31FevXzZeeCjkQHhc7J7CJFSCUZzXTpqnWpaBQi",
+        "account": "ak_KrjazkGLhrr2Qx31vr43ZGGCNF6KqgtjzLWyNsy3zPLphuhat",
+        "voteOption": 20,
+        "stake": "10579334189930000000000"
+      },
+      {
+        "height": 77043,
+        "nonce": 15,
+        "txHash": "th_2EfUmHZ5ohg4QcNy3wGnnDQ59xwUwhtLYGTfmqPTnSy27kQqhk",
+        "account": "ak_ZgeXjQ3fC5Uw5Kw1HRbe24Y3omD8Lj9DrCHSUizWy6RvjVbnn",
+        "voteOption": 20,
+        "stake": "457650069059998839100"
+      },
+      {
+        "height": 77051,
+        "nonce": 2,
+        "txHash": "th_2pShGBmuQRAAixXKEsxL1bKsDBiCzRtwvP2rZ9hWNRaWa9H4S3",
+        "account": "ak_2StWzrVEoNNjLBH4qTeYCxNy7L8pK5Z3PPtrQaZCe4mKETLbeX",
+        "voteOption": 20,
+        "stake": "2574149159999983000"
+      },
+      {
+        "height": 77074,
+        "nonce": 1,
+        "txHash": "th_dTwru4AtCu553dywMDjDN4Knrw9DAjtUNhLyqjtJyrxTYnrAf",
+        "account": "ak_RFsL9gAHCZrj1zhqdbsCa373tr5rJLpGn48ZQDg8w6yYzuXFq",
+        "voteOption": 20,
+        "stake": "532875449401140997413"
+      },
+      {
+        "height": 77102,
+        "nonce": 1,
+        "txHash": "th_nEXrSvQb8Yjm4oigK8DbfSkb4XPLz7vGC7tbc2VsrLiTZLKSJ",
+        "account": "ak_KKs4WjrWTy9EvwVLJqhdjqvAhBm8thsq9SSdS4TzmxLs5ot4u",
+        "voteOption": 20,
+        "stake": "1542749982740000000000"
+      },
+      {
+        "height": 77120,
+        "nonce": 3,
+        "txHash": "th_ERYn2zwjHUyUMeKrGfG8hu9LYMkt34he5wx8bps8m3hXxNzwJ",
+        "account": "ak_nxPEMPJchWs6FmyPUrXHqEJKGtjqTrmd2VrXhBFmh4gJNmEKW",
+        "voteOption": 20,
+        "stake": "1401889876320000000000"
+      },
+      {
+        "height": 77121,
+        "nonce": 1,
+        "txHash": "th_3gTMFJX5uCCiWoir99PW1ft3iS9kxmgzEuVFxmxQUmd8gA5Ye",
+        "account": "ak_2HmB8VgsGA6A83LV1jdjJwPMFX2JMMoQzU5EyZHVv6QhrYUgt8",
+        "voteOption": 20,
+        "stake": "12346223469640000000000"
+      },
+      {
+        "height": 77121,
+        "nonce": 3,
+        "txHash": "th_5burRV47oP5JRYbLfshJQdutFBAzoWqzGG3YxCAKZqZ6Yh8sG",
+        "account": "ak_wd27tKdCLNxGsEzKYvp13G7WGNED3PsBfTgpEnn2qxV3CwAN9",
+        "voteOption": 20,
+        "stake": "35999999948220000000000"
+      },
+      {
+        "height": 77136,
+        "nonce": 6,
+        "txHash": "th_1JDyKm3mV2JT4Q4AuqZBXw7wPXeDVCSkRErjF7rp4s8APjYiC",
+        "account": "ak_27cVGViPzGa979m7ysTVQQpNttBFcxqs3kC2MPYGLBB4Zx2pRE",
+        "voteOption": 20,
+        "stake": "9965979999762000"
+      },
+      {
+        "height": 77175,
+        "nonce": 1,
+        "txHash": "th_HLduGKxrFYdRTwHcENv18pc6oedYNfkKZvdErahQpiaEmkq7j",
+        "account": "ak_2iFFsDRLNncc3F2EHz3pC4VSgZug9Rm31qXDPZ9d3Nk5ApFjtL",
+        "voteOption": 20,
+        "stake": "56000681691230000000000"
+      },
+      {
+        "height": 77179,
+        "nonce": 19,
+        "txHash": "th_2Hq53wFsFtaMpWL6sRgyo4rcfRy432RD3bowFt4zRJ5Es2pXYS",
+        "account": "ak_essw23rv1LdefJReNpoR5wiwtio44rqMdZEMf75F3Vsozg71M",
+        "voteOption": 20,
+        "stake": "3049658700000000000"
+      },
+      {
+        "height": 77209,
+        "nonce": 2,
+        "txHash": "th_2dsAuWTxkz7xbCnG8Tbfowg84ax5ehJJLxDngSaZcWSZSDW2Pj",
+        "account": "ak_2qgoT2qjgeDEWJEiBVbfx5AeVxtPCNBmyK6ZQuVXr8s4RqNqdo",
+        "voteOption": 20,
+        "stake": "1004999965860000000000"
+      },
+      {
+        "height": 77246,
+        "nonce": 9,
+        "txHash": "th_2JhFbsGSaLkB2dGxqRuYziFhQQUECBh8XDi8x67YdyAXZq9yuU",
+        "account": "ak_22BY6LMKpMVBW4kkUqF1G2oCGxHBLP58EHMBgF2VJwE1DdXKYN",
+        "voteOption": 20,
+        "stake": "6785156531829998839170"
+      },
+      {
+        "height": 77252,
+        "nonce": 1,
+        "txHash": "th_uSwi36Y62CfYNzrMVsjH5Zy8Nc5M2UmgNHwtKTdkUkcEq2rsK",
+        "account": "ak_2Pk9HvoLijaYnS4ZBLJJbBMsWC6STZXPohy3cJBTrihsnk5Z91",
+        "voteOption": 20,
+        "stake": "23650009582760000000000"
+      },
+      {
+        "height": 77295,
+        "nonce": 1,
+        "txHash": "th_2jnTwN224mxwbXubRzMi1NZXdMYP5ijmy13BY1rn6yTDFzg694",
+        "account": "ak_2hSPUKrYGxBbf7g1a2E1rRHbtJW8XwFFrQS2RYNPVEUXiAJTqc",
+        "voteOption": 20,
+        "stake": "11312272582760000000000"
+      },
+      {
+        "height": 77310,
+        "nonce": 2,
+        "txHash": "th_2QAVNxLKuv5rmXEiXghJrDTPvXuREgRcfpaDeFhiUhmu72cPuE",
+        "account": "ak_vx5cM3dB4rBTQpXwXa1Ad2JzejNxXCLk8gzYsats3HcYxZxnf",
+        "voteOption": 20,
+        "stake": "4640583251900000000000"
+      },
+      {
+        "height": 77400,
+        "nonce": 5,
+        "txHash": "th_k8cmWzU2ts1jUqCQGRhk5yfKeDMdk3sG4Xxw94Vw7k1XpFk4i",
+        "account": "ak_ibb2CJYQr5DAcrZ8d48ZzdAQLNbi2pyLW4GJJUfTtwTBzP8MU",
+        "voteOption": 20,
+        "stake": "343548059999982130"
+      },
+      {
+        "height": 77465,
+        "nonce": 1,
+        "txHash": "th_3kEtE6XEFDX6tKWVFSGR5ubbSieqvd4RzaU4e2UD7FmAtWGvt",
+        "account": "ak_Fowfckktub4tsPW35mfUwYSjhDxCLdEYacNeCx2qMhtSVXFLb",
+        "voteOption": 20,
+        "stake": "134999982760000000000"
+      },
+      {
+        "height": 77523,
+        "nonce": 4,
+        "txHash": "th_22AqKzhBTFPt7JQPv7KfF4THBk27RsqZwGC4DGs9W3FWhp9dp5",
+        "account": "ak_KNZCz8v7uANWawKehVf7vcVfTJBww7bW3Ad8vZusdpdWcd4Ev",
+        "voteOption": 20,
+        "stake": "631999925780000000000"
+      },
+      {
+        "height": 77549,
+        "nonce": 2,
+        "txHash": "th_CbVYE7ndxqhDpqd4Gs1H45mxs9YQS3YbkazkYaVCYMDbkz1g5",
+        "account": "ak_2tcS6ioJdngFoqKMBdLNXtJ9QA6tTnd6RE91DdKEDf1xdgR8U7",
+        "voteOption": 20,
+        "stake": "1418999964160000000000"
+      },
+      {
+        "height": 77669,
+        "nonce": 2,
+        "txHash": "th_5fZPFioiwa5ipiUqRcWGMv8xUMYhF6brzo7xw3bjGG278NAxM",
+        "account": "ak_HkLhsZiQrbqRWa2ZhKXvhvxcZcc3iPc9C4b2kD9tfxezt8tJS",
+        "voteOption": 20,
+        "stake": "599945820000000000"
+      },
+      {
+        "height": 77761,
+        "nonce": 5,
+        "txHash": "th_hNFUBxphKXvWGRUbaXcD3xS9jpKMSK6JxvCUNK9QuDaLMcYvw",
+        "account": "ak_2MN6Toa8bSM9iia6qXhpciGyzJhQDKCTsuyZkzFRPgJCHVLRo5",
+        "voteOption": 20,
+        "stake": "310148660259999945760"
+      },
+      {
+        "height": 77939,
+        "nonce": 3,
+        "txHash": "th_g9xM66aG8FFKWnRPg8qDGpR78J65mHtUNjzQtNnB1ZLFtooBJ",
+        "account": "ak_2EmkhDWg6aTRawTBB8vKp7W24xj2ER1NepjnvGbFEXpbxBdov4",
+        "voteOption": 20,
+        "stake": "6122605652620000200000"
+      },
+      {
+        "height": 77963,
+        "nonce": 24,
+        "txHash": "th_2WFjvWbfSodjitbm3TcuifqPtUcMkUUoE6HCczF7J9sYVPLn1M",
+        "account": "ak_2ruXgsLy9jMwEqsgyQgEsxw8chYDfv2QyBfCsR6qtpQYkektWB",
+        "voteOption": 20,
+        "stake": "52128256648759830000"
+      },
+      {
+        "height": 78319,
+        "nonce": 1,
+        "txHash": "th_2fawysRpEm69F7XVeRYEbrJSRhBi2XCNDz8C9bMC7zzsHpexkj",
+        "account": "ak_WXTpCxaQoqshitDukD4VjJ8PCgfLKuPwT735fzhUUczdZNAnU",
+        "voteOption": 20,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78321,
+        "nonce": 1,
+        "txHash": "th_2cLHbwsaERokoKvqz2LcnkE3bqf4XWRKZPkfFV3hafHLZbrs2F",
+        "account": "ak_vDqAVDD4FcjqAkjTYfgsU4dQ9kRN5QRJrHVv8s6X3Ph15gWUu",
+        "voteOption": 20,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78322,
+        "nonce": 1,
+        "txHash": "th_n8hLJfwK7iM8r4ZVtdgc9znmXtveVLSuVUYqRra1WVCz2U9qh",
+        "account": "ak_Qcb3u71WiHJnEkAWenMTtRrwiKtRyNwhAvmYBnqP74wsjXRo2",
+        "voteOption": 20,
+        "stake": "1740000000000"
+      },
+      {
+        "height": 78324,
+        "nonce": 1,
+        "txHash": "th_2b3sAvmB5bKahiU4cmMby3cEuUYBFhYmgqAfyCth84xuG5SQFe",
+        "account": "ak_25ZiLLsyT8sdayVR8PeRVAnp69rVzwZ3MBGGoih1RwuE99n9eA",
+        "voteOption": 20,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78324,
+        "nonce": 1,
+        "txHash": "th_gHc8GfwnGwT5qEZvoVAxyoks98ViUMKh3guyLrRWJQjc6vCok",
+        "account": "ak_2mgSQAepqhyN6oDW9KH5Moa5bMuykUQRoh2dj88zDNULvDYAEp",
+        "voteOption": 20,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78324,
+        "nonce": 1,
+        "txHash": "th_2WXvLPXpjd385PBAeP94h641qq4HzCPSTg5SVvwqfUU3Bdzgev",
+        "account": "ak_2pT88NCcikFywhv9CQkFRRuTsbj8vtgW91kH6oMqDAsHwsKnWu",
+        "voteOption": 20,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78324,
+        "nonce": 1,
+        "txHash": "th_hMD4KKzpK98nNwVdbr8uvXFursATwUmuuDyXyymq7dDn6Axnz",
+        "account": "ak_2tf7fezB2P6mM77nUav5P69jfjquWMYgutSTuJnMV1Wdop8iUS",
+        "voteOption": 20,
+        "stake": "1999944790000000000"
+      },
+      {
+        "height": 78324,
+        "nonce": 1,
+        "txHash": "th_2KsoFsNoqN5VJC1SF3V9CzTsbAci1HpcuDetwjoVH6uwBda4wY",
+        "account": "ak_2tZExnagCHjv3zYKGXRbvmuPgcp552gqGi6qWhBi9Z12L14wxF",
+        "voteOption": 20,
+        "stake": "1999982760000000000"
+      },
+      {
+        "height": 78324,
+        "nonce": 1,
+        "txHash": "th_2ZqpYN1xviPyDsjZvL2dMphmi1Gdm724EMkBa2eM8pKTgrSUDU",
+        "account": "ak_2WdHeyZ9De87kCFHfqwLqf3LUCzEi1kbBAH3KRWZ7x2wuTf1KX",
+        "voteOption": 20,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78324,
+        "nonce": 4,
+        "txHash": "th_2eWcYeocZXu5u7ezcp3ihvLEHCTfN8pmJxexgSn1BzccyjZ4RL",
+        "account": "ak_AMQMqhHJgjqMXXfgfJQeBpdSihqSS8EsJbu2rSb4pYQoT1A73",
+        "voteOption": 20,
+        "stake": "369999713149999926213"
+      },
+      {
+        "height": 78324,
+        "nonce": 1,
+        "txHash": "th_2UEcrvhGzyCBaR7q75UBdH8QQBjSVh4ADBQTasE4xiWZtSGUCD",
+        "account": "ak_GwQas9TGbS3CCmfuPYr3wu5xaanKrGNwyvJHESHiJAcxiWDW5",
+        "voteOption": 20,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78324,
+        "nonce": 2,
+        "txHash": "th_2ZdCKpUMUXNSdAAsh1UJ53gFPwdd9u8ZBNL8oR5D9s6RvFC8gj",
+        "account": "ak_pxRE4RgyXerKKuCKVLqMBCdVpYfLCebZ3WmLt4QcAfioxeJUh",
+        "voteOption": 20,
+        "stake": "1999965480000000000"
+      },
+      {
+        "height": 78326,
+        "nonce": 1,
+        "txHash": "th_2STp5cuyezvFEZMBT64ewMFu9seCRJE7sKtTj9ihmLhcEQoDF4",
+        "account": "ak_tzLiiLnQ7F181cauHX77oaHL3DuH9mtL2YVL8jubppixhQed3",
+        "voteOption": 20,
+        "stake": "1999982740000000000"
+      },
+      {
+        "height": 78554,
+        "nonce": 1,
+        "txHash": "th_27LVW4atMML8Q1SUy2yJLasSr1dXSREMHzGKfftHUYMUkncX3p",
+        "account": "ak_yidcRCsrGrFrQhBDvWA6jzpKKn84RdR5LuHsNymN4rykUeLex",
+        "voteOption": 20,
+        "stake": "137803818760000000000"
+      },
+      {
+        "height": 78620,
+        "nonce": 1,
+        "txHash": "th_2uzTFimv9PPx4VmG6sjQpqqMEyRmwhGQT5FtxXSDty5rShafnk",
+        "account": "ak_afME1y144s1bdnjvbz6V5WfAYqwLZMCnW1SL3QBtq6EVB1QLM",
+        "voteOption": 20,
+        "stake": "0"
+      },
+      {
+        "height": 78623,
+        "nonce": 3,
+        "txHash": "th_DsajZYUUoNHUjXEmxk7n9e5LACxNHuDp9asDWShysqwBZuzWw",
+        "account": "ak_2tAtRe4umWsSXtp1t7jMGpxiQnvmvtcf2AfsPMBfdZs8142gYf",
+        "voteOption": 20,
+        "stake": "26808179949419999980224"
+      },
+      {
+        "height": 78796,
+        "nonce": 1,
+        "txHash": "th_2fKAzpSgrt9gWaPaH1dVE4NgwKeZNBYU2Uz5VEZjCntB4qjxdZ",
+        "account": "ak_2dR372KrrZ4EoQbVCSfzSyNdXeCN7QVivfgFFNuSM2yG7X1rbH",
+        "voteOption": 20,
+        "stake": "7008999982760000000000"
+      },
+      {
+        "height": 79205,
+        "nonce": 1,
+        "txHash": "th_B4HkC6ToHVx93EztyfXBe9WsLx5esSutseLNeuwnVmePNKjj4",
+        "account": "ak_L2gYTHXuD7t7v2wz2eJFVsj1DFZxp9duqDahzXja1p3yrQpor",
+        "voteOption": 20,
+        "stake": "249998899982760000000000"
+      },
+      {
+        "height": 79219,
+        "nonce": 1,
+        "txHash": "th_2oKwGcNRT4vFCcT8v7NM9EY4xpH8EC4ZufCWfpemRTTEAKP3Bp",
+        "account": "ak_Y8snq5TE7nbtx7Y8M3sHdMyjNjyA4Qv6PJMfDnNfGhoCsm4Az",
+        "voteOption": 20,
+        "stake": "5074496882760000000000"
+      },
+      {
+        "height": 79220,
+        "nonce": 2,
+        "txHash": "th_24CZys3UHruFZcrbtn8ovasoq4CxUFJQ3nq9EUJr45jjFvoivP",
+        "account": "ak_KFYadiagAVBeYQ9vNdTzvykxNYuDRbfmwovnejNmUZernoxDz",
+        "voteOption": 20,
+        "stake": "20064609365860000000000"
+      },
+      {
+        "height": 79319,
+        "nonce": 2,
+        "txHash": "th_2P4FgTRfQP3vNtCNtYAHN55UVtUirsCpVbJwtViU3ERHENXP7e",
+        "account": "ak_bgwbAyrgSM7R27zKicpkFEExSJTM8r4ZhLNVMCRjXMGShBdDV",
+        "voteOption": 20,
+        "stake": "55050009982739999983000"
+      },
+      {
+        "height": 79319,
+        "nonce": 4,
+        "txHash": "th_2eEZgeUPXshFotRByTmekNXA4RuLqYdXeo76hb4BMnMfnVXbdu",
+        "account": "ak_KBFSaEXqRG527dD8U4mWdmMLyuLs5s6oEt79179BjaNJVpxqL",
+        "voteOption": 20,
+        "stake": "5300029982739999762000"
+      },
+      {
+        "height": 79319,
+        "nonce": 1,
+        "txHash": "th_2FBFJi2yzSXTpxvMx8hPsXHKKok8bfK2WS3bq4n6wX7RCtok3Z",
+        "account": "ak_PKobQhAkcJgjTMVheZd6VEiQCWqsNB9dg2ADoFtaKRBw8CQSM",
+        "voteOption": 20,
+        "stake": "159106549982740000000000"
+      },
+      {
+        "height": 79355,
+        "nonce": 1,
+        "txHash": "th_M8AFwTGcJvioy58Yo2tK3kARsBeZRAHmR2SxBUzGqTj46P8RT",
+        "account": "ak_iumLJqsU6gxqj5WHoB2FTDUga3B13E3pUDTCAU7WndxxfsWbk",
+        "voteOption": 20,
+        "stake": "99999982760000000000"
+      },
+      {
+        "height": 79369,
+        "nonce": 1,
+        "txHash": "th_2ri9y8xKwX8KP5gKSqcngnKCa5HCFKJQWjfABHkk7PqLuCSzur",
+        "account": "ak_muXCdEDgHxHRYokN6L9tDCnApzHBgbKGhNR7Li7KKbyskprvP",
+        "voteOption": 20,
+        "stake": "5700413849690000000000"
+      },
+      {
+        "height": 79816,
+        "nonce": 2,
+        "txHash": "th_SESfzxpo1cQi7we1cHt41dZy3rFLV8U4BFhdeb1U6gTr6BzpA",
+        "account": "ak_2NesmhLFheVnWMoNcAMg2S3o1GFxB4ttJPCDZajyU1gJ2j2C77",
+        "voteOption": 20,
+        "stake": "159660414028760000000000"
+      },
+      {
+        "height": 79867,
+        "nonce": 3,
+        "txHash": "th_yxM7BtoBa5VFShFVuX2QTPk5kttSgFrSR1fc8RNmK8tfWb3Sa",
+        "account": "ak_2MtgeXrGWd3AuP6GQGi8rsC6EHFQ91hWoYNpo3XYFBpbkucLov",
+        "voteOption": 20,
+        "stake": "0"
+      },
+      {
+        "height": 80194,
+        "nonce": 11,
+        "txHash": "th_2Wnqt25F4ABGLJqEmjqC7zNbRrXFGE2ZaCKhLhfggUWGjchg88",
+        "account": "ak_2sjs18SR6c1XVrqfK5QdEV2MacdwK23yPUxVxEefFDSpXK1dYM",
+        "voteOption": 20,
+        "stake": "209832999897579999910650"
+      },
+      {
+        "height": 80250,
+        "nonce": 2,
+        "txHash": "th_cGTcWb4wCeqsrme1s2R3cgXAXA2qQr9x1UN6YdYDjZgJP7mV9",
+        "account": "ak_216i6AuBfMHQUXvkzFxTwFgKvgiM7RTJ3HAnA22uxZutNQqe7",
+        "voteOption": 20,
+        "stake": "384279021520000000000"
+      },
+      {
+        "height": 80250,
+        "nonce": 7,
+        "txHash": "th_2mPNyCHyNKfJFcX31SAvZf4vWnnaUvyfqrvMXGgGKteBz3cPDf",
+        "account": "ak_j9N5ikDPbhpWYFDv2YspnYJMRSMKPqVJpxnfn2ubyx8c4Jbh8",
+        "voteOption": 20,
+        "stake": "1418999965479999915000"
+      },
+      {
+        "height": 80365,
+        "nonce": 9,
+        "txHash": "th_2hDM9Z2pPpHGKn8Uvtn6qg2V91pkKoi3Grqxu1RAcmp2P8pDcv",
+        "account": "ak_2K2ZazfNfgso3nQ7hBtqPergqn9tS4AH1VD6eb5HWxTCCHxc9R",
+        "voteOption": 20,
+        "stake": "163499965859999874840"
+      },
+      {
+        "height": 80412,
+        "nonce": 2,
+        "txHash": "th_2QVckkTvcxbV1hSRr72ibuwWc3HUuvg6LbP3H9Rxn8reDwJcbE",
+        "account": "ak_BHmMsCpokxPE25xwqLgdDpnVWQBuNPokaLQJPGxbXbhD3b36n",
+        "voteOption": 20,
+        "stake": "1583824431560260000000000"
+      },
+      {
+        "height": 80535,
+        "nonce": 1,
+        "txHash": "th_2kxhVQtEXdH6RfnsYUAozxmrwyTHDEVEaRYQwTNUgcayYLcyj7",
+        "account": "ak_cvTHFmAX2nFFqxqkk38NBPBEDyNCXNUSkMc6EAYKHhE4QrDC1",
+        "voteOption": 20,
+        "stake": "499999982760000000000"
+      }
+    ]
+  }
+]

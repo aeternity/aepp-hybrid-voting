@@ -1,8 +1,18 @@
+# BRI Voting is Finished
+
+[Result Overview](./result/README.md)
+
 # Hybrid Voting aepp
 
 To build is a hybrid voting-aepp that works with Ethereum AE ERC20 Token and Aeternity Mainnet token. One token one vote (token weighted).
 
 People give their vote by calling a voting option in a voting smart contract on chain OR doing transactions. At a given, past/future block-height on Aeternity and Ethereum all votes will be counted (publicly verifiable). 
+
+## Verify the Result:
+ - must have NodeJS >= 8 installed
+ - clone https://github.com/aeternity/aepp-hybrid-voting
+ - run `./verify.sh` (installs dependencies and prints the result)
+
 
 # Vote Participation Methods
  1. Ethereum Aeternity ERC-20 Tokens using Metamask/Ledger

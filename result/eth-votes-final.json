@@ -1,0 +1,156 @@
+[
+  {
+    "option": "0",
+    "totalStake": "126559655980944242710000",
+    "votes": [
+      {
+        "account": "0x2fb9905D7bC1538c05f3e5238D6f4b0ffB761151",
+        "voteOption": 0,
+        "balance": "0",
+        "burned": "94227277180000000000000",
+        "stake": "94227277180000000000000"
+      },
+      {
+        "account": "0x8f2D0B95E4DD963576ed2315949459AE5834336A",
+        "voteOption": 0,
+        "balance": "2432865620000000000000",
+        "burned": "0",
+        "stake": "2432865620000000000000"
+      },
+      {
+        "account": "0x610791116E4c2Ac790fdb3B103D0B24336667eea",
+        "voteOption": 0,
+        "balance": "29899513180944242710000",
+        "burned": "0",
+        "stake": "29899513180944242710000"
+      },
+      {
+        "account": "0x4db262800434f94BFB4Ae870206A364631d914aF",
+        "voteOption": 0,
+        "balance": "0",
+        "burned": "0",
+        "stake": "0"
+      }
+    ]
+  },
+  {
+    "option": "5",
+    "totalStake": "4303000000000000000000",
+    "votes": [
+      {
+        "account": "0x871b234fC63523D45def3b8F1753C2cF7975e830",
+        "voteOption": 5,
+        "balance": "0",
+        "burned": "4300000000000000000000",
+        "stake": "4300000000000000000000"
+      },
+      {
+        "account": "0x21152886d9b2102E034C53A6468dE02F15Ea8d2a",
+        "voteOption": 5,
+        "balance": "0",
+        "burned": "3000000000000000000",
+        "stake": "3000000000000000000"
+      }
+    ]
+  },
+  {
+    "option": "10",
+    "totalStake": "7583687919860834920519",
+    "votes": [
+      {
+        "account": "0x12888e492672801F6Ea947F8905d8fb4c0d0b295",
+        "voteOption": 10,
+        "balance": "0",
+        "burned": "1227545210000000000000",
+        "stake": "1227545210000000000000"
+      },
+      {
+        "account": "0x0a93E3dE4452173fe18E89eE3fCDe6f826f6dC94",
+        "voteOption": 10,
+        "balance": "0",
+        "burned": "0",
+        "stake": "0"
+      },
+      {
+        "account": "0x6a849f55042b68f293649569169d2338eBC95F18",
+        "voteOption": 10,
+        "balance": "0",
+        "burned": "1356142709860834920519",
+        "stake": "1356142709860834920519"
+      },
+      {
+        "account": "0xd35e085a70675c6Fee1933cCc0FE9017EECA1032",
+        "voteOption": 10,
+        "balance": "0",
+        "burned": "5000000000000000000000",
+        "stake": "5000000000000000000000"
+      }
+    ]
+  },
+  {
+    "option": "15",
+    "totalStake": "10509875917570143453",
+    "votes": [
+      {
+        "account": "0x5685387313205dA9a4F8cC7C574aF82C031877Cc",
+        "voteOption": 15,
+        "balance": "509875917570143453",
+        "burned": "10000000000000000000",
+        "stake": "10509875917570143453"
+      }
+    ]
+  },
+  {
+    "option": "17",
+    "totalStake": "14990000000000000000",
+    "votes": [
+      {
+        "account": "0xeE02d6Be712AB1559274aA9DCdEde6968D9CA1d6",
+        "voteOption": 17,
+        "balance": "11990000000000000000",
+        "burned": "3000000000000000000",
+        "stake": "14990000000000000000"
+      }
+    ]
+  },
+  {
+    "option": "19",
+    "totalStake": "10000000000000000000",
+    "votes": [
+      {
+        "account": "0xb226050F6322501080Dfa6F62E03D63c59A16538",
+        "voteOption": 19,
+        "balance": "8000000000000000000",
+        "burned": "2000000000000000000",
+        "stake": "10000000000000000000"
+      }
+    ]
+  },
+  {
+    "option": "20",
+    "totalStake": "16353700000000000000000",
+    "votes": [
+      {
+        "account": "0xc2E23303f1f0899B4D7cE5b099a446c145678513",
+        "voteOption": 20,
+        "balance": "5500000000000000000",
+        "burned": "5000000000000000000",
+        "stake": "10500000000000000000"
+      },
+      {
+        "account": "0xA14c3b8966F29fE571bC64F3327c1e7C9d8bAa98",
+        "voteOption": 20,
+        "balance": "0",
+        "burned": "13355200000000000000000",
+        "stake": "13355200000000000000000"
+      },
+      {
+        "account": "0xb9c48c6262A5E60C3cfB487b91407721C040BCA8",
+        "voteOption": 20,
+        "balance": "2988000000000000000000",
+        "burned": "0",
+        "stake": "2988000000000000000000"
+      }
+    ]
+  }
+]
