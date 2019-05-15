@@ -35,3 +35,4 @@
  - All Votes on AE [ae-votes-final.json](./ae-votes-final.json)
  - All Votes on ETH [eth-votes-final.json](./eth-votes-final.json)
  - Aggregated Results as JSON [aggregated.json](./aggregated.json)
+ - Aggregated Results as CVS [aggregated.csv](./aggregated.csv)
