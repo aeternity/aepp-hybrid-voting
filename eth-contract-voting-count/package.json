@@ -4,7 +4,7 @@
   "description": "Script generating a JSON file containing all voters, their votes and balances",
   "main": "eth-vote-count-1.js",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bignumber.js": "^8.1.1",
     "web3": "^1.0.0-beta.36"
   },
